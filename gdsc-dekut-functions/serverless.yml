@@ -1,0 +1,50 @@
+org: emiliokariuki
+app: gdsc-dekut-functions
+service: gdsc-dekut-functions
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  environment:
+    NODE_PATH: "./:/opt/node_modules"
+
+layers:
+  Common:
+    path: gdsc-layers
+    description: "GDSC common layer"
+
+package:
+  exclude:
+    - gdsc-layers/**
+    - .gitignore
+
+functions:
+  events:
+    handler: event.notifications
+    events:
+      - http:
+          path: /events
+          method: get
+      - schedule: rate(1 minute)
+    layers:
+      - { Ref: CommonLambdaLayer }
+
+  completeEvent:
+    handler: complete.completeEvent
+    events:
+      - http:
+          path: /complete
+          method: get
+      - schedule: rate(1 minute)
+    layers:
+      - { Ref: CommonLambdaLayer }
+
+  announcement:
+    handler: announcement.notifications
+    events:
+      - http:
+          path: /announcement
+          method: post
+    layers:
+      - { Ref: CommonLambdaLayer }

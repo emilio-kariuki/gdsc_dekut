@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="14"
+   height="14"
+   viewBox="0 0 14 14"
+   fill="none"
+   version="1.1"
+   id="svg6"
+   sodipodi:docname="clock.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs10" />
+  <sodipodi:namedview
+     id="namedview8"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1" />
+  <path
+     d="M7.00008 13.2707C3.54092 13.2707 0.729248 10.459 0.729248 6.99984C0.729248 3.54067 3.54092 0.729004 7.00008 0.729004C10.4592 0.729004 13.2709 3.54067 13.2709 6.99984C13.2709 10.459 10.4592 13.2707 7.00008 13.2707ZM7.00008 1.604C4.02508 1.604 1.60425 4.02484 1.60425 6.99984C1.60425 9.97484 4.02508 12.3957 7.00008 12.3957C9.97508 12.3957 12.3959 9.97484 12.3959 6.99984C12.3959 4.02484 9.97508 1.604 7.00008 1.604Z"
+     fill="#5B5561"
+     id="path2" />
+  <path
+     d="M9.16421 9.29253C9.08837 9.29253 9.01254 9.27503 8.94254 9.22836L7.13421 8.14919C6.68504 7.88086 6.35254 7.29169 6.35254 6.77253V4.38086C6.35254 4.14169 6.55087 3.94336 6.79004 3.94336C7.02921 3.94336 7.22754 4.14169 7.22754 4.38086V6.77253C7.22754 6.98253 7.40254 7.29169 7.58337 7.39669L9.39171 8.47586C9.60171 8.59836 9.66587 8.86669 9.54337 9.07669C9.45587 9.21669 9.31004 9.29253 9.16421 9.29253Z"
+     fill="#5B5561"
+     id="path4" />
+</svg>

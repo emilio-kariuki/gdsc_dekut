@@ -1,0 +1,131 @@
+{
+  "project_info": {
+    "project_number": "780318268681",
+    "firebase_url": "https://apt-rite-346310-default-rtdb.firebaseio.com",
+    "project_id": "apt-rite-346310",
+    "storage_bucket": "apt-rite-346310.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:780318268681:android:749231b8d88096589487d8",
+        "android_client_info": {
+          "package_name": "com.example.gdsc_bloc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "780318268681-ijq9vj2t9kn2gcivaf9ts2g7na0eibse.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALI_BdxpN7o_cKJOPAaPDRKb81v64syP0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "780318268681-e2lq95b9rcqjr5d1fekc94qf14htnuov.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "780318268681-1fm64pj8v2bpigp9cqbv7536hjuvd8mr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gdsc.gdsc"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:780318268681:android:c7be1068b3f120779487d8",
+        "android_client_info": {
+          "package_name": "com.gdsc.gdsc_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "780318268681-88kk958b4gic2a6u6l5bpnh8rk4qag6f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gdsc.gdsc_app",
+            "certificate_hash": "508dc9a42ef7dda9db8fefdb4e3c4895f16042cf"
+          }
+        },
+        {
+          "client_id": "780318268681-bkopr83bgskupldj14mf4n5feq5onn62.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gdsc.gdsc_app",
+            "certificate_hash": "c5bf479f662c7454464dc157954dd9034250d4c8"
+          }
+        },
+        {
+          "client_id": "780318268681-edlcucm5qvp4jqrprqk5kur52v811kn2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gdsc.gdsc_app",
+            "certificate_hash": "e4bbee8d39b90ed3cd3904cac11f10637c674abf"
+          }
+        },
+        {
+          "client_id": "780318268681-m30pl2qg24cq5f1cak9ji14f0e0pfcqt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gdsc.gdsc_app",
+            "certificate_hash": "414948a1c70558d9dedae1259a65b20e01f3fad3"
+          }
+        },
+        {
+          "client_id": "780318268681-me28t4q429dt9qr33fq5b4blc4vguq0v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gdsc.gdsc_app",
+            "certificate_hash": "92d665b2744956858c9a1cabaf8deeeb56184ede"
+          }
+        },
+        {
+          "client_id": "780318268681-ugt71lgr3v4o2f57ap0nh72vftqq1f51.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gdsc.gdsc_app",
+            "certificate_hash": "79883711a2ab6743513b429c18b6f7d431f24fe5"
+          }
+        },
+        {
+          "client_id": "780318268681-ijq9vj2t9kn2gcivaf9ts2g7na0eibse.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALI_BdxpN7o_cKJOPAaPDRKb81v64syP0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "780318268681-e2lq95b9rcqjr5d1fekc94qf14htnuov.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "780318268681-1fm64pj8v2bpigp9cqbv7536hjuvd8mr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gdsc.gdsc"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
