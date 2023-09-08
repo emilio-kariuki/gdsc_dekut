@@ -5,6 +5,7 @@
 *.class
 *.lock
 *.log
+*.pem
 *.pyc
 *.swp
 .DS_Store
@@ -18,6 +19,8 @@
 *.ipr
 *.iws
 .idea/
+
+/key.pem
 
 # Visual Studio Code related
 .classpath
