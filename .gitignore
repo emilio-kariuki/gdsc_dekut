@@ -1,1 +1,9 @@
-gdsc-dekut-mobile/.
+gdsc-dekut-mobile/.dart_tool/
+gdsc-dekut-mobile/build/
+gdsc-dekut-mobile/.vscode/
+
+gdsc-dekut-functions/.serverless/
+gdsc-dekut-functions/node_modules/
+
+
+
