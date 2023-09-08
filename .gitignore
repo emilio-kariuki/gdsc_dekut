@@ -5,8 +5,12 @@ gdsc-dekut-mobile/.vscode/
 gdsc-dekut-mobile/key.pem
 
 
+
+
 gdsc-dekut-functions/.serverless/
 gdsc-dekut-functions/node_modules/
 
+
+gdsc-dekut-functions/server.json
 
 
