@@ -2,6 +2,9 @@ gdsc-dekut-mobile/.dart_tool/
 gdsc-dekut-mobile/build/
 gdsc-dekut-mobile/.vscode/
 
+gdsc-dekut-mobile/key.pem
+
+
 gdsc-dekut-functions/.serverless/
 gdsc-dekut-functions/node_modules/
 
