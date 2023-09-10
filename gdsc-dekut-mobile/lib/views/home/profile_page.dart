@@ -156,7 +156,7 @@ class AboutButtons extends StatelessWidget {
           const ProfilePadding(),
           ProfileCard(
             leadingLogo: AppImages.version,
-            title: "Version - 2.2.0",
+            title: "Version - 2.0.0+13",
             function: () {},
             showTrailing: false,
           ),
@@ -255,24 +255,15 @@ class CommunityButtons extends StatelessWidget {
                     if (state is UserAdmin) {
                       return Navigator.pushNamed(context, '/admin_page');
                     } else {
-                      return ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          backgroundColor: Colors.red,
-                          behavior: SnackBarBehavior.floating,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          content: Center(
-                            child: AutoSizeText(
-                              "You are not an admin",
-                              style: GoogleFonts.inter(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.white,
-                              ),
-                            ),
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            behavior: SnackBarBehavior.floating,
+                            backgroundColor: const Color(0xffEB5757),
+                            content: Text("You are not an admin"),
                           ),
-                        ),
-                      );
+                        );
+                      });
                     }
                   },
                   showTrailing: true,
@@ -347,9 +338,9 @@ class UserProfilePicture extends StatelessWidget {
                 height: height * 0.01,
               ),
               CachedNetworkImage(
-                imageUrl:  state.user.imageUrl! == "imageUrl"
-                        ? AppImages.defaultImage
-                        : state.user.imageUrl!,
+                imageUrl: state.user.imageUrl! == "imageUrl"
+                    ? AppImages.defaultImage
+                    : state.user.imageUrl!,
                 imageBuilder: (context, imageProvider) => Container(
                   height: 100,
                   width: 100,
