@@ -39,6 +39,7 @@ class EventPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return MultiBlocProvider(
@@ -63,9 +64,7 @@ class EventPage extends StatelessWidget {
             child: SafeArea(
               child: RefreshIndicator(
                 onRefresh: () async {
-                  context.read<EventCubit>().getAllEvents();
                   context.read<UserCubit>().getUser();
-                  context.read<AnnouncementCubit>().getAllAnnoucements();
                   return Future.value();
                 },
                 child: SingleChildScrollView(
@@ -264,19 +263,19 @@ class UserProfileContainer extends StatelessWidget {
           ],
         ),
         const Spacer(),
-        IconButton(
-          padding: EdgeInsets.zero,
-          onPressed: () async {
-            // Navigator.pushNamed(context, '/announcement_page');
-            await NotificationProviders().showNormalNotification(
-                message: "the test notification", title: "Test notification");
-          },
-          icon: const Icon(
-            Icons.notifications_active_outlined,
-            size: 24,
-            color: Colors.black,
-          ),
-        )
+        // IconButton(
+        //   padding: EdgeInsets.zero,
+        //   onPressed: () async {
+        //     // Navigator.pushNamed(context, '/announcement_page');
+        //     await NotificationProviders().showNormalNotification(
+        //         message: "the test notification", title: "Test notification");
+        //   },
+        //   icon: const Icon(
+        //     Icons.notifications_active_outlined,
+        //     size: 24,
+        //     color: Colors.black,
+        //   ),
+        // )
       ],
     );
   }
