@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class InputField extends StatelessWidget {
-   InputField(
+  InputField(
       {super.key,
-       this.title,
+      this.title,
       required this.controller,
       this.obScureText = false,
       this.suffixIcon,
@@ -47,6 +47,12 @@ class InputField extends StatelessWidget {
                 width: 1,
               )),
           child: TextFormField(
+            onTap: () {
+              //check if we have any snackbar open
+              if (ScaffoldMessenger.of(context).mounted) {
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+              }
+            },
             controller: controller,
             obscureText: obScureText,
             style: GoogleFonts.inter(
