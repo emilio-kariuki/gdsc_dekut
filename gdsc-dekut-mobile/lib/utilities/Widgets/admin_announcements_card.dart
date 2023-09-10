@@ -54,17 +54,13 @@ class AnnouncementAdminCard extends StatelessWidget {
               const SizedBox(
                 height: 5,
               ),
-              Row(
-                children: [
-                  AutoSizeText(
-                    title,
-                    style: GoogleFonts.inter(
-                      fontSize: 15,
-                      color: const Color(0xff000000),
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
+              AutoSizeText(
+                title,
+                style: GoogleFonts.inter(
+                  fontSize: 15,
+                  color: const Color(0xff000000),
+                  fontWeight: FontWeight.w600,
+                ),
               ),
               const SizedBox(
                 height: 5,
