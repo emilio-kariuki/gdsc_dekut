@@ -18,7 +18,7 @@ class AdminPage extends StatelessWidget {
       "image": AppImages.resources,
     },
     {
-      "title": "Announcements",
+      "title": "Announcement",
       "location": "/admin_announcements",
       "image": AppImages.announcement,
     },
@@ -80,7 +80,7 @@ class AdminPage extends StatelessWidget {
                 crossAxisCount: 3,
                 mainAxisSpacing: 8,
                 crossAxisSpacing: 8,
-                childAspectRatio: 0.78,
+                childAspectRatio: 0.75,
               ),
               itemBuilder: (context, index) {
                 return Semantics(
@@ -115,7 +115,7 @@ class AdminPage extends StatelessWidget {
                         Text(
                           adminActivities[index]["title"],
                           style: GoogleFonts.inter(
-                            fontSize: 15,
+                            fontSize: 14,
                             fontWeight: FontWeight.w500,
                             color: const Color(0xFF1F1F1F),
                           ),
