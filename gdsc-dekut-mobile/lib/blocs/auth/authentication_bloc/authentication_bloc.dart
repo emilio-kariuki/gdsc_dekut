@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gdsc_bloc/utilities/shared_preference_manager.dart';
 import 'package:meta/meta.dart';
 
@@ -13,7 +14,10 @@ class AuthenticationBloc
       emit(AuthenticationLoading());
       try {
         final isLoggedIn = await SharedPreferencesManager().isLoggedIn();
-        if (isLoggedIn) {
+        final user = FirebaseAuth.instance.currentUser;
+
+            
+        if (isLoggedIn && user != null) {
           emit(AuthenticationAuthenticated());
         } else {
           emit(AuthenticationUnauthenticated());
