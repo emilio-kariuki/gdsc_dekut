@@ -85,8 +85,9 @@ class UserRepository {
       final userEmail = await FirebaseAuth.instance.currentUser!.email;
       final firebaseFirestore = FirebaseFirestore.instance;
 
+
       final lead = await firebaseFirestore
-          .collection("leads")
+          .collection("lead")
           .where("email", isEqualTo: userEmail)
           .get()
           .then((value) =>
