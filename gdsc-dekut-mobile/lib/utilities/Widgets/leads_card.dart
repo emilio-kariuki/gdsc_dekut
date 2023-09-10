@@ -23,44 +23,46 @@ class LeadsCard extends StatelessWidget {
     return SizedBox(
       width: width * 0.34,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          CachedNetworkImage(
-            height: height * 0.12,
-            width: width * 0.33,
-            placeholder: (context, url) {
-              return Container(
-                height: height * 0.12,
-                width: width * 0.33,
-                decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 243, 243, 243),
-                    borderRadius: BorderRadius.circular(10)),
-              );
-            },
-            errorWidget: ((context, url, error) {
-              return const Icon(
-                Icons.error,
-                size: 20,
-                color: Colors.red,
-              );
-            }),
-            imageUrl: image,
-            fit: BoxFit.fitHeight,
-            imageBuilder: (context, imageProvider) {
-              return AnimatedContainer(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border:
-                      Border.all(width: 0.4, color: const Color(0xff666666)),
-                  image: DecorationImage(
-                    image: imageProvider,
-                    fit: BoxFit.cover,
+          Center(
+            child: CachedNetworkImage(
+              height: height * 0.1,
+              width: width * 0.3,
+              placeholder: (context, url) {
+                return Container(
+                  height: height * 0.1,
+                  width: width * 0.3,
+                  decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 243, 243, 243),
+                      borderRadius: BorderRadius.circular(10)),
+                );
+              },
+              errorWidget: ((context, url, error) {
+                return const Icon(
+                  Icons.error,
+                  size: 20,
+                  color: Colors.red,
+                );
+              }),
+              imageUrl: image,
+              fit: BoxFit.fitHeight,
+              imageBuilder: (context, imageProvider) {
+                return AnimatedContainer(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border:
+                        Border.all(width: 0.4, color: const Color(0xff666666)),
+                    image: DecorationImage(
+                      image: imageProvider,
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                ),
-                duration: const Duration(milliseconds: 500),
-              );
-            },
+                  duration: const Duration(milliseconds: 500),
+                );
+              },
+            ),
           ),
           const SizedBox(
             height: 8,
@@ -71,13 +73,14 @@ class LeadsCard extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 5),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(
                       width: width * 0.28,
                       child: Text(
                         title,
                         overflow: TextOverflow.clip,
+                        textAlign: TextAlign.center,
                         maxLines: 2,
                         style: GoogleFonts.inter(
                           fontWeight: FontWeight.w600,

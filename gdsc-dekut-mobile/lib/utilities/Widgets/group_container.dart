@@ -391,6 +391,7 @@ class GroupContainer extends StatelessWidget {
             child: Text(
               title,
               overflow: TextOverflow.clip,
+              textAlign: TextAlign.center,
               maxLines: 2,
               style: GoogleFonts.inter(
                 fontWeight: FontWeight.w500,

@@ -373,13 +373,13 @@ class ResourceCard extends StatelessWidget {
                   width: width * 0.32,
                   decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 243, 243, 243),
-                      borderRadius: BorderRadius.circular(10)),
+                      borderRadius: BorderRadius.circular(20)),
                 );
               },
               errorWidget: ((context, url, error) {
                 return AnimatedContainer(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(20),
                     border:
                         Border.all(width: 0.4, color: const Color(0xff666666)),
                   ),
@@ -397,7 +397,7 @@ class ResourceCard extends StatelessWidget {
                 return AnimatedContainer(
                   decoration: BoxDecoration(
                     // shape: BoxShape.circle,
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(20),
                     border:
                         Border.all(width: 0.4, color: const Color(0xff666666)),
                     image: DecorationImage(
@@ -427,6 +427,7 @@ class ResourceCard extends StatelessWidget {
                       title,
                       overflow: TextOverflow.clip,
                       maxLines: 2,
+                      textAlign: TextAlign.center,
                       style: GoogleFonts.inter(
                         fontWeight: FontWeight.w500,
                         fontSize: 13.5,

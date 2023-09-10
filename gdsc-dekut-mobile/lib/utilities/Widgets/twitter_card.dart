@@ -346,9 +346,7 @@ class TwitterCard extends StatelessWidget {
                     fontWeight: FontWeight.w700,
                     fontSize: 11,
                     color: Colors.black,
-                    decoration: DateTime.now().isAfter(time)
-                        ? TextDecoration.lineThrough
-                        : null
+                    
 
                     // decoration: TextDecoration.lineThrough
                     ),
@@ -362,6 +360,7 @@ class TwitterCard extends StatelessWidget {
                     child: Text(
                       title,
                       overflow: TextOverflow.clip,
+                      textAlign: TextAlign.center,
                       maxLines: 2,
                       style: GoogleFonts.inter(
                         fontWeight: FontWeight.w500,
@@ -376,6 +375,7 @@ class TwitterCard extends StatelessWidget {
                   Text(
                     date,
                     overflow: TextOverflow.clip,
+                    
                     maxLines: 1,
                     style: GoogleFonts.inter(
                       fontWeight: FontWeight.w600,
