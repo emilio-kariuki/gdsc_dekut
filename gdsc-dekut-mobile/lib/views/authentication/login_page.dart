@@ -142,6 +142,7 @@ class LoginPage extends StatelessWidget {
                     BlocBuilder<AuthBloc, AuthState>(
                       builder: (context, state) {
                         if (state is LoginSuccess) {
+                          ScaffoldMessenger.of(context).hideCurrentSnackBar();
                           Timer(
                             const Duration(milliseconds: 200),
                             () => Navigator.pushReplacementNamed(
@@ -152,6 +153,7 @@ class LoginPage extends StatelessWidget {
                         }
 
                         if (state is GoogleLoginSuccess) {
+                          ScaffoldMessenger.of(context).hideCurrentSnackBar();
                           Timer(
                               const Duration(milliseconds: 200),
                               () => Navigator.pushReplacement(
@@ -164,27 +166,28 @@ class LoginPage extends StatelessWidget {
                         }
 
                         if (state is LoginFailure) {
-                          Timer(
-                              const Duration(seconds: 1),
-                              () => ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      behavior: SnackBarBehavior.floating,
-                                      backgroundColor: const Color(0xffEB5757),
-                                      content: Text(state.message),
-                                    ),
-                                  ));
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                behavior: SnackBarBehavior.floating,
+                                backgroundColor: const Color(0xffEB5757),
+                                content: Text(state.message),
+                              ),
+                            );
+                          });
                         }
 
                         if (state is GoogleLoginFailure) {
-                          Timer(
-                              const Duration(milliseconds: 200),
-                              () => ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      behavior: SnackBarBehavior.floating,
-                                      backgroundColor: const Color(0xffEB5757),
-                                      content: Text(state.message),
-                                    ),
-                                  ));
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                behavior: SnackBarBehavior.floating,
+                                backgroundColor: const Color(0xffEB5757),
+                                content: Text(state.message),
+                              ),
+                            );
+                          });
                         }
                         return state is LoginLoading
                             ? const Center(

@@ -7,6 +7,6 @@ class PasswordVisibilityCubit extends Cubit<PasswordVisibilityState> {
   PasswordVisibilityCubit() : super(PasswordVisibilityInitial());
 
   void changePasswordVisibility(bool isObscured) {
-    emit(PasswordObscured(isObscured: !isObscured));
+    emit(PasswordObscured(isObscured: isObscured));
   }
 }

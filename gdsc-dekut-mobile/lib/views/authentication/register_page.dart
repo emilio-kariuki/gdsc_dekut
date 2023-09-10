@@ -155,27 +155,27 @@ class RegisterPage extends StatelessWidget {
                         }
 
                         if (state is GoogleLoginFailure) {
-                          Timer(
-                              const Duration(seconds: 1),
-                              () => ScaffoldMessenger.of(context).showSnackBar(
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       behavior: SnackBarBehavior.floating,
                                       backgroundColor: const Color(0xffEB5757),
                                       content: Text(state.message),
                                     ),
-                                  ));
+                                  );
+                          });
                         }
 
                         if (state is RegisterFailure) {
-                          Timer(
-                              const Duration(seconds: 1),
-                              () => ScaffoldMessenger.of(context).showSnackBar(
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       behavior: SnackBarBehavior.floating,
                                       backgroundColor: const Color(0xffEB5757),
                                       content: Text(state.message),
                                     ),
-                                  ));
+                                  );
+                          });
                         }
                         return state is RegisterLoading
                             ? const Center(

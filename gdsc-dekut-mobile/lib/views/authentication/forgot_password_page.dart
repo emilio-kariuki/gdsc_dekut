@@ -47,7 +47,7 @@ class ForgotPassword extends StatelessWidget {
             create: (context) => AuthBloc(),
           ),
           BlocProvider(
-            create: (context) =>PasswordVisibilityCubit(),
+            create: (context) => PasswordVisibilityCubit(),
           ),
         ],
         child: Builder(builder: (context) {
@@ -98,9 +98,7 @@ class ForgotPassword extends StatelessWidget {
                       builder: (context, state) {
                         return InputField(
                             hintText: "Enter your password",
-                            obScureText: state is PasswordObscured
-                                ? state.isObscured
-                                : true,
+                            obScureText: isObscured,
                             controller: oldPasswordController,
                             suffixIcon: InkWell(
                               onTap: () {
@@ -109,7 +107,7 @@ class ForgotPassword extends StatelessWidget {
                                     .changePasswordVisibility(!isObscured);
                               },
                               child: Icon(
-                                state is PasswordObscured && state.isObscured
+                                isObscured
                                     ? Icons.visibility_off
                                     : Icons.visibility,
                                 color: Colors.black,
@@ -121,35 +119,38 @@ class ForgotPassword extends StatelessWidget {
                     const SizedBox(
                       height: 10,
                     ),
-                    BlocConsumer<PasswordVisibilityCubit,
-                        PasswordVisibilityState>(
-                      listener: (context, state) {
-                        if (state is PasswordObscured) {
-                          isObscured2 = state.isObscured;
-                        }
-                      },
-                      builder: (context, state) {
-                        return InputField(
-                            hintText: "Enter your password",
-                            obScureText: state is PasswordObscured
-                                ? state.isObscured
-                                : true,
-                            controller: newPasswordController,
-                            suffixIcon: InkWell(
-                              onTap: () {
-                                context
-                                    .read<PasswordVisibilityCubit>()
-                                    .changePasswordVisibility(!isObscured2);
-                              },
-                              child: Icon(
-                                state is PasswordObscured && state.isObscured
-                                    ? Icons.visibility_off
-                                    : Icons.visibility,
-                                color: Colors.black,
-                                size: 20,
-                              ),
-                            ));
-                      },
+                    BlocProvider(
+                      create: (context) => PasswordVisibilityCubit(),
+                      child: Builder(builder: (context) {
+                        return BlocConsumer<PasswordVisibilityCubit,
+                            PasswordVisibilityState>(
+                          listener: (context, state) {
+                            if (state is PasswordObscured) {
+                              isObscured2 = state.isObscured;
+                            }
+                          },
+                          builder: (context, state) {
+                            return InputField(
+                                hintText: "Enter your password",
+                                obScureText: isObscured2,
+                                controller: newPasswordController,
+                                suffixIcon: InkWell(
+                                  onTap: () {
+                                    context
+                                        .read<PasswordVisibilityCubit>()
+                                        .changePasswordVisibility(!isObscured2);
+                                  },
+                                  child: Icon(
+                                    isObscured2
+                                        ? Icons.visibility_off
+                                        : Icons.visibility,
+                                    color: Colors.black,
+                                    size: 20,
+                                  ),
+                                ));
+                          },
+                        );
+                      }),
                     ),
                     const SizedBox(
                       height: 30,
@@ -199,7 +200,6 @@ class ForgotPassword extends StatelessWidget {
                                 width: double.infinity,
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    
                                     context.read<AuthBloc>().add(ChangePassword(
                                         email: emailController.text,
                                         oldPassword: oldPasswordController.text,
