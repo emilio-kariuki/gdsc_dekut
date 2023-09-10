@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "firebase-admin": "^11.10.1"
+    "firebase-admin": "^11.10.1",
+    "uuid": "^9.0.0"
   }
 }
