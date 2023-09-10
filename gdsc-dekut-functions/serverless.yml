@@ -30,6 +30,15 @@ functions:
     layers:
       - { Ref: CommonLambdaLayer }
 
+  createEvent:
+    handler: createEvent.createEvent
+    events:
+      - http:
+          path: /event
+          method: post
+    layers:
+      - { Ref: CommonLambdaLayer }
+
   completeEvent:
     handler: complete.completeEvent
     events:
