@@ -164,9 +164,10 @@ class PostGroups extends StatelessWidget {
                           }
                         },
                         builder: (context, state) {
-                          return SizedBox(
-                            height: 50,
-                            width: 120,
+                         final width = MediaQuery.of(context).size.width;
+                      return SizedBox(
+                        height: 50,
+                        width: width * 0.4,
                             child: state is ImageUploading
                                 ? const LoadingCircle()
                                 : ElevatedButton(

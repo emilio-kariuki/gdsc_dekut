@@ -279,11 +279,12 @@ class AdminResourcePostPage extends StatelessWidget {
                         }
                       },
                       builder: (context, state) {
+                        final width = MediaQuery.of(context).size.width;
                         return state is ImageUploading
                             ? const LoadingCircle()
                             : SizedBox(
                                 height: 50,
-                                width: 120,
+                                width: width * 0.4,
                                 child: ElevatedButton(
                                   onPressed: () {
                                     BlocProvider.of<GetImageCubit>(context)

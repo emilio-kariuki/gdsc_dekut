@@ -2,6 +2,7 @@
 
 import 'dart:async';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -246,9 +247,10 @@ class ReportProblemPage extends StatelessWidget {
                       }
                     },
                     builder: (context, state) {
+                      final width = MediaQuery.of(context).size.width;
                       return SizedBox(
                         height: 50,
-                        width: 120,
+                        width: width * 0.4,
                         child: state is ImageUploading
                             ? const LoadingCircle()
                             : ElevatedButton(
@@ -263,8 +265,9 @@ class ReportProblemPage extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(5),
                                   ),
                                 ),
-                                child: Text(
+                                child: AutoSizeText(
                                   "Attach File",
+                                  minFontSize: 10,
                                   style: GoogleFonts.inter(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w600,

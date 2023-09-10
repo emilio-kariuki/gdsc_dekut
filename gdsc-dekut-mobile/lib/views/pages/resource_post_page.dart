@@ -226,11 +226,13 @@ class ResourcePostPage extends StatelessWidget {
                         }
                       },
                       builder: (context, state) {
+                        final width = MediaQuery.of(context).size.width;
                         return state is ImageUploading
                             ? const LoadingCircle()
-                            : SizedBox(
-                                height: 50,
-                                width: 120,
+                            : 
+                       SizedBox(
+                        height: 50,
+                        width: width * 0.4,
                                 child: ElevatedButton(
                                   onPressed: () {
                                     context.read<GetImageCubit>().getImage();
