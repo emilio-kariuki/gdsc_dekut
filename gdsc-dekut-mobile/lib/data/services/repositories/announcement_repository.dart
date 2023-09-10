@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:uuid/uuid.dart' as uuid;
 
 import '../../models/announcement_model.dart';
@@ -19,7 +19,10 @@ class AnnouncementRepository {
         'nSecs': 5678
       }); //
 
-      await firebaseFirestore.collection("announcement").doc(id).set({
+      await firebaseFirestore
+          .collection(kReleaseMode ? "announcement" : "announcement_test")
+          .doc(id)
+          .set({
         "id": id,
         "name": name,
         "position": position,
@@ -39,7 +42,7 @@ class AnnouncementRepository {
       final firebaseFirestore = FirebaseFirestore.instance;
 
       final group = await firebaseFirestore
-          .collection("announcement")
+          .collection(kReleaseMode ? "announcement" : "announcement_test")
           .doc(id)
           .get()
           .then((value) => AnnouncementModel.fromJson(value.data()!));
@@ -50,21 +53,18 @@ class AnnouncementRepository {
     }
   }
 
-  Future<List<AnnouncementModel>> getAllAnnouncements(
-     ) async {
+  Future<List<AnnouncementModel>> getAllAnnouncements() async {
     try {
       final firebaseFirestore = FirebaseFirestore.instance;
 
       final announcements = await firebaseFirestore
-          .collection("announcement")
+          .collection(kReleaseMode ? "announcement" : "announcement_test")
           .get()
           .then((value) => value.docs
               .map((e) => AnnouncementModel.fromJson(e.data()))
               .toList());
 
       return announcements;
-         
-     
     } catch (e) {
       debugPrint(e.toString());
       throw Exception(e);
@@ -76,7 +76,7 @@ class AnnouncementRepository {
       final firebaseFirestore = FirebaseFirestore.instance;
 
       final announcement = firebaseFirestore
-          .collection("announcement")
+          .collection(kReleaseMode ? "announcement" : "announcement_test")
           .snapshots()
           .map((event) => event.docs
               .map((e) => AnnouncementModel.fromJson(e.data()))
@@ -95,7 +95,7 @@ class AnnouncementRepository {
       final firebaseFirestore = FirebaseFirestore.instance;
 
       final announcement = await firebaseFirestore
-          .collection("announcement")
+          .collection(kReleaseMode ? "announcement" : "announcement_test")
           .get()
           .then((value) => value.docs
               .map((e) => AnnouncementModel.fromJson(e.data()))
@@ -120,7 +120,10 @@ class AnnouncementRepository {
     try {
       final firebaseFirestore = FirebaseFirestore.instance;
 
-      await firebaseFirestore.collection("announcement").doc(id).update(
+      await firebaseFirestore
+          .collection(kReleaseMode ? "announcement" : "announcement_test")
+          .doc(id)
+          .update(
         {
           "id": id,
           "name": name,
@@ -140,7 +143,7 @@ class AnnouncementRepository {
       final firebaseFirestore = FirebaseFirestore.instance;
 
       await firebaseFirestore
-          .collection("announcement")
+          .collection(kReleaseMode ? "announcement" : "announcement_test")
           .doc(id)
           .get()
           .then((value) => value.reference.delete());

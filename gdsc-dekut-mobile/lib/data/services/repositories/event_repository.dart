@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:googleapis_auth/googleapis_auth.dart';
 import 'package:share_plus/share_plus.dart';
@@ -30,7 +30,14 @@ class EventRepository {
         'nSecs': 5678
       }); //
 
-      await firebaseFirestore.collection("event_test").doc(id).set({
+      await firebaseFirestore
+          .collection(kReleaseMode
+              ? "event"
+              : kReleaseMode
+                  ? "event"
+                  : "event_test")
+          .doc(id)
+          .set({
         "id": id,
         "title": title,
         "venue": venue,
@@ -53,8 +60,10 @@ class EventRepository {
     try {
       final firebaseFirestore = FirebaseFirestore.instance;
 
-      final events = firebaseFirestore.collection("event_test").snapshots().map(
-          (event) =>
+      final events = firebaseFirestore
+          .collection(kReleaseMode ? "event" : "event_test")
+          .snapshots()
+          .map((event) =>
               event.docs.map((e) => EventModel.fromJson(e.data())).toList());
 
       yield* events;
@@ -69,7 +78,7 @@ class EventRepository {
       final firebaseFirestore = FirebaseFirestore.instance;
 
       final announcement = firebaseFirestore
-          .collection("event_test")
+          .collection(kReleaseMode ? "event" : "event_test")
           .where("isCompleted", isEqualTo: false)
           .snapshots()
           .map((event) =>
@@ -87,7 +96,7 @@ class EventRepository {
       final firebaseFirestore = FirebaseFirestore.instance;
 
       final event = await firebaseFirestore
-          .collection("event_test")
+          .collection(kReleaseMode ? "event" : "event_test")
           .where("isCompleted", isEqualTo: false)
           .get()
           .then((value) =>
@@ -104,8 +113,10 @@ class EventRepository {
     try {
       final firebaseFirestore = FirebaseFirestore.instance;
 
-      final event =
-          await firebaseFirestore.collection("event_test").doc(id).get();
+      final event = await firebaseFirestore
+          .collection(kReleaseMode ? "event" : "event_test")
+          .doc(id)
+          .get();
 
       return EventModel.fromJson(event.data()!);
     } catch (e) {
@@ -119,7 +130,7 @@ class EventRepository {
       final firebaseFirestore = FirebaseFirestore.instance;
 
       final events = await firebaseFirestore
-          .collection("event_test")
+          .collection(kReleaseMode ? "event" : "event_test")
           .where("isCompleted", isEqualTo: false)
           .get()
           .then((value) =>
@@ -140,7 +151,7 @@ class EventRepository {
       final firebaseFirestore = FirebaseFirestore.instance;
 
       final event = await firebaseFirestore
-          .collection("event_test")
+          .collection(kReleaseMode ? "event" : "event_test")
           .where("isCompleted", isEqualTo: true)
           .get()
           .then((value) =>
@@ -157,7 +168,7 @@ class EventRepository {
       final firebaseFirestore = FirebaseFirestore.instance;
 
       final events = await firebaseFirestore
-          .collection("event_test")
+          .collection(kReleaseMode ? "event" : "event_test")
           .where("isCompleted", isEqualTo: true)
           .get()
           .then((value) =>
@@ -178,7 +189,7 @@ class EventRepository {
       final firebaseFirestore = FirebaseFirestore.instance;
 
       await firebaseFirestore
-          .collection("event_test")
+          .collection(kReleaseMode ? "event" : "event_test")
           .doc(id)
           .update({"isCompleted": true});
 
@@ -194,7 +205,7 @@ class EventRepository {
       final firebaseFirestore = FirebaseFirestore.instance;
 
       await firebaseFirestore
-          .collection("event_test")
+          .collection(kReleaseMode ? "event" : "event_test")
           .doc(id)
           .update({"isCompleted": false});
 
@@ -218,7 +229,10 @@ class EventRepository {
     try {
       final firebaseFirestore = FirebaseFirestore.instance;
 
-      await firebaseFirestore.collection("event_test").doc(id).update({
+      await firebaseFirestore
+          .collection(kReleaseMode ? "event" : "event_test")
+          .doc(id)
+          .update({
         "id": id,
         "title": title,
         "venue": venue,
@@ -242,7 +256,7 @@ class EventRepository {
       final firebaseFirestore = FirebaseFirestore.instance;
 
       await firebaseFirestore
-          .collection("event_test")
+          .collection(kReleaseMode ? "event" : "event_test")
           .doc(id)
           .get()
           .then((value) => value.reference.delete());

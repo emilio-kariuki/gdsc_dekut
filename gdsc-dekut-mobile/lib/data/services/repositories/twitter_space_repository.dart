@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart' as uuid;
 
 import '../../models/twitter_model.dart';
 
 class TwitterSpaceRepository {
-    Future<bool> createSpace({
+  Future<bool> createSpace({
     required String title,
     required String link,
     required Timestamp startTime,
@@ -22,7 +23,10 @@ class TwitterSpaceRepository {
         'nSecs': 5678
       }); //
 
-      await firebaseFirestore.collection("twitter").doc(id).set({
+      await firebaseFirestore
+          .collection(kReleaseMode ? "twitter" : "twitter_test")
+          .doc(id)
+          .set({
         "id": id,
         "title": title,
         "link": link,
@@ -38,12 +42,14 @@ class TwitterSpaceRepository {
     }
   }
 
-    Future<List<TwitterModel>> getSpaces() async {
+  Future<List<TwitterModel>> getSpaces() async {
     try {
       final firebaseFirestore = FirebaseFirestore.instance;
 
-      final spaces = await firebaseFirestore.collection("twitter").get().then(
-          (value) =>
+      final spaces = await firebaseFirestore
+          .collection(kReleaseMode ? "twitter" : "twitter_test")
+          .get()
+          .then((value) =>
               value.docs.map((e) => TwitterModel.fromJson(e.data())).toList());
       return spaces;
     } catch (e) {
@@ -52,13 +58,12 @@ class TwitterSpaceRepository {
     }
   }
 
-
   Future<TwitterModel> getParticularSpaces({required String id}) async {
     try {
       final firebaseFirestore = FirebaseFirestore.instance;
 
       final space = await firebaseFirestore
-          .collection("twitter")
+          .collection(kReleaseMode ? "twitter" : "twitter_test")
           .doc(id)
           .get()
           .then((value) => TwitterModel.fromJson(value.data()!));
@@ -69,12 +74,14 @@ class TwitterSpaceRepository {
     }
   }
 
-    Future<List<TwitterModel>> searchSpace({required String query}) async {
+  Future<List<TwitterModel>> searchSpace({required String query}) async {
     try {
       final firebaseFirestore = FirebaseFirestore.instance;
 
-      final spaces = await firebaseFirestore.collection("twitter").get().then(
-          (value) =>
+      final spaces = await firebaseFirestore
+          .collection(kReleaseMode ? "twitter" : "twitter_test")
+          .get()
+          .then((value) =>
               value.docs.map((e) => TwitterModel.fromJson(e.data())).toList());
 
       return spaces
@@ -87,8 +94,7 @@ class TwitterSpaceRepository {
     }
   }
 
-
-    Future<bool> updateSpace({
+  Future<bool> updateSpace({
     required String id,
     required String title,
     required String link,
@@ -100,7 +106,10 @@ class TwitterSpaceRepository {
     try {
       final firebaseFirestore = FirebaseFirestore.instance;
 
-      await firebaseFirestore.collection("twitter").doc(id).update(
+      await firebaseFirestore
+          .collection(kReleaseMode ? "twitter" : "twitter_test")
+          .doc(id)
+          .update(
         {
           "id": id,
           "title": title,
@@ -118,12 +127,12 @@ class TwitterSpaceRepository {
     }
   }
 
-    Future<bool> deleteParticularSpace({required String id}) async {
+  Future<bool> deleteParticularSpace({required String id}) async {
     try {
       final firebaseFirestore = FirebaseFirestore.instance;
 
       await firebaseFirestore
-          .collection("twitter")
+          .collection(kReleaseMode ? "twitter" : "twitter_test")
           .doc(id)
           .get()
           .then((value) => value.reference.delete());

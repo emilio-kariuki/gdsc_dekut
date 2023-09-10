@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import "package:uuid/uuid.dart" as uuid;
 
@@ -25,7 +26,14 @@ class ResourceRepository {
 
       final userId = await FirebaseAuth.instance.currentUser!.uid;
 
-      await firebaseFirestore.collection("resource").doc(id).set({
+      await firebaseFirestore
+          .collection(kReleaseMode
+              ? kReleaseMode
+                  ? "resource"
+                  : "resource_test"
+              : "resource_test")
+          .doc(id)
+          .set({
         "id": id,
         "title": title,
         "link": link,
@@ -54,7 +62,10 @@ class ResourceRepository {
     try {
       final firebaseFirestore = FirebaseFirestore.instance;
 
-      await firebaseFirestore.collection("resource").doc(id).update({
+      await firebaseFirestore
+          .collection(kReleaseMode ? "resource" : "resource_test")
+          .doc(id)
+          .update({
         "id": id,
         "title": title,
         "link": link,
@@ -88,7 +99,10 @@ class ResourceRepository {
 
       final userId = await FirebaseAuth.instance.currentUser!.uid;
 
-      await firebaseFirestore.collection("resource").doc(id).set({
+      await firebaseFirestore
+          .collection(kReleaseMode ? "resource" : "resource_test")
+          .doc(id)
+          .set({
         "id": id,
         "title": title,
         "link": link,
@@ -111,7 +125,7 @@ class ResourceRepository {
       final firebaseFirestore = FirebaseFirestore.instance;
 
       final resources = await firebaseFirestore
-          .collection("resource")
+          .collection(kReleaseMode ? "resource" : "resource_test")
           .where("isApproved", isEqualTo: true)
           .get()
           .then((value) =>
@@ -129,7 +143,7 @@ class ResourceRepository {
       final userId = await SharedPreferencesManager().getId();
 
       final resources = await firebaseFirestore
-          .collection("resource")
+          .collection(kReleaseMode ? "resource" : "resource_test")
           .where("userId", isEqualTo: userId)
           .where("isApproved", isEqualTo: true)
           .get()
@@ -146,8 +160,10 @@ class ResourceRepository {
     try {
       final firebaseFirestore = FirebaseFirestore.instance;
 
-      final event =
-          await firebaseFirestore.collection("resource").doc(id.trim()).get();
+      final event = await firebaseFirestore
+          .collection(kReleaseMode ? "resource" : "resource_test")
+          .doc(id.trim())
+          .get();
 
       return Resource.fromJson(event.data()!);
     } catch (e) {
@@ -161,7 +177,7 @@ class ResourceRepository {
       final firebaseFirestore = FirebaseFirestore.instance;
 
       await firebaseFirestore
-          .collection("resource")
+          .collection(kReleaseMode ? "resource" : "resource_test")
           .doc(id)
           .update({"isApproved": true});
 
@@ -177,7 +193,7 @@ class ResourceRepository {
       final firebaseFirestore = FirebaseFirestore.instance;
 
       final resources = await firebaseFirestore
-          .collection("resource")
+          .collection(kReleaseMode ? "resource" : "resource_test")
           .where(
             "category",
             isEqualTo: category,
@@ -214,7 +230,7 @@ class ResourceRepository {
       final firebaseFirestore = FirebaseFirestore.instance;
 
       final resources = await firebaseFirestore
-          .collection("resource")
+          .collection(kReleaseMode ? "resource" : "resource_test")
           .where("isApproved", isEqualTo: true)
           .get()
           .then((value) =>
@@ -235,7 +251,7 @@ class ResourceRepository {
       final firebaseFirestore = FirebaseFirestore.instance;
 
       final resources = await firebaseFirestore
-          .collection("resource")
+          .collection(kReleaseMode ? "resource" : "resource_test")
           .where("isApproved", isEqualTo: false)
           .get()
           .then((value) =>
@@ -253,7 +269,7 @@ class ResourceRepository {
       final firebaseFirestore = FirebaseFirestore.instance;
 
       final resources = await firebaseFirestore
-          .collection("resource")
+          .collection(kReleaseMode ? "resource" : "resource_test")
           .where("isApproved", isEqualTo: false)
           .get()
           .then((value) =>
@@ -275,7 +291,7 @@ class ResourceRepository {
       final firebaseFirestore = FirebaseFirestore.instance;
 
       final resources = await firebaseFirestore
-          .collection("resource")
+          .collection(kReleaseMode ? "resource" : "resource_test")
           .where("isApproved", isEqualTo: true)
           .where("category", isEqualTo: category)
           .get()
@@ -297,7 +313,7 @@ class ResourceRepository {
       final firebaseFirestore = FirebaseFirestore.instance;
       final userId = await SharedPreferencesManager().getId();
       final resources = await firebaseFirestore
-          .collection("resource")
+          .collection(kReleaseMode ? "resource" : "resource_test")
           .where("userId", isEqualTo: userId)
           .where("isApproved", isEqualTo: true)
           .get()
@@ -319,7 +335,7 @@ class ResourceRepository {
       final firebaseFirestore = FirebaseFirestore.instance;
 
       await firebaseFirestore
-          .collection("resource")
+          .collection(kReleaseMode ? "resource" : "resource_test")
           .doc(id)
           .get()
           .then((value) => value.reference.delete());

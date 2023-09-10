@@ -2,12 +2,14 @@ import 'dart:async';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:gdsc_bloc/blocs/app_functionality/user/user_cubit.dart';
 import 'package:gdsc_bloc/data/services/repositories/notifications_repository.dart';
+import 'package:gdsc_bloc/data/services/repositories/app_repository.dart';
 import 'package:gdsc_bloc/utilities/Widgets/no_internet_page.dart';
 import 'package:gdsc_bloc/utilities/route_generator.dart';
 
@@ -44,7 +46,7 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  FirebaseMessaging.instance.subscribeToTopic('dev');
+  FirebaseMessaging.instance.subscribeToTopic(kReleaseMode? "prod" :'dev');
   await NotificationProviders().getFirebaseMessagingToken();
 
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
