@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gdsc_bloc/blocs/minimal_functonality/pick_date/pick_date_cubit.dart';
@@ -10,6 +11,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../blocs/app_functionality/event/event_cubit.dart';
 import '../../../../blocs/minimal_functonality/get_image/get_image_cubit.dart';
 import '../../../../blocs/minimal_functonality/pick_time/pick_time_cubit.dart';
+import '../../../../data/services/providers/notification_providers.dart';
 
 class PostEvent extends StatelessWidget {
   PostEvent({super.key, required this.tabController});
@@ -53,11 +55,17 @@ class PostEvent extends StatelessWidget {
               );
               print(imageController.text);
 
-              // NotificationProviders().createPushNotification(
-              //   title: nameController.text,
-              //   message: descriptionController.text,
-              //   image: imageController.text,
-              // );
+              NotificationProviders().createPushNotification(
+                  image: imageController.text,
+                  title: "New Event Posted🤩🚚",
+                  message: nameController.text,
+                  topic: "test");
+              NotificationProviders().createPushNotification(
+                image: imageController.text,
+                title: "New Event Posted🤩🚚",
+                message: nameController.text,
+                topic: kReleaseMode ? "prod" : "dev",
+              );
 
               tabController.animateTo(0);
             }
@@ -208,9 +216,9 @@ class PostEvent extends StatelessWidget {
                       },
                       builder: (context, state) {
                         final width = MediaQuery.of(context).size.width;
-                      return SizedBox(
-                        height: 50,
-                        width: width * 0.4,
+                        return SizedBox(
+                          height: 50,
+                          width: width * 0.4,
                           child: state is ImageUploading
                               ? const LoadingCircle()
                               : ElevatedButton(
