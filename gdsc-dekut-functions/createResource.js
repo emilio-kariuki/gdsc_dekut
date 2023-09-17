@@ -7,11 +7,10 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
 
-module.exports.createEvent = async (event) => {
-  const requestBody = JSON.parse(event.body);
-  const { title, description, venue, organizers, link, imageUrl, date } =
-    requestBody;
-  const firestore = admin.firestore();
+module.exports.createResource = async (event) => {
+    const requestBody = JSON.parse(event.body);
+  const { title, description, link, imageUrl, category,userId } = requestBody;
+  const firestore =  admin.firestore();
 
   const v1options = {
     node: [0x01, 0x23, 0x45, 0x67, 0x89, 0xab],
@@ -21,25 +20,24 @@ module.exports.createEvent = async (event) => {
   };
   const id = uuidv1(v1options);
 
-  const eventRef = await firestore.collection("event_test").doc(id);
+  const resourceRef = await firestore.collection("resource_test").doc(id);
 
-  const newEvent = {
+  const newResource = {
     id: id,
     title,
     description,
-    venue,
-    organizers,
     link,
     imageUrl,
-    date,
-    isCompleted: false,
-    duration: 120,
+    category,
+    userId,
+    isApproved: true,
   };
 
-  console.log(newEvent);
+  console.log(newResource);
 
   try {
-    await eventRef.set(newEvent);
+    await resourceRef.set(newResource);
+    console.log("created resource");
   } catch (e) {
     console.log(e);
   }
@@ -47,7 +45,7 @@ module.exports.createEvent = async (event) => {
   return {
     statusCode: 200,
     body: JSON.stringify({
-      message: "Event created successfully",
+      message: "Resource created successfully",
     }),
   };
-};
+}

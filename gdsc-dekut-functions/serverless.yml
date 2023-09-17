@@ -39,6 +39,24 @@ functions:
     layers:
       - { Ref: CommonLambdaLayer }
 
+  notifications:
+    handler: notification.pushNotifications
+    events:
+      - http:
+          path: /notification
+          method: post
+    layers:
+      - { Ref: CommonLambdaLayer }
+
+  createResource:
+    handler: createResource.createResource
+    events:
+      - http:
+          path: /resource
+          method: post
+    layers:
+      - { Ref: CommonLambdaLayer }
+
   completeEvent:
     handler: complete.completeEvent
     events:
