@@ -23,11 +23,13 @@ class NotificationProviders {
     required String title,
     required String message,
     required String image,
+    required String topic,
   }) async {
     final response = await NotificationsRepository().createPushNotification(
       title: title,
       message: message,
       image: image,
+      topic: topic,
     );
     return response;
   }
@@ -51,6 +53,19 @@ class NotificationProviders {
   Future<String> getFirebaseMessagingToken() async {
     final response =
         await NotificationsRepository().getFirebaseMessagingToken();
+    return response;
+  }
+
+  Future<bool> sendEventNotification({
+    required String title,
+    required String image,
+    required String description,
+  }) async {
+    final response = await NotificationsRepository().sendEventNotification(
+      title: title,
+      image: image,
+      description: description,
+    );
     return response;
   }
 }
