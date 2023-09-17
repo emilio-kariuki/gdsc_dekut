@@ -33,17 +33,59 @@ class UserRepository {
     try {
       final firebaseFirestore = FirebaseFirestore.instance;
       final userId = await SharedPreferencesManager().getId();
+      final email = await FirebaseAuth.instance.currentUser!.email;
+      final name = await FirebaseAuth.instance.currentUser!.displayName;
 
-      final user = await firebaseFirestore
-          .collection("users")
-          .doc(userId)
-          .get()
-          .then((value) => UserModel.fromJson(value.data()!));
+      final isUserRegistered = await checkIsDataCollected();
 
-      return user;
+      if (!isUserRegistered) {
+        await createUserData(
+          user: UserModel(name, email, "phone", "github", "linkedin", "twitter",
+              userId, "technology", "imageUrl"),
+          id: userId,
+        );
+        final user = await firebaseFirestore
+            .collection("users")
+            .doc(userId)
+            .get()
+            .then((value) => UserModel.fromJson(value.data()!));
+
+        return user;
+      } else {
+        final user = await firebaseFirestore
+            .collection("users")
+            .doc(userId)
+            .get()
+            .then((value) => UserModel.fromJson(value.data()!));
+
+        return user;
+      }
     } catch (e) {
       debugPrint(e.toString());
       throw Exception(e);
+    }
+  }
+
+  Future<bool> checkIsDataCollected() async {
+    try {
+      final userId = await FirebaseAuth.instance.currentUser!.uid;
+
+      final firebaseFirestore = FirebaseFirestore.instance;
+
+      final user = await firebaseFirestore
+          .collection("users")
+          .where("userId", isEqualTo: userId)
+          .get()
+          .then((value) =>
+              value.docs.map((e) => LeadsModel.fromJson(e.data())).toList());
+
+      if (user.isNotEmpty) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      return false;
     }
   }
 
@@ -84,7 +126,6 @@ class UserRepository {
     try {
       final userEmail = await FirebaseAuth.instance.currentUser!.email;
       final firebaseFirestore = FirebaseFirestore.instance;
-
 
       final lead = await firebaseFirestore
           .collection("lead")
