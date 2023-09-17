@@ -173,8 +173,12 @@ class AuthRepository {
           debugPrint("Login Succesfull");
           return true;
         } else {
-          debugPrint("Login failed");
-          return false;
+          await SharedPreferencesManager().setLoggedIn(value: true);
+          await SharedPreferencesManager()
+              .setId(value: userCredential.user!.uid);
+          await SharedPreferencesManager()
+              .setName(value: userCredential.user!.displayName!);
+          return true;
         }
       } else {
         return false;
