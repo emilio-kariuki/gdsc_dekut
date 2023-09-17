@@ -47,6 +47,7 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
   FirebaseMessaging.instance.subscribeToTopic(kReleaseMode? "prod" :'dev');
+
   await NotificationProviders().getFirebaseMessagingToken();
 
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =

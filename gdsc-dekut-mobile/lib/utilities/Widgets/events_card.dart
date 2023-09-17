@@ -1,6 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -40,6 +39,9 @@ class EventCard extends StatelessWidget {
   final Function() function;
 
   void _showImageDialog(BuildContext context, String imageUrl, String title) {
+    final height = MediaQuery.of(context).size.height;
+
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -152,8 +154,8 @@ class EventCard extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          height: 8,
+                         SizedBox(
+                          height: height * 0.011,
                         ),
                         Expanded(
                           child: Scaffold(
@@ -176,9 +178,9 @@ class EventCard extends StatelessWidget {
                                       color: Colors.white,
                                     ),
                                   ),
-                                  const SizedBox(
-                                    height: 8,
-                                  ),
+                                   SizedBox(
+                          height: height * 0.011,
+                        ),
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -249,9 +251,9 @@ class EventCard extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const SizedBox(
-                                      height: 4,
-                                    ),
+                                      SizedBox(
+                          height: height * 0.015,
+                        ),
                                     Row(
                                       children: [
                                         Row(
@@ -303,9 +305,7 @@ class EventCard extends StatelessWidget {
                                         ),
                                       ],
                                     ),
-                                    const SizedBox(
-                                      height: 3,
-                                    ),
+                                    
                                   ],
                                 ),
                               ),

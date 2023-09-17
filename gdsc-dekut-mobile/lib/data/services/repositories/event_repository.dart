@@ -101,7 +101,6 @@ class EventRepository {
           .get()
           .then((value) =>
               value.docs.map((e) => EventModel.fromJson(e.data())).toList());
-      debugPrint(event.toString());
       return event;
     } catch (e) {
       debugPrint(e.toString());
