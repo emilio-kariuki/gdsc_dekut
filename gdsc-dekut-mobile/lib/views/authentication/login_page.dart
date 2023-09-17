@@ -120,7 +120,7 @@ class LoginPage extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.pushNamed(context, '/forgot_password');
+                        Navigator.pushNamed(context, "/reset_password");
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
