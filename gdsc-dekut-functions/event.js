@@ -9,7 +9,7 @@ admin.initializeApp({
 module.exports.notifications = async (event) => {
   var message = "Notification not sent successfully";
   const firestore = admin.firestore();
-  const query = await firestore.collection("event_test").get();
+  const query = await firestore.collection("event").get();
   const data = query.docs.map((doc) => doc.data());
 
   message = data;
@@ -43,7 +43,7 @@ module.exports.notifications = async (event) => {
           imageUrl: event.imageUrl,
         },
       },
-      topic: "dev",
+      topic: "prod",
     };
     if (minutes === 1 || minutes === 60) {
       try {

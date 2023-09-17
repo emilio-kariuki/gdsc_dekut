@@ -8,7 +8,7 @@ admin.initializeApp({
 
 module.exports.completeEvent = async (event) => {
   const firestore = admin.firestore();
-  const query = await firestore.collection("event_test").get();
+  const query = await firestore.collection("event").get();
   const data = query.docs.map((doc) => doc.data());
 
   message = data;
@@ -33,7 +33,7 @@ module.exports.completeEvent = async (event) => {
     if (minutes === -119 && !isCompleted) {
       try {
         await firestore
-          .collection("event_test")
+          .collection("event")
           .doc(event.id)
           .update({ isCompleted: true });
 
