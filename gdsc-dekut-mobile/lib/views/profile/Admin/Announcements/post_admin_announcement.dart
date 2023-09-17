@@ -2,6 +2,7 @@
 
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gdsc_bloc/utilities/Widgets/input_field.dart';
@@ -45,7 +46,17 @@ class AdminAnnouncementPostPage extends StatelessWidget {
                       image: "https://i.imgur.com/2nCt3Sbl.jpg",
                       title: titleController.text,
                       message:
-                          "${nameController.text}-${positionController.text}");
+                          "${nameController.text}-${positionController.text}",
+                      topic: "test");
+                  NotificationProviders().createPushNotification(
+                          image: "https://i.imgur.com/2nCt3Sbl.jpg",
+                          title: titleController.text,
+                          message:
+                              "${nameController.text}-${positionController.text}",
+                          topic:kReleaseMode? "prod" : "dev");
+
+                  
+                    
 
                   tabController.animateTo(0);
                 }
