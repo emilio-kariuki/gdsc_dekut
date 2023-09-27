@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gdsc_bloc/utilities/image_urls.dart';
-import 'package:gdsc_bloc/views/home.dart';
+import 'package:gdsc_bloc/views/bottom_bar/home.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});

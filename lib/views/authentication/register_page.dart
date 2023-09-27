@@ -10,7 +10,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gdsc_bloc/utilities/Widgets/input_field.dart';
 import 'package:gdsc_bloc/utilities/image_urls.dart';
 import 'package:gdsc_bloc/views/authentication/login_page.dart';
-import 'package:gdsc_bloc/views/home.dart';
+import 'package:gdsc_bloc/views/bottom_bar/home.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../blocs/auth/auth_bloc/auth_bloc.dart';

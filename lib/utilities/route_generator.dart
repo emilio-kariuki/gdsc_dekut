@@ -5,34 +5,33 @@ import 'package:gdsc_bloc/views/authentication/forgot_password_page.dart';
 import 'package:gdsc_bloc/views/authentication/login_page.dart';
 import 'package:gdsc_bloc/views/authentication/register_page.dart';
 import 'package:gdsc_bloc/views/authentication/reset_password_page.dart';
-import 'package:gdsc_bloc/views/bottom_bar/profile_page.dart';
-import 'package:gdsc_bloc/views/pages/annoucement_page.dart';
-import 'package:gdsc_bloc/views/pages/events_page.dart';
-import 'package:gdsc_bloc/views/pages/resource_post_page.dart';
-import 'package:gdsc_bloc/views/pages/tech_groups_page.dart';
-import 'package:gdsc_bloc/views/pages/twitter_page.dart';
-import 'package:gdsc_bloc/views/profile/About/about_page.dart';
-import 'package:gdsc_bloc/views/profile/Account/personal_information_page.dart';
-import 'package:gdsc_bloc/views/profile/Admin/Announcements/admin_announcements.dart';
-import 'package:gdsc_bloc/views/profile/Admin/Event/admin_event.dart';
-import 'package:gdsc_bloc/views/profile/Admin/Feedback/admin_feedback.dart';
-import 'package:gdsc_bloc/views/profile/Admin/Groups/admin_groups.dart';
-import 'package:gdsc_bloc/views/profile/Admin/Lead/admin_lead.dart';
-import 'package:gdsc_bloc/views/profile/Admin/Reports/admin_reports.dart';
-import 'package:gdsc_bloc/views/profile/Admin/Resources/admin_resources.dart';
-import 'package:gdsc_bloc/views/profile/Admin/admin_page.dart';
-import 'package:gdsc_bloc/views/profile/Community/community_leads_page.dart';
-import 'package:gdsc_bloc/views/profile/Community/user_resources.dart';
-import 'package:gdsc_bloc/views/profile/Help/contact_developer_page.dart';
-import 'package:gdsc_bloc/views/profile/Help/report_problem_page.dart';
-import 'package:gdsc_bloc/views/profile/Help/send_feedback_page.dart';
-import 'package:gdsc_bloc/views/resources/more_resources_page.dart';
-import 'package:gdsc_bloc/views/home.dart';
-import 'package:gdsc_bloc/views/messages/profile_page.dart';
+import 'package:gdsc_bloc/views/bottom_bar/pages/profile/profile_page.dart';
+import 'package:gdsc_bloc/views/bottom_bar/pages/home/pages/annoucement_page.dart';
+import 'package:gdsc_bloc/views/bottom_bar/pages/events/events_page.dart';
+import 'package:gdsc_bloc/views/bottom_bar/pages/resources/resource_post_page.dart';
+import 'package:gdsc_bloc/views/bottom_bar/pages/home/pages/tech_groups_page.dart';
+import 'package:gdsc_bloc/views/bottom_bar/pages/home/pages/twitter_page.dart';
+import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Announcements/admin_announcements.dart';
+import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Event/admin_event.dart';
+import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Feedback/admin_feedback.dart';
+import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Groups/admin_groups.dart';
+import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Lead/admin_lead.dart';
+import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Reports/admin_reports.dart';
+import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Resources/admin_resources.dart';
+import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/admin_page.dart';
+import 'package:gdsc_bloc/views/bottom_bar/pages/resources/more_resources_page.dart';
+import 'package:gdsc_bloc/views/bottom_bar/home.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
-import '../views/profile/Admin/Twitter/admin_twitter.dart';
+import '../views/bottom_bar/pages/profile/Admin/Twitter/admin_twitter.dart';
+import '../views/bottom_bar/pages/profile/pages/about_page.dart';
+import '../views/bottom_bar/pages/profile/pages/community_leads_page.dart';
+import '../views/bottom_bar/pages/profile/pages/contact_developer_page.dart';
+import '../views/bottom_bar/pages/profile/pages/personal_information_page.dart';
+import '../views/bottom_bar/pages/profile/pages/report_problem_page.dart';
+import '../views/bottom_bar/pages/profile/pages/send_feedback_page.dart';
+import '../views/bottom_bar/pages/profile/pages/user_resources.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -75,8 +74,6 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => AnnouncementPage());
       case '/post_resource':
         return MaterialPageRoute(builder: (_) => ResourcePostPage());
-      case '/message_profile':
-        return MaterialPageRoute(builder: (_) => const MessagesProfilePage());
       case '/admin_page':
         return MaterialPageRoute(builder: (_) => AdminPage());
       case '/admin_event':
