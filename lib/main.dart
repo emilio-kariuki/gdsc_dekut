@@ -28,7 +28,6 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
     message: message.notification!.body!,
     title: message.notification!.title!,
   );
-  print("Received a background message");
 }
 
 void main() async {
