@@ -91,11 +91,9 @@ class EditGroupDialog extends StatelessWidget {
                       },
                     ),
                   ),
-                  backgroundColor: Colors.white,
                   appBar: PreferredSize(
                     preferredSize: const Size.fromHeight(40),
                     child: AppBar(
-                      backgroundColor: Colors.white,
                       automaticallyImplyLeading: false,
                       title: Text(
                         "Edit Twitter Space",
@@ -104,7 +102,6 @@ class EditGroupDialog extends StatelessWidget {
                         style: GoogleFonts.inter(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
-                          color: Colors.grey[900],
                         ),
                       ),
                       actions: [

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Event/past_event.dart';
-import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Event/post_event_page.dart';
-import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Event/upcoming_events.dart';
+import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/event/tabs/post_event_page.dart';
+import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/event/tabs/past_event.dart';
+import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/event/tabs/upcoming_events.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../../blocs/app_functionality/event/event_cubit.dart';
@@ -34,9 +34,8 @@ class _AdminEventState extends State<AdminEvent>
         create: (context) => EventCubit(),
         child: Builder(builder: (context) {
           return Scaffold(
-            backgroundColor: Colors.white,
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             appBar: AppBar(
-                backgroundColor: Colors.white,
                 iconTheme:
                     const IconThemeData(color: Color(0xff666666), size: 20),
                 title: Text(

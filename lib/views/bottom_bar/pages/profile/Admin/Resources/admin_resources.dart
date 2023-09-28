@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Resources/post_admin_resource_page.dart';
-import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Resources/app_resources.dart';
-import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Resources/approve_resource_page.dart';
+import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Resources/tabs/post_admin_resource_page.dart';
+import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Resources/tabs/app_resources.dart';
+import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Resources/tabs/approve_resource_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../../blocs/app_functionality/resource/resource_cubit.dart';
-
 
 class AdminResources extends StatefulWidget {
   const AdminResources({super.key});
@@ -34,9 +33,7 @@ class _AdminResourcesState extends State<AdminResources>
         create: (context) => ResourceCubit(),
         child: Builder(builder: (context) {
           return Scaffold(
-            backgroundColor: Colors.white,
             appBar: AppBar(
-                backgroundColor: Colors.white,
                 iconTheme:
                     const IconThemeData(color: Color(0xff666666), size: 20),
                 title: Text(
@@ -60,7 +57,7 @@ class _AdminResourcesState extends State<AdminResources>
                   ),
                   Tab(
                     child: Text(
-                      "Approve R",
+                      "Approve",
                       style: GoogleFonts.inter(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,

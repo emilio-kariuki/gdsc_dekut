@@ -59,17 +59,12 @@ class AdminPage extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
     // final width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: Colors.white,
         iconTheme: const IconThemeData(color: Color(0xff666666), size: 20),
         title: Text(
           "Admin Page",
-          style: GoogleFonts.inter(
-            fontSize: 17,
-            fontWeight: FontWeight.w500,
-            color: const Color(0xff666666),
-          ),
+          style: Theme.of(context).textTheme.titleMedium
         ),
       ),
       body: Padding(
@@ -98,26 +93,25 @@ class AdminPage extends StatelessWidget {
                       children: [
                         Container(
                           height: height * 0.13,
-                          padding: const EdgeInsets.all(15),
+                          padding: const EdgeInsets.all(25),
                           decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
+                            color: Theme.of(context).primaryColor,
+                            borderRadius: BorderRadius.circular(25),
                             border: Border.all(
-                              color: const Color(0xFF282828),
-                              width: 0.15,
+                              color: Colors.grey[400]!,
+                              width: 0.6,
                             ),
                           ),
                           child: LottieBuilder.asset(
                             adminActivities[index]["image"],
                           ),
                         ),
-                        const SizedBox(height: 5),
+                        const SizedBox(height: 15),
                         Text(
                           adminActivities[index]["title"],
                           style: GoogleFonts.inter(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
-                            color: const Color(0xFF1F1F1F),
                           ),
                         ),
                       ],

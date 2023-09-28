@@ -16,9 +16,9 @@ class ImageView extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height * 0.9;
     return Scaffold(
-      backgroundColor: Colors.black,
+      
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        
         elevation: 0,
         automaticallyImplyLeading: true,
         iconTheme: const IconThemeData(size: 20, color: Colors.white),
@@ -26,11 +26,7 @@ class ImageView extends StatelessWidget {
           title,
           overflow: TextOverflow.clip,
           maxLines: 2,
-          style: GoogleFonts.inter(
-            fontSize: 15,
-            fontWeight: FontWeight.w500,
-            color: Colors.white,
-          ),
+          
         ),
         actions: [
           PopupMenuButton(
@@ -38,7 +34,6 @@ class ImageView extends StatelessWidget {
             icon: const Icon(
               Icons.more_vert,
               size: 20,
-              color: Colors.white,
             ),
             itemBuilder: (BuildContext context) => <PopupMenuEntry>[
               PopupMenuItem(
@@ -48,7 +43,6 @@ class ImageView extends StatelessWidget {
                   style: GoogleFonts.inter(
                     fontSize: 13,
                     fontWeight: FontWeight.w500,
-                    color: Colors.white,
                   ),
                 ),
               ),

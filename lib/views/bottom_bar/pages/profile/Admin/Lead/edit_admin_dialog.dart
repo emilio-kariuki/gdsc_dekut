@@ -68,8 +68,7 @@ class EditLeadDialog extends StatelessWidget {
                           width: double.infinity,
                           child: ElevatedButton(
                             onPressed: () {
-                              BlocProvider.of<LeadsCubit>(context)
-                                  .updateLead(
+                              BlocProvider.of<LeadsCubit>(context).updateLead(
                                 name: nameController.text,
                                 email: emailController.text,
                                 phone: phoneController.text,
@@ -99,11 +98,9 @@ class EditLeadDialog extends StatelessWidget {
                       },
                     ),
                   ),
-                  backgroundColor: Colors.white,
                   appBar: PreferredSize(
                     preferredSize: const Size.fromHeight(40),
                     child: AppBar(
-                      backgroundColor: Colors.white,
                       automaticallyImplyLeading: false,
                       title: Text(
                         "Edit Lead",
@@ -112,7 +109,6 @@ class EditLeadDialog extends StatelessWidget {
                         style: GoogleFonts.inter(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
-                          color: Colors.grey[900],
                         ),
                       ),
                       actions: [
@@ -137,23 +133,23 @@ class EditLeadDialog extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-              "Name",
-              style: GoogleFonts.inter(
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-                color: const Color(0xff000000),
-              ),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
+                            "Name",
+                            style: GoogleFonts.inter(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                              color: const Color(0xff000000),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
                           InputField(
                             validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please enter your name";
-                        }
-                        return null;
-                      },
+                              if (value!.isEmpty) {
+                                return "Please enter your name";
+                              }
+                              return null;
+                            },
                             controller: nameController,
                             hintText: "Enter name of lead",
                           ),
@@ -161,23 +157,23 @@ class EditLeadDialog extends StatelessWidget {
                             height: 6,
                           ),
                           Text(
-              "Email",
-              style: GoogleFonts.inter(
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-                color: const Color(0xff000000),
-              ),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
+                            "Email",
+                            style: GoogleFonts.inter(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                              color: const Color(0xff000000),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
                           InputField(
                             validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please enter the email";
-                        }
-                        return null;
-                      },
+                              if (value!.isEmpty) {
+                                return "Please enter the email";
+                              }
+                              return null;
+                            },
                             controller: emailController,
                             hintText: "Enter email of lead",
                           ),
@@ -185,23 +181,23 @@ class EditLeadDialog extends StatelessWidget {
                             height: 6,
                           ),
                           Text(
-              "Phone",
-              style: GoogleFonts.inter(
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-                color: const Color(0xff000000),
-              ),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
+                            "Phone",
+                            style: GoogleFonts.inter(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                              color: const Color(0xff000000),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
                           InputField(
                             validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please enter the phone";
-                        }
-                        return null;
-                      },
+                              if (value!.isEmpty) {
+                                return "Please enter the phone";
+                              }
+                              return null;
+                            },
                             controller: phoneController,
                             hintText: "Enter phone of lead",
                           ),
@@ -209,23 +205,23 @@ class EditLeadDialog extends StatelessWidget {
                             height: 6,
                           ),
                           Text(
-              "Role",
-              style: GoogleFonts.inter(
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-                color: const Color(0xff000000),
-              ),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
+                            "Role",
+                            style: GoogleFonts.inter(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                              color: const Color(0xff000000),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
                           InputField(
                             validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please enter the role";
-                        }
-                        return null;
-                      },
+                              if (value!.isEmpty) {
+                                return "Please enter the role";
+                              }
+                              return null;
+                            },
                             controller: roleController,
                             hintText: "Enter role of lead",
                           ),
@@ -233,23 +229,23 @@ class EditLeadDialog extends StatelessWidget {
                             height: 6,
                           ),
                           Text(
-              "Github",
-              style: GoogleFonts.inter(
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-                color: const Color(0xff000000),
-              ),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
+                            "Github",
+                            style: GoogleFonts.inter(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                              color: const Color(0xff000000),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
                           InputField(
                             validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please enter the github";
-                        }
-                        return null;
-                      },
+                              if (value!.isEmpty) {
+                                return "Please enter the github";
+                              }
+                              return null;
+                            },
                             controller: githubController,
                             hintText: "Enter github of lead",
                           ),
@@ -257,23 +253,23 @@ class EditLeadDialog extends StatelessWidget {
                             height: 6,
                           ),
                           Text(
-              "Twitter",
-              style: GoogleFonts.inter(
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-                color: const Color(0xff000000),
-              ),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
+                            "Twitter",
+                            style: GoogleFonts.inter(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                              color: const Color(0xff000000),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
                           InputField(
                             validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please enter the twitter";
-                        }
-                        return null;
-                      },
+                              if (value!.isEmpty) {
+                                return "Please enter the twitter";
+                              }
+                              return null;
+                            },
                             controller: twitterController,
                             hintText: "Enter twitter of lead",
                           ),
@@ -281,23 +277,23 @@ class EditLeadDialog extends StatelessWidget {
                             height: 6,
                           ),
                           Text(
-              "Bio",
-              style: GoogleFonts.inter(
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-                color: const Color(0xff000000),
-              ),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
+                            "Bio",
+                            style: GoogleFonts.inter(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                              color: const Color(0xff000000),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
                           InputField(
                             validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please enter the  bio";
-                        }
-                        return null;
-                      },
+                              if (value!.isEmpty) {
+                                return "Please enter the  bio";
+                              }
+                              return null;
+                            },
                             controller: bioController,
                             hintText: "Enter bio of lead",
                           ),
@@ -318,8 +314,7 @@ class EditLeadDialog extends StatelessWidget {
                           BlocProvider(
                             create: (context) => GetImageCubit(),
                             child: Builder(builder: (context) {
-                              return BlocConsumer<GetImageCubit,
-                                  GetImageState>(
+                              return BlocConsumer<GetImageCubit, GetImageState>(
                                 listener: (context, state) {
                                   if (state is ImagePicked) {
                                     imageController.text = state.imageUrl;
@@ -352,16 +347,16 @@ class EditLeadDialog extends StatelessWidget {
                                   }
                                 },
                                 builder: (context, state) {
-                                 final width = MediaQuery.of(context).size.width;
-                      return SizedBox(
-                        height: 50,
-                        width: width * 0.4,
+                                  final width =
+                                      MediaQuery.of(context).size.width;
+                                  return SizedBox(
+                                    height: 50,
+                                    width: width * 0.4,
                                     child: state is ImageUploading
                                         ? const LoadingCircle()
                                         : ElevatedButton(
                                             onPressed: () {
-                                              BlocProvider.of<
-                                                          GetImageCubit>(
+                                              BlocProvider.of<GetImageCubit>(
                                                       context)
                                                   .getImage();
                                             },

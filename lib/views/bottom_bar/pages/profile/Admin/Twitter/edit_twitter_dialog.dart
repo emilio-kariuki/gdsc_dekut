@@ -107,11 +107,9 @@ class EditTwitterDialog extends StatelessWidget {
                       },
                     ),
                   ),
-                  backgroundColor: Colors.white,
                   appBar: PreferredSize(
                     preferredSize: const Size.fromHeight(40),
                     child: AppBar(
-                      backgroundColor: Colors.white,
                       automaticallyImplyLeading: false,
                       title: Text(
                         "Edit Twitter Space",
@@ -120,7 +118,6 @@ class EditTwitterDialog extends StatelessWidget {
                         style: GoogleFonts.inter(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
-                          color: Colors.grey[900],
                         ),
                       ),
                       actions: [
@@ -145,23 +142,23 @@ class EditTwitterDialog extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-              "Name",
-              style: GoogleFonts.inter(
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-                color: const Color(0xff000000),
-              ),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
+                            "Name",
+                            style: GoogleFonts.inter(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                              color: const Color(0xff000000),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
                           InputField(
                             validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please enter your name";
-                        }
-                        return null;
-                      },
+                              if (value!.isEmpty) {
+                                return "Please enter your name";
+                              }
+                              return null;
+                            },
                             controller: nameController,
                             hintText: "Edit name of twitter space",
                           ),
@@ -169,23 +166,23 @@ class EditTwitterDialog extends StatelessWidget {
                             height: 6,
                           ),
                           Text(
-              "Link",
-              style: GoogleFonts.inter(
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-                color: const Color(0xff000000),
-              ),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
+                            "Link",
+                            style: GoogleFonts.inter(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                              color: const Color(0xff000000),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
                           InputField(
                             validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please enter your link";
-                        }
-                        return null;
-                      },
+                              if (value!.isEmpty) {
+                                return "Please enter your link";
+                              }
+                              return null;
+                            },
                             controller: linkController,
                             hintText: "Edit link of twitter space",
                           ),
@@ -222,7 +219,6 @@ class EditTwitterDialog extends StatelessWidget {
                                     padding: const EdgeInsets.only(
                                         left: 12, right: 1),
                                     decoration: BoxDecoration(
-                                        color: Colors.white,
                                         borderRadius: BorderRadius.circular(5),
                                         border: Border.all(
                                           color: Colors.grey[500]!,
@@ -230,8 +226,7 @@ class EditTwitterDialog extends StatelessWidget {
                                         )),
                                     child: TextFormField(
                                       onTap: () async {
-                                        BlocProvider.of<PickDateCubit>(
-                                                context)
+                                        BlocProvider.of<PickDateCubit>(context)
                                             .pickDate(context: context);
                                       },
                                       controller: dateController,
@@ -277,7 +272,9 @@ class EditTwitterDialog extends StatelessWidget {
                                     const SizedBox(
                                       height: 8,
                                     ),
-                                    PickTwitterSpaceTime(startTimeController: startTimeController),
+                                    PickTwitterSpaceTime(
+                                        startTimeController:
+                                            startTimeController),
                                   ],
                                 ),
                               ),
@@ -305,7 +302,6 @@ class EditTwitterDialog extends StatelessWidget {
                                       padding: const EdgeInsets.only(
                                           left: 12, right: 1),
                                       decoration: BoxDecoration(
-                                          color: Colors.white,
                                           borderRadius:
                                               BorderRadius.circular(5),
                                           border: Border.all(
@@ -374,8 +370,7 @@ class EditTwitterDialog extends StatelessWidget {
                           BlocProvider(
                             create: (context) => GetImageCubit(),
                             child: Builder(builder: (context) {
-                              return BlocConsumer<GetImageCubit,
-                                  GetImageState>(
+                              return BlocConsumer<GetImageCubit, GetImageState>(
                                 listener: (context, state) {
                                   if (state is ImagePicked) {
                                     imageController.text = state.imageUrl;
@@ -408,16 +403,16 @@ class EditTwitterDialog extends StatelessWidget {
                                   }
                                 },
                                 builder: (context, state) {
-                                 final width = MediaQuery.of(context).size.width;
-                      return SizedBox(
-                        height: 50,
-                        width: width * 0.4,
+                                  final width =
+                                      MediaQuery.of(context).size.width;
+                                  return SizedBox(
+                                    height: 50,
+                                    width: width * 0.4,
                                     child: state is ImageUploading
                                         ? const LoadingCircle()
                                         : ElevatedButton(
                                             onPressed: () {
-                                              BlocProvider.of<
-                                                          GetImageCubit>(
+                                              BlocProvider.of<GetImageCubit>(
                                                       context)
                                                   .getImage();
                                             },
@@ -468,35 +463,25 @@ class PickTwitterSpaceTime extends StatelessWidget {
       child: Builder(builder: (context) {
         return Container(
           height: 50,
-          padding: const EdgeInsets.only(
-              left: 12, right: 1),
+          padding: const EdgeInsets.only(left: 12, right: 1),
           decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius:
-                  BorderRadius.circular(5),
+              borderRadius: BorderRadius.circular(5),
               border: Border.all(
                 color: Colors.grey[500]!,
                 width: 1,
               )),
-          child: BlocListener<PickTwitterTimeCubit,
-              PickTwitterTimeState>(
+          child: BlocListener<PickTwitterTimeCubit, PickTwitterTimeState>(
             listener: (context, state) {
               if (state is TwitterTimePicked) {
-                startTimeController
-                    .text = DateTime
-                        .fromMillisecondsSinceEpoch(
-                            state.timestamp
-                                .millisecondsSinceEpoch)
+                startTimeController.text = DateTime.fromMillisecondsSinceEpoch(
+                        state.timestamp.millisecondsSinceEpoch)
                     .toString();
               }
             },
             child: TextFormField(
               onTap: () async {
-                BlocProvider.of<
-                            PickTwitterTimeCubit>(
-                        context)
-                    .pickSpaceTime(
-                        context: context);
+                BlocProvider.of<PickTwitterTimeCubit>(context)
+                    .pickSpaceTime(context: context);
               },
               controller: startTimeController,
               keyboardType: TextInputType.none,

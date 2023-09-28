@@ -23,11 +23,9 @@ class TechGroupsPage extends StatelessWidget {
       create: (context) => GroupCubit()..getAllGroups(),
       child: Builder(builder: (context) {
         return Scaffold(
-          backgroundColor: Colors.white,
           appBar: PreferredSize(
             preferredSize: const Size.fromHeight(50),
             child: AppBar(
-              backgroundColor: Colors.white,
               title: Text(
                 "Tech Groups",
                 style: GoogleFonts.inter(
@@ -61,7 +59,6 @@ class TechGroupsPage extends StatelessWidget {
                       height: 49,
                       padding: const EdgeInsets.only(left: 15, right: 1),
                       decoration: BoxDecoration(
-                          color: Colors.white,
                           borderRadius: BorderRadius.circular(25),
                           border: Border.all(
                             color: Colors.grey[500]!,

@@ -72,49 +72,57 @@ class _HomeState extends State<Home> {
     return Builder(builder: (context) {
       return BlocBuilder<BottomNavigationCubit, BottomNavigationState>(
         builder: (context, state) {
-          return AnimatedBottomNavigationBar.builder(
-            elevation: 0,
-            // backgroundColor: Colors.white,
-            notchSmoothness: NotchSmoothness.softEdge,
-            splashRadius: 1,
-            itemCount: items.length,
-            splashSpeedInMilliseconds: 160,
-            activeIndex: state is TabChanged ? state.index : 0,
-            gapWidth: 10,
-            onTap: (index) {
-              BlocProvider.of<BottomNavigationCubit>(context).changeTab(index);
-              SystemChannels.textInput.invokeMethod('TextInput.hide');
-            },
-            tabBuilder: (int index, bool isActive) {
-              final icons = items[index];
-              return Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Icon(
-                    isActive ? icons['one'] : icons['two'],
-                    size: 22,
-                    color: isActive ? Colors.deepOrange : Color(0xff666666),
-                  ),
-                  const SizedBox(
-                    height: 2,
-                  ),
-                  Text(
-                    icons['three'],
-                    style: TextStyle(
-                      color:
-                          isActive ? Colors.deepOrange : Colors.grey.shade600,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
+          return Container(
+            decoration: BoxDecoration(
+              border: Border(
+                top: BorderSide(
+                  width: 0.1,
+                  color: Colors.grey[300]!
+                )
+              )
+            ),
+            child: AnimatedBottomNavigationBar.builder(
+              elevation: 0,
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              notchSmoothness: NotchSmoothness.softEdge,
+              splashRadius: 1,
+              itemCount: items.length,
+              splashSpeedInMilliseconds: 160,
+              activeIndex: state is TabChanged ? state.index : 0,
+              gapWidth: 10,
+              onTap: (index) {
+                BlocProvider.of<BottomNavigationCubit>(context).changeTab(index);
+                SystemChannels.textInput.invokeMethod('TextInput.hide');
+              },
+              tabBuilder: (int index, bool isActive) {
+                final icons = items[index];
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    
+                    Icon(
+                      isActive ? icons['one'] : icons['two'],
+                      size: 22,
+                      color: isActive ? Colors.deepOrange : Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
                     ),
-                  )
-                ],
-              );
-            },
+                    const SizedBox(
+                      height: 2,
+                    ),
+                    Text(
+                      icons['three'],
+                      style: TextStyle(
+                        color:
+                            isActive ? Colors.deepOrange : Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    )
+                  ],
+                );
+              },
+            ),
           );
         },
       );

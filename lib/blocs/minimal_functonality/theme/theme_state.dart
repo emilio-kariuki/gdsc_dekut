@@ -9,21 +9,12 @@ abstract class ThemeState extends Equatable {
 
 class ThemeInitial extends ThemeState {}
 
-class ThemeDark extends ThemeState {
-  final ThemeData themeData;
+class AppTheme extends ThemeState {
+  final bool isDark;
 
-  const ThemeDark({required this.themeData});
-
-  @override
-  List<Object> get props => [themeData];
-}
-
-
-class ThemeLight extends ThemeState {
-  final ThemeData themeData;
-
-  const ThemeLight({required this.themeData});
+  const AppTheme({required this.isDark});
 
   @override
-  List<Object> get props => [themeData];
+  List<Object> get props => [isDark];
 }
+

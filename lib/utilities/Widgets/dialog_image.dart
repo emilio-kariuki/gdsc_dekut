@@ -63,9 +63,7 @@ class DialogImage extends StatelessWidget {
             bottomNavigationBar: Container(
               height: height * 0.045,
               width: width,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-              ),
+              decoration: const BoxDecoration(),
             ),
             appBar: AppBar(
               backgroundColor: Colors.black,
@@ -78,7 +76,6 @@ class DialogImage extends StatelessWidget {
                 style: GoogleFonts.inter(
                   fontSize: 13,
                   fontWeight: FontWeight.w500,
-                  color: Colors.white,
                 ),
               ),
               actions: [
@@ -87,7 +84,6 @@ class DialogImage extends StatelessWidget {
                   icon: const Icon(
                     Icons.more_vert,
                     size: 20,
-                    color: Colors.white,
                   ),
                   itemBuilder: (BuildContext context) => <PopupMenuEntry>[
                     PopupMenuItem(
@@ -97,7 +93,6 @@ class DialogImage extends StatelessWidget {
                         style: GoogleFonts.inter(
                           fontSize: 13,
                           fontWeight: FontWeight.w500,
-                          color: Colors.white,
                         ),
                       ),
                     ),

@@ -22,9 +22,7 @@ class AppFeedback extends StatelessWidget {
       create: (context) => FeedbackCubit()..getAllFeedbacks(),
       child: Builder(builder: (context) {
         return Scaffold(
-          backgroundColor: Colors.white,
           appBar: AppBar(
-            backgroundColor: Colors.white,
             iconTheme: const IconThemeData(color: Color(0xff666666), size: 20),
             title: Text(
               "Admin Feedback",

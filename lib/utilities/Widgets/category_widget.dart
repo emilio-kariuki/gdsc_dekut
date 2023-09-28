@@ -20,25 +20,17 @@ class CategoryWidget extends StatelessWidget {
           style: GoogleFonts.inter(
             fontWeight: FontWeight.w600,
             fontSize: 17,
-            color: const Color(0xff000000),
+            
           ),
         ),
         TextButton(
-          style: TextButton.styleFrom(
-            padding: EdgeInsets.zero,
-            shadowColor: Colors.white,
-            backgroundColor: Colors.white,
-          ),
+          style: Theme.of(context).textButtonTheme.style,
           onPressed: () {
             Navigator.pushNamed(context, location);
           },
           child: Text(
             "See all",
-            style: GoogleFonts.inter(
-              fontWeight: FontWeight.w500,
-              fontSize: 15,
-              color: const Color(0xff000000),
-            ),
+            style: Theme.of(context).textTheme.titleSmall,
           ),
         )
       ],

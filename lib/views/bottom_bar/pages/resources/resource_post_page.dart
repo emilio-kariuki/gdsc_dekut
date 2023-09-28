@@ -36,6 +36,7 @@ class ResourcePostPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -54,18 +55,17 @@ class ResourcePostPage extends StatelessWidget {
             selectedType: selectedType,
             image: image,
           ),
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          
           appBar: AppBar(
-            backgroundColor: Colors.white,
-            iconTheme: const IconThemeData(color: Color(0xff666666), size: 20),
             title: Text(
               "Post a Resource",
-              style: GoogleFonts.inter(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                color: Colors.black,
-              ),
+              style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+              )
             ),
+            iconTheme: Theme.of(context).iconTheme,
           ),
           body: SafeArea(
             child: SingleChildScrollView(
@@ -75,7 +75,18 @@ class ResourcePostPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Text(
+                      "Name",
+                      style: GoogleFonts.inter(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    SizedBox(
+                      height: height * 0.01,
+                    ),
                     InputField(
+                      borderRadius: 10,
                         validator: (value) {
                           if (value!.isEmpty) {
                             return "Please enter your title";
@@ -86,6 +97,16 @@ class ResourcePostPage extends StatelessWidget {
                         hintText: "Enter the title of the resource"),
                     const SizedBox(
                       height: 20,
+                    ),
+                    Text(
+                      "Description",
+                      style: GoogleFonts.inter(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    SizedBox(
+                      height: height * 0.01,
                     ),
                     InputField(
                         validator: (value) {
@@ -107,7 +128,6 @@ class ResourcePostPage extends StatelessWidget {
                       style: GoogleFonts.inter(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
-                        color: const Color(0xff000000),
                       ),
                     ),
                     const SizedBox(
@@ -128,11 +148,7 @@ class ResourcePostPage extends StatelessWidget {
                                 isExpanded: true,
                                 hint: Text(
                                   'Select a resource type',
-                                  style: GoogleFonts.inter(
-                                    fontSize: 14,
-                                    color: Colors.grey[400],
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                                  style: Theme.of(context).inputDecorationTheme.hintStyle,
                                   overflow: TextOverflow.ellipsis,
                                 ),
                                 items: items
@@ -142,9 +158,8 @@ class ResourcePostPage extends StatelessWidget {
                                             item,
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .bodyLarge!
+                                                .titleMedium!
                                                 .copyWith(
-                                                  color: Colors.black,
                                                   fontWeight: FontWeight.w400,
                                                 ),
                                             overflow: TextOverflow.ellipsis,
@@ -178,16 +193,18 @@ class ResourcePostPage extends StatelessWidget {
                                   padding: null,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(5),
-                                      color: Colors.white),
+                                     ),
                                   elevation: 0,
                                   offset: const Offset(0, 0),
                                   scrollbarTheme: ScrollbarThemeData(
+                                    
                                     radius: const Radius.circular(40),
                                     thickness:
                                         MaterialStateProperty.all<double>(6),
                                     thumbVisibility:
                                         MaterialStateProperty.all<bool>(true),
                                   ),
+                                  
                                 ),
                                 menuItemStyleData: const MenuItemStyleData(
                                   height: 40,
@@ -201,6 +218,16 @@ class ResourcePostPage extends StatelessWidget {
                     ),
                     const SizedBox(
                       height: 20,
+                    ),
+                    Text(
+                      "Link",
+                      style: GoogleFonts.inter(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    SizedBox(
+                      height: height * 0.01,
                     ),
                     InputField(
 validator: (value) {
@@ -253,18 +280,22 @@ validator: (value) {
                                   onPressed: () {
                                     context.read<GetImageCubit>().getImage();
                                   },
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color(0xff000000),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                  ),
+                                  style: Theme.of(context)
+                                      .elevatedButtonTheme
+                                      .style!
+                                      .copyWith(
+                                        shape: MaterialStateProperty.all(
+                                          RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(25),
+                                          ),
+                                        ),
+                                      ),
                                   child: Text(
                                     "Add Image",
                                     style: GoogleFonts.inter(
                                       fontSize: 14,
                                       fontWeight: FontWeight.w600,
-                                      color: const Color(0xffffffff),
                                     ),
                                   ),
                                 ),
@@ -348,18 +379,22 @@ class PostResourceContainer extends StatelessWidget {
                       descriptionController.clear();
                       linkController.clear();
                     },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xff000000),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                    ),
+                    style: Theme.of(context)
+                                      .elevatedButtonTheme
+                                      .style!
+                                      .copyWith(
+                                        shape: MaterialStateProperty.all(
+                                          RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(25),
+                                          ),
+                                        ),
+                                      ),
                     child: Text(
                       "Post",
                       style: GoogleFonts.inter(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
-                        color: const Color(0xffffffff),
                       ),
                     ),
                   ),

@@ -23,9 +23,7 @@ class TwitterPage extends StatelessWidget {
       create: (context) => TwitterSpaceCubit()..getAllTwitterSpaces(),
       child: Builder(builder: (context) {
         return Scaffold(
-          backgroundColor: Colors.white,
           appBar: AppBar(
-            backgroundColor: Colors.white,
             title: Text(
               "Twitter Spaces",
               style: GoogleFonts.inter(
@@ -58,7 +56,6 @@ class TwitterPage extends StatelessWidget {
                       height: 49,
                       padding: const EdgeInsets.only(left: 15, right: 1),
                       decoration: BoxDecoration(
-                          color: Colors.white,
                           borderRadius: BorderRadius.circular(25),
                           border: Border.all(
                             color: Colors.grey[500]!,

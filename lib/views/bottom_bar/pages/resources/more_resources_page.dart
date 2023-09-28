@@ -26,15 +26,14 @@ class MoreResourcesPage extends StatelessWidget {
           ResourceCubit()..getResourcesByCategory(category: category),
       child: Builder(builder: (context) {
         return Scaffold(
-          // backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           appBar: AppBar(
-            // backgroundColor: Colors.white,
+            backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
             title: Text(
               title,
               style: GoogleFonts.inter(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
-                color: Colors.black,
               ),
             ),
           ),
@@ -60,7 +59,7 @@ class MoreResourcesPage extends StatelessWidget {
                       height: 49,
                       padding: const EdgeInsets.only(left: 15, right: 1),
                       decoration: BoxDecoration(
-                          // color: Colors.white,
+                          //
                           borderRadius: BorderRadius.circular(25),
                           border: Border.all(
                             color: Colors.grey[500]!,
@@ -221,7 +220,7 @@ class MoreResourcesPage extends StatelessWidget {
                             );
                           } else {
                             return BlocConsumer<ResourceCubit, ResourceState>(
-                               listener: (context, state) {
+                              listener: (context, state) {
                                 if (state is ResourceError) {
                                   Timer(
                                     const Duration(milliseconds: 300),
@@ -241,8 +240,8 @@ class MoreResourcesPage extends StatelessWidget {
                                 if (state is ResourceLoading) {
                                   return SizedBox(
                                       height: height * 0.65,
-                                      child: const Center(
-                                          child: LoadingCircle()));
+                                      child:
+                                          const Center(child: LoadingCircle()));
                                 } else if (state is ResourceSuccess) {
                                   return Padding(
                                     padding: const EdgeInsets.only(top: 10),
@@ -259,11 +258,10 @@ class MoreResourcesPage extends StatelessWidget {
                                                 Text(
                                                   "Resources not found",
                                                   style: GoogleFonts.inter(
-                                                    fontWeight:
-                                                        FontWeight.w600,
+                                                    fontWeight: FontWeight.w600,
                                                     fontSize: 15,
-                                                    color: const Color(
-                                                        0xff666666),
+                                                    color:
+                                                        const Color(0xff666666),
                                                   ),
                                                 ),
                                               ],
@@ -293,12 +291,10 @@ class MoreResourcesPage extends StatelessWidget {
                                                       .category!,
                                                   width: width,
                                                   height: height,
-                                                  image: state
-                                                      .resources[index]
+                                                  image: state.resources[index]
                                                       .imageUrl!,
                                                   title: state
-                                                      .resources[index]
-                                                      .title!);
+                                                      .resources[index].title!);
                                             },
                                           ),
                                   );

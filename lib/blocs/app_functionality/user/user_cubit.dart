@@ -1,12 +1,13 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:gdsc_bloc/data/models/user_model.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 import '../../../data/services/providers/user_providers.dart';
 
 part 'user_state.dart';
 
-class UserCubit extends Cubit<UserState> {
+class UserCubit extends HydratedCubit<UserState> {
   UserCubit() : super(UserInitial());
 
   void getUser() async {
@@ -48,6 +49,20 @@ class UserCubit extends Cubit<UserState> {
       }
     } catch (e) {
       emit(UserError(message: e.toString()));
+    }
+  }
+  
+  @override
+  UserState? fromJson(Map<String, dynamic> json) {
+    UserModel user = UserModel.fromJson(json);
+    return UserSuccess(user: user);
+    
+  }
+  
+  @override
+  Map<String, dynamic>? toJson(UserState state) {
+    if (state is UserSuccess) {
+      return state.user.toJson();
     }
   }
 }

@@ -3,15 +3,16 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gdsc_bloc/blocs/app_functionality/resource/resource_cubit.dart';
-
-import 'package:gdsc_bloc/utilities/Widgets/approve_resource_card.dart';
 import 'package:gdsc_bloc/utilities/Widgets/loading_circle.dart';
 import 'package:gdsc_bloc/utilities/image_urls.dart';
+import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Resources/edit_resource_dialog.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
-class ApprovedResources extends StatelessWidget {
-  ApprovedResources({super.key, required this.tabController});
+import '../../../../../../../utilities/Widgets/admin/resource/admin_resource_card.dart';
+
+class AppResources extends StatelessWidget {
+  AppResources({super.key, required this.tabController});
 
   final searchController = TextEditingController();
   final idController = TextEditingController();
@@ -19,8 +20,30 @@ class ApprovedResources extends StatelessWidget {
   final descriptionController = TextEditingController();
   final linkController = TextEditingController();
   final imageController = TextEditingController();
+  final categoryController = TextEditingController();
 
   final TabController tabController;
+
+  _editEventDialog(
+    BuildContext context,
+  ) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return EditResourceDialog(
+          selectedType: categoryController.text,
+          categoryController: categoryController,
+          tabController: tabController,
+          imageController: imageController,
+          idController: idController,
+          nameController: nameController,
+          descriptionController: descriptionController,
+          linkController: linkController,
+          context: context,
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,14 +52,14 @@ class ApprovedResources extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-            create: (context) => ResourceCubit()..getUnApprovedResources()),
+          create: (context) => ResourceCubit()..getAllResources(),
+        ),
       ],
       child: Builder(builder: (context) {
         return Scaffold(
-          backgroundColor: Colors.white,
           body: RefreshIndicator(
             onRefresh: () {
-              context.read<ResourceCubit>().getUnApprovedResources();
+              context.read<ResourceCubit>().getAllResources();
               return Future.value();
             },
             child: SingleChildScrollView(
@@ -46,59 +69,64 @@ class ApprovedResources extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      height: 49,
-                      padding: const EdgeInsets.only(left: 15, right: 1),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(25),
-                          border: Border.all(
-                            color: Colors.grey[500]!,
-                            width: 0.8,
-                          )),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          const Icon(
-                            Icons.search,
+                    TextFormField(
+                      controller: searchController,
+                      style: GoogleFonts.inter(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 14,
+                        // color: const Color(0xff000000),
+                      ),
+                      onChanged: (value) {
+                        Future.delayed(const Duration(milliseconds: 500), () {
+                          context
+                              .read<ResourceCubit>()
+                              .searchResource(query: value);
+                        });
+                      },
+                      onFieldSubmitted: (value) {
+                        context
+                            .read<ResourceCubit>()
+                            .searchResource(query: value);
+                      },
+                      decoration: InputDecoration(
+                        prefixIcon: const Icon(
+                          Icons.search,
+                          color: Color(0xff666666),
+                          size: 18,
+                        ),
+                        suffixIcon: IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            context.read<ResourceCubit>()..getAllResources();
+                            searchController.clear();
+                          },
+                          icon: const Icon(
+                            Icons.close,
                             color: Color(0xff666666),
                             size: 18,
                           ),
-                          const SizedBox(
-                            width: 10,
+                        ),
+                        hintText: "Search for resource eg. Flutter",
+                        border: Theme.of(context).inputDecorationTheme.border,
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25),
+                          borderSide: BorderSide(
+                            color: Colors.grey[500]!,
+                            width: 1,
                           ),
-                          Expanded(
-                            child: TextFormField(
-                              controller: searchController,
-                              style: GoogleFonts.inter(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 14,
-                                color: const Color(0xff000000),
-                              ),
-                              onFieldSubmitted: (value) {
-                                if (value.isNotEmpty) {
-                                  context
-                                      .read<ResourceCubit>()
-                                      .searchUnApprovedResources(
-                                          query: value.toLowerCase());
-                                } else {
-                                  context
-                                      .read<ResourceCubit>()
-                                      .getUnApprovedResources();
-                                }
-                              },
-                              decoration: InputDecoration(
-                                hintText: "Search for event eg. Flutter",
-                                border: InputBorder.none,
-                                hintStyle: GoogleFonts.inter(
-                                  fontSize: 12,
-                                  color: const Color(0xff666666),
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25),
+                          borderSide: BorderSide(
+                            color: Colors.grey[500]!,
+                            width: 1.3,
                           ),
-                        ],
+                        ),
+                        hintStyle: GoogleFonts.inter(
+                          fontSize: 12,
+                          // color: const Color(0xff666666),
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
                     BlocListener<ResourceCubit, ResourceState>(
@@ -137,7 +165,7 @@ class ApprovedResources extends StatelessWidget {
                                       style: GoogleFonts.inter(
                                         fontWeight: FontWeight.w600,
                                         fontSize: 18,
-                                        color: const Color(0xff000000),
+                                        
                                       ),
                                     ),
                                     IconButton(
@@ -147,13 +175,12 @@ class ApprovedResources extends StatelessWidget {
                                         onPressed: () {
                                           context
                                               .read<ResourceCubit>()
-                                              .getUnApprovedResources();
+                                              .getAllResources();
                                           searchController.clear();
                                         },
                                         icon: const Icon(
                                           Icons.close,
                                           size: 18,
-                                          color: Colors.black,
                                         ))
                                   ],
                                 ),
@@ -183,12 +210,46 @@ class ApprovedResources extends StatelessWidget {
                                         child: BlocConsumer<ResourceCubit,
                                             ResourceState>(
                                           listener: (context, appState) {
-                                            if (state is ResourceApproved) {
+                                            if (appState is ResourceDeleted) {
                                               tabController.animateTo(0);
                                             }
-
-                                            if (state is ResourceDeleted) {
-                                              tabController.animateTo(1);
+                                            if (appState is ResourceFetched) {
+                                              categoryController.text =
+                                                  appState.resource.category!;
+                                              imageController.text =
+                                                  appState.resource.imageUrl!;
+                                              idController.text =
+                                                  appState.resource.id!;
+                                              nameController.text =
+                                                  appState.resource.title!;
+                                              // descriptionController.text =
+                                              //     appState
+                                              //         .resource.description!;
+                                              linkController.text =
+                                                  appState.resource.link!;
+                                              showDialog(
+                                                context: context,
+                                                builder: (context) {
+                                                  return EditResourceDialog(
+                                                    selectedType:
+                                                        categoryController.text,
+                                                    categoryController:
+                                                        categoryController,
+                                                    tabController:
+                                                        tabController,
+                                                    imageController:
+                                                        imageController,
+                                                    idController: idController,
+                                                    nameController:
+                                                        nameController,
+                                                    descriptionController:
+                                                        descriptionController,
+                                                    linkController:
+                                                        linkController,
+                                                    context: context,
+                                                  );
+                                                },
+                                              );
                                             }
                                           },
                                           builder: (context, appState) {
@@ -199,7 +260,7 @@ class ApprovedResources extends StatelessWidget {
                                               shrinkWrap: true,
                                               itemCount: state.resources.length,
                                               itemBuilder: (context, index) {
-                                                return AdminApprovedResourceCard(
+                                                return AdminResourceCard(
                                                   category: state
                                                           .resources[index]
                                                           .category ??
@@ -221,22 +282,22 @@ class ApprovedResources extends StatelessWidget {
                                                   image: state.resources[index]
                                                           .imageUrl ??
                                                       AppImages.eventImage,
-                                                  editFunction: () async {
+                                                  function: () async {
                                                     BlocProvider.of<
                                                                 ResourceCubit>(
                                                             context)
-                                                        .deleteResource(
+                                                        .getResourceById(
                                                             id: state
                                                                     .resources[
                                                                         index]
                                                                     .id ??
                                                                 "");
                                                   },
-                                                  approveFunction: () {
+                                                  completeFunction: () {
                                                     BlocProvider.of<
                                                                 ResourceCubit>(
                                                             context)
-                                                        .approveResource(
+                                                        .deleteResource(
                                                             id: state
                                                                     .resources[
                                                                         index]

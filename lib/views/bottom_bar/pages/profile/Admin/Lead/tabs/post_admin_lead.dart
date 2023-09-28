@@ -8,8 +8,8 @@ import 'package:gdsc_bloc/utilities/Widgets/input_field.dart';
 import 'package:gdsc_bloc/utilities/Widgets/loading_circle.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../../../blocs/app_functionality/leads/leads_cubit.dart';
-import '../../../../../../blocs/minimal_functonality/get_image/get_image_cubit.dart';
+import '../../../../../../../blocs/app_functionality/leads/leads_cubit.dart';
+import '../../../../../../../blocs/minimal_functonality/get_image/get_image_cubit.dart';
 
 class PostAdminLead extends StatelessWidget {
   PostAdminLead({super.key, required this.tabController});
@@ -31,9 +31,7 @@ class PostAdminLead extends StatelessWidget {
       create: (context) => LeadsCubit(),
       child: Builder(builder: (context) {
         return Scaffold(
-          backgroundColor: Colors.white,
-          bottomNavigationBar:
-              BlocConsumer<LeadsCubit, LeadsState>(
+          bottomNavigationBar: BlocConsumer<LeadsCubit, LeadsState>(
             listener: (context, state) {
               if (state is LeadsCreated) {
                 Timer(
@@ -60,8 +58,7 @@ class PostAdminLead extends StatelessWidget {
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () {
-                            BlocProvider.of<LeadsCubit>(context)
-                                .createLead(
+                            BlocProvider.of<LeadsCubit>(context).createLead(
                               name: nameController.text,
                               email: emailController.text,
                               phone: phoneController.text,
@@ -107,185 +104,185 @@ class PostAdminLead extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                   Text(
-              "Name",
-              style: GoogleFonts.inter(
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-                color: const Color(0xff000000),
-              ),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-                          InputField(
-                            validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please enter your name";
-                        }
-                        return null;
-                      },
-                            controller: nameController,
-                            hintText: "Enter name of lead",
-                          ),
-                          const SizedBox(
-                            height: 6,
-                          ),
-                          Text(
-              "Email",
-              style: GoogleFonts.inter(
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-                color: const Color(0xff000000),
-              ),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-                          InputField(
-                            validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please enter the email";
-                        }
-                        return null;
-                      },
-                            controller: emailController,
-                            hintText: "Enter email of lead",
-                          ),
-                          const SizedBox(
-                            height: 6,
-                          ),
-                          Text(
-              "Phone",
-              style: GoogleFonts.inter(
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-                color: const Color(0xff000000),
-              ),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-                          InputField(
-                            validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please enter the phone";
-                        }
-                        return null;
-                      },
-                            controller: phoneController,
-                            hintText: "Enter phone of lead",
-                          ),
-                          const SizedBox(
-                            height: 6,
-                          ),
-                          Text(
-              "Role",
-              style: GoogleFonts.inter(
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-                color: const Color(0xff000000),
-              ),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-                          InputField(
-                            validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please enter the role";
-                        }
-                        return null;
-                      },
-                            controller: roleController,
-                            hintText: "Enter role of lead",
-                          ),
-                          const SizedBox(
-                            height: 6,
-                          ),
-                          Text(
-              "Github",
-              style: GoogleFonts.inter(
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-                color: const Color(0xff000000),
-              ),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-                          InputField(
-                            validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please enter the github";
-                        }
-                        return null;
-                      },
-                            controller: githubController,
-                            hintText: "Enter github of lead",
-                          ),
-                          const SizedBox(
-                            height: 6,
-                          ),
-                          Text(
-              "Twitter",
-              style: GoogleFonts.inter(
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-                color: const Color(0xff000000),
-              ),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-                          InputField(
-                            validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please enter the twitter";
-                        }
-                        return null;
-                      },
-                            controller: twitterController,
-                            hintText: "Enter twitter of lead",
-                          ),
-                          const SizedBox(
-                            height: 6,
-                          ),
-                          Text(
-              "Bio",
-              style: GoogleFonts.inter(
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-                color: const Color(0xff000000),
-              ),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-                          InputField(
-                            validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please enter the  bio";
-                        }
-                        return null;
-                      },
-                            controller: bioController,
-                            hintText: "Enter bio of lead",
-                          ),
-                          const SizedBox(
-                            height: 6,
-                          ),
-                          Text(
-                            "Attach a File",
-                            style: GoogleFonts.inter(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              color: const Color(0xff000000),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 8,
-                          ),
+                  Text(
+                    "Name",
+                    style: GoogleFonts.inter(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                      color: const Color(0xff000000),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  InputField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Please enter your name";
+                      }
+                      return null;
+                    },
+                    controller: nameController,
+                    hintText: "Enter name of lead",
+                  ),
+                  const SizedBox(
+                    height: 6,
+                  ),
+                  Text(
+                    "Email",
+                    style: GoogleFonts.inter(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                      color: const Color(0xff000000),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  InputField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Please enter the email";
+                      }
+                      return null;
+                    },
+                    controller: emailController,
+                    hintText: "Enter email of lead",
+                  ),
+                  const SizedBox(
+                    height: 6,
+                  ),
+                  Text(
+                    "Phone",
+                    style: GoogleFonts.inter(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                      color: const Color(0xff000000),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  InputField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Please enter the phone";
+                      }
+                      return null;
+                    },
+                    controller: phoneController,
+                    hintText: "Enter phone of lead",
+                  ),
+                  const SizedBox(
+                    height: 6,
+                  ),
+                  Text(
+                    "Role",
+                    style: GoogleFonts.inter(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                      color: const Color(0xff000000),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  InputField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Please enter the role";
+                      }
+                      return null;
+                    },
+                    controller: roleController,
+                    hintText: "Enter role of lead",
+                  ),
+                  const SizedBox(
+                    height: 6,
+                  ),
+                  Text(
+                    "Github",
+                    style: GoogleFonts.inter(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                      color: const Color(0xff000000),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  InputField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Please enter the github";
+                      }
+                      return null;
+                    },
+                    controller: githubController,
+                    hintText: "Enter github of lead",
+                  ),
+                  const SizedBox(
+                    height: 6,
+                  ),
+                  Text(
+                    "Twitter",
+                    style: GoogleFonts.inter(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                      color: const Color(0xff000000),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  InputField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Please enter the twitter";
+                      }
+                      return null;
+                    },
+                    controller: twitterController,
+                    hintText: "Enter twitter of lead",
+                  ),
+                  const SizedBox(
+                    height: 6,
+                  ),
+                  Text(
+                    "Bio",
+                    style: GoogleFonts.inter(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                      color: const Color(0xff000000),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  InputField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Please enter the  bio";
+                      }
+                      return null;
+                    },
+                    controller: bioController,
+                    hintText: "Enter bio of lead",
+                  ),
+                  const SizedBox(
+                    height: 6,
+                  ),
+                  Text(
+                    "Attach a File",
+                    style: GoogleFonts.inter(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: const Color(0xff000000),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
                   BlocProvider(
                     create: (context) => GetImageCubit(),
                     child: Builder(builder: (context) {
@@ -319,16 +316,15 @@ class PostAdminLead extends StatelessWidget {
                           }
                         },
                         builder: (context, state) {
-                         final width = MediaQuery.of(context).size.width;
-                      return SizedBox(
-                        height: 50,
-                        width: width * 0.4,
+                          final width = MediaQuery.of(context).size.width;
+                          return SizedBox(
+                            height: 50,
+                            width: width * 0.4,
                             child: state is ImageUploading
                                 ? const LoadingCircle()
                                 : ElevatedButton(
                                     onPressed: () {
-                                      BlocProvider.of<GetImageCubit>(
-                                              context)
+                                      BlocProvider.of<GetImageCubit>(context)
                                           .getImage();
                                     },
                                     style: ElevatedButton.styleFrom(

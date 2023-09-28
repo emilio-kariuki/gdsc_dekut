@@ -11,8 +11,8 @@ import 'package:gdsc_bloc/utilities/Widgets/input_field.dart';
 import 'package:gdsc_bloc/utilities/Widgets/loading_circle.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../../../blocs/app_functionality/resource/resource_cubit.dart';
-import '../../../../../../blocs/minimal_functonality/get_image/get_image_cubit.dart';
+import '../../../../../../../blocs/app_functionality/resource/resource_cubit.dart';
+import '../../../../../../../blocs/minimal_functonality/get_image/get_image_cubit.dart';
 
 class AdminResourcePostPage extends StatelessWidget {
   AdminResourcePostPage({super.key, required this.tabController});
@@ -98,19 +98,20 @@ class AdminResourcePostPage extends StatelessWidget {
                                 imageUrl: image,
                               );
                             },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xff000000),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                            ),
+                           style: Theme.of(context)
+                                      .elevatedButtonTheme
+                                      .style!
+                                      .copyWith(
+                                        shape: MaterialStateProperty.all(
+                                          RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(25),
+                                          ),
+                                        ),
+                                      ),
                             child: Text(
                               "Post",
-                              style: GoogleFonts.inter(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: const Color(0xffffffff),
-                              ),
+                              
                             ),
                           ),
                         );
@@ -118,7 +119,6 @@ class AdminResourcePostPage extends StatelessWidget {
               ),
             ),
           ),
-          backgroundColor: Colors.white,
           body: SafeArea(
             child: SingleChildScrollView(
               child: Padding(
@@ -128,46 +128,46 @@ class AdminResourcePostPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-              "Title",
-              style: GoogleFonts.inter(
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-                color: const Color(0xff000000),
-              ),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
+                      "Title",
+                      style: GoogleFonts.inter(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
                     InputField(
                         validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please enter your title";
-                        }
-                        return null;
-                      },
+                          if (value!.isEmpty) {
+                            return "Please enter your title";
+                          }
+                          return null;
+                        },
                         controller: titleController,
                         hintText: "Enter the title of the resource"),
                     const SizedBox(
                       height: 20,
                     ),
                     Text(
-              "Description",
-              style: GoogleFonts.inter(
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-                color: const Color(0xff000000),
-              ),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
+                      "Description",
+                      style: GoogleFonts.inter(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
                     InputField(
                         validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please enter your description";
-                        }
-                        return null;
-                      },
+                          if (value!.isEmpty) {
+                            return "Please enter your description";
+                          }
+                          return null;
+                        },
                         controller: descriptionController,
                         hintText: "Enter the description of the resource"),
                     const SizedBox(
@@ -178,7 +178,7 @@ class AdminResourcePostPage extends StatelessWidget {
                       style: GoogleFonts.inter(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
-                        color: const Color(0xff000000),
+                        
                       ),
                     ),
                     const SizedBox(
@@ -213,9 +213,8 @@ class AdminResourcePostPage extends StatelessWidget {
                                             item,
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .bodyLarge!
+                                                .titleSmall!
                                                 .copyWith(
-                                                  color: Colors.black,
                                                   fontWeight: FontWeight.w400,
                                                 ),
                                             overflow: TextOverflow.ellipsis,
@@ -249,7 +248,7 @@ class AdminResourcePostPage extends StatelessWidget {
                                   padding: null,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(5),
-                                      color: Colors.white),
+                                      color: Theme.of(context).primaryColor),
                                   elevation: 0,
                                   offset: const Offset(0, 0),
                                   scrollbarTheme: ScrollbarThemeData(
@@ -274,23 +273,23 @@ class AdminResourcePostPage extends StatelessWidget {
                       height: 20,
                     ),
                     Text(
-              "Link",
-              style: GoogleFonts.inter(
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-                color: const Color(0xff000000),
-              ),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
+                      "Link",
+                      style: GoogleFonts.inter(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
                     InputField(
                         validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please enter your link";
-                        }
-                        return null;
-                      },
+                          if (value!.isEmpty) {
+                            return "Please enter your link";
+                          }
+                          return null;
+                        },
                         controller: linkController,
                         hintText: "Enter the link to the resource"),
                     const SizedBox(
@@ -337,19 +336,20 @@ class AdminResourcePostPage extends StatelessWidget {
                                     BlocProvider.of<GetImageCubit>(context)
                                         .getImage();
                                   },
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color(0xff000000),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                  ),
+                                  style: Theme.of(context)
+                                      .elevatedButtonTheme
+                                      .style!
+                                      .copyWith(
+                                        shape: MaterialStateProperty.all(
+                                          RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(25),
+                                          ),
+                                        ),
+                                      ),
                                   child: Text(
                                     "Add Image",
-                                    style: GoogleFonts.inter(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w600,
-                                      color: const Color(0xffffffff),
-                                    ),
+                                    
                                   ),
                                 ),
                               );

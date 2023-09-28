@@ -16,16 +16,14 @@ class ContactDeveloperPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
         iconTheme: const IconThemeData(color: Color(0xff666666), size: 20),
         title: Text(
           "Developer Contact",
           style: GoogleFonts.inter(
             fontSize: 16,
             fontWeight: FontWeight.w500,
-                color: const Color(0xff666666),
+            color: const Color(0xff666666),
           ),
         ),
       ),
@@ -99,7 +97,7 @@ class ContactDeveloperPage extends StatelessWidget {
                           )
                         : ListView.separated(
                             separatorBuilder: (context, index) =>
-                                 ProfilePadding(),
+                                ProfilePadding(),
                             itemCount: state.appDevelopers.length,
                             shrinkWrap: true,
                             itemBuilder: ((context, index) {
@@ -144,7 +142,7 @@ class ContactDeveloperPage extends StatelessWidget {
                                 trailing: IconButton(
                                   onPressed: () {
                                     DeveloperProviders().contactDeveloper(
-                                      email: developer.email!);
+                                        email: developer.email!);
                                   },
                                   icon: const Icon(
                                     Icons.arrow_forward,

@@ -9,7 +9,6 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../blocs/minimal_functonality/clipboard/clipboard_cubit.dart';
 import '../../../../data/services/providers/app_providers.dart';
 
-
 class AdminTwitterCard extends StatelessWidget {
   AdminTwitterCard({
     super.key,
@@ -52,13 +51,12 @@ class AdminTwitterCard extends StatelessWidget {
               child: Container(
                   height: double.infinity,
                   constraints: BoxConstraints(
-                    maxHeight: height * 0.6,
+                    maxHeight: height * 0.5,
                   ),
                   width: double.infinity,
                   decoration:
                       BoxDecoration(borderRadius: BorderRadius.circular(10)),
                   child: Scaffold(
-                    backgroundColor: Colors.grey[900],
                     bottomNavigationBar: Container(
                         height: height * 0.11,
                         width: width,
@@ -66,7 +64,6 @@ class AdminTwitterCard extends StatelessWidget {
                           border: const Border(
                               top: BorderSide(
                                   width: 0.4, color: Color(0xff666666))),
-                          color: Colors.grey[900],
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -87,8 +84,7 @@ class AdminTwitterCard extends StatelessWidget {
                                               shape: BoxShape.circle),
                                           child: IconButton(
                                             onPressed: () {
-                                              BlocProvider.of<
-                                                          ClipboardCubit>(
+                                              BlocProvider.of<ClipboardCubit>(
                                                       context)
                                                   .copyToClipboard(text: link);
                                             },
@@ -105,7 +101,6 @@ class AdminTwitterCard extends StatelessWidget {
                                           style: GoogleFonts.inter(
                                             fontSize: 13,
                                             fontWeight: FontWeight.w500,
-                                            color: Colors.white,
                                           ),
                                         )
                                       ],
@@ -141,7 +136,6 @@ class AdminTwitterCard extends StatelessWidget {
                                     style: GoogleFonts.inter(
                                       fontSize: 13,
                                       fontWeight: FontWeight.w500,
-                                      color: Colors.white,
                                     ),
                                   )
                                 ],
@@ -174,7 +168,6 @@ class AdminTwitterCard extends StatelessWidget {
                                   style: GoogleFonts.inter(
                                     fontSize: 13,
                                     fontWeight: FontWeight.w500,
-                                    color: Colors.white,
                                   ),
                                 )
                               ],
@@ -206,7 +199,6 @@ class AdminTwitterCard extends StatelessWidget {
                                   style: GoogleFonts.inter(
                                     fontSize: 13,
                                     fontWeight: FontWeight.w500,
-                                    color: Colors.white,
                                   ),
                                 )
                               ],
@@ -216,7 +208,6 @@ class AdminTwitterCard extends StatelessWidget {
                     appBar: PreferredSize(
                       preferredSize: const Size.fromHeight(40),
                       child: AppBar(
-                        backgroundColor: Colors.grey[900],
                         elevation: 0,
                         automaticallyImplyLeading: false,
                         title: Text(
@@ -226,7 +217,7 @@ class AdminTwitterCard extends StatelessWidget {
                           style: GoogleFonts.inter(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
-                            color: Colors.white,
+                            color: Colors.grey[400]
                           ),
                         ),
                         actions: [
@@ -237,7 +228,6 @@ class AdminTwitterCard extends StatelessWidget {
                               icon: const Icon(
                                 Icons.close,
                                 size: 20,
-                                color: Colors.white,
                               ))
                         ],
                       ),
@@ -267,7 +257,7 @@ class AdminTwitterCard extends StatelessWidget {
                                       color: Color.fromARGB(255, 243, 243, 243),
                                     )
                                     // border: Border.all(width: 0.4, color: Color(0xff666666)),
-
+              
                                     );
                               },
                               errorWidget: ((context, url, error) {
@@ -299,36 +289,7 @@ class AdminTwitterCard extends StatelessWidget {
                         const SizedBox(
                           height: 8,
                         ),
-                        Expanded(
-                          child: Scaffold(
-                            backgroundColor: Colors.grey[900],
-                            body: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    title,
-                                    overflow: TextOverflow.clip,
-                                    maxLines: 2,
-                                    style: GoogleFonts.inter(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  
-                                  const SizedBox(
-                                    height: 4,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
+                        
                       ],
                     ),
                   )),
@@ -341,6 +302,7 @@ class AdminTwitterCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.sizeOf(context).height;
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
       child: ElevatedButton(
@@ -348,9 +310,8 @@ class AdminTwitterCard extends StatelessWidget {
           _showImageDialog(context, image, title, link);
         },
         style: ElevatedButton.styleFrom(
+          backgroundColor: Theme.of(context).primaryColor,
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.white,
           elevation: 0,
           shape: RoundedRectangleBorder(
             side: const BorderSide(
@@ -400,7 +361,7 @@ class AdminTwitterCard extends StatelessWidget {
                       imageBuilder: (context, imageProvider) {
                         return AnimatedContainer(
                           decoration: BoxDecoration(
-                             shape: BoxShape.circle,
+                            shape: BoxShape.circle,
                             border: Border.all(
                                 width: 0.4, color: const Color(0xff666666)),
                             image: DecorationImage(
@@ -431,13 +392,12 @@ class AdminTwitterCard extends StatelessWidget {
                     title,
                     maxLines: 2,
                     style: GoogleFonts.inter(
-                      fontSize: 16,
-                      color: const Color(0xff000000),
+                      fontSize: 20,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  const SizedBox(
-                    height: 2,
+                   SizedBox(
+                    height: height * 0.01,
                   ),
                   Text(
                     date,
@@ -449,8 +409,8 @@ class AdminTwitterCard extends StatelessWidget {
                       color: const Color(0xff666666),
                     ),
                   ),
-                  const SizedBox(
-                    height: 7,
+                   SizedBox(
+                    height: height * 0.01,
                   ),
                   Text(
                     "$startTime - $endTime",
@@ -459,11 +419,11 @@ class AdminTwitterCard extends StatelessWidget {
                     style: GoogleFonts.inter(
                       fontWeight: FontWeight.w700,
                       fontSize: 11,
-                      color: Colors.black,
+                      // color: Colors.black,
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
+                   SizedBox(
+                    height: height * 0.03,
                   ),
                   SizedBox(
                     height: 36,
@@ -515,7 +475,6 @@ class AdminTwitterCard extends StatelessWidget {
                               "Delete",
                               style: GoogleFonts.inter(
                                 fontSize: 14,
-                                color: Colors.white,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),

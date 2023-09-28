@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../blocs/minimal_functonality/admin_checker/admin_cubit.dart';
 import '../../../../blocs/app_functionality/user/user_cubit.dart';
+import '../../../../blocs/minimal_functonality/theme/theme_bloc.dart';
 import '../../../../data/services/providers/auth_providers.dart';
 import '../../../../utilities/Widgets/bug_report_sheet.dart';
 import '../../../../utilities/Widgets/network_image_container.dart';
@@ -22,29 +23,30 @@ class ProfilePage extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     return Builder(builder: (context) {
       return Scaffold(
-          backgroundColor: Colors.white,
           // bottomNavigationBar: LogoutButtonContainer(),
           body: SafeArea(
-            child: RefreshIndicator(
-              onRefresh: () {
-                return Future.delayed(const Duration(seconds: 1), () {
-                  context.read<UserCubit>().getUser();
-                });
-              },
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: Column(
+        child: RefreshIndicator(
+          onRefresh: () {
+            return Future.delayed(const Duration(seconds: 1), () {
+              context.read<UserCubit>().getUser();
+            });
+          },
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  // UserProfilePicture(height: height),
+                  SizedBox(
+                    height: height * 0.03,
+                  ),
+                  Column(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // UserProfilePicture(height: height),
-                      SizedBox(
-                        height: height * 0.03,
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      Row(
                         children: [
                           Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -53,100 +55,116 @@ class ProfilePage extends StatelessWidget {
                               style: GoogleFonts.inter(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 28,
-                                color: const Color(0xff000000),
+                                // color: const Color(0xff000000),
                               ),
                             ),
                           ),
-                          SizedBox(
-                            height: height * 0.01,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 15),
-                            child: ListTile(
-                              onTap: () {
-                                Navigator.pushNamed(
-                                    context, '/personal_information');
-                              },
-                              contentPadding: const EdgeInsets.all(0),
-                              leading: NetworkImageContainer(
-                                height: height * 0.13,
-                                width: height * 0.13,
-                                borderRadius: BorderRadius.circular(0),
-                                isCirlce: true,
-                                imageUrl: AppImages.defaultImage,
-                                border: Border.all(
-                                  width: 0.3,
-                                  color: Colors.grey[500]!,
-                                ),
-                              ),
-                              title: BlocBuilder<UserCubit, UserState>(
-                                builder: (context, state) {
-                                  return AutoSizeText(
-                                    state is UserSuccess
-                                        ? state.user.name!
-                                        : "Your Name",
-                                    style: GoogleFonts.inter(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 18,
-                                      color: const Color(0xff000000),
-                                    ),
-                                  );
+                          Spacer(),
+                          BlocBuilder<ThemeBloc, ThemeState>(
+                            builder: (context, state) {
+                              return IconButton(
+                                onPressed: () {
+                                  context.read<ThemeBloc>().add(ChangeTheme());
                                 },
-                              ),
-                              subtitle: AutoSizeText(
-                                "View your profile",
-                                style: GoogleFonts.inter(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 12,
-                                  color: const Color(0xff666666),
+                                icon: Icon(
+                                  state is AppTheme && state.isDark
+                                      ? Icons.light_mode
+                                      : Icons.dark_mode,
                                 ),
-                              ),
-                              trailing: Icon(
-                                Icons.arrow_forward_ios,
-                                color: Colors.grey[800],
-                                size: 14,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: height * 0.03,
-                          ),
-                          ProfileTitle(width: width, title: "Community"),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          CommunityButtons(),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          ProfileTitle(
-                            width: width,
-                            title: "Help",
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          HelpButtons(),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          ProfileTitle(width: width, title: "About"),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          AboutButtons(),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          LogoutButtonContainer(),
+                              );
+                            },
+                          )
                         ],
                       ),
+                      SizedBox(
+                        height: height * 0.01,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 15),
+                        child: ListTile(
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, '/personal_information');
+                          },
+                          contentPadding: const EdgeInsets.all(0),
+                          leading: NetworkImageContainer(
+                            height: height * 0.13,
+                            width: height * 0.13,
+                            borderRadius: BorderRadius.circular(0),
+                            isCirlce: true,
+                            imageUrl: AppImages.defaultImage,
+                            border: Border.all(
+                              width: 0.3,
+                              // color: Colors.grey[500]!,
+                            ),
+                          ),
+                          title: BlocBuilder<UserCubit, UserState>(
+                            builder: (context, state) {
+                              return AutoSizeText(
+                                state is UserSuccess
+                                    ? state.user.name!
+                                    : "Your Name",
+                                style: GoogleFonts.inter(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 18,
+                                  // color: const Color(0xff000000),
+                                ),
+                              );
+                            },
+                          ),
+                          subtitle: AutoSizeText(
+                            "View your profile",
+                            style: GoogleFonts.inter(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 12,
+                                color: Colors.grey[400]),
+                          ),
+                          trailing: Icon(
+                            Icons.arrow_forward_ios,
+                            // color: Colors.grey[800],
+                            size: 14,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: height * 0.03,
+                      ),
+                      ProfileTitle(width: width, title: "Community"),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      CommunityButtons(),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      ProfileTitle(
+                        width: width,
+                        title: "Help",
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      HelpButtons(),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      ProfileTitle(width: width, title: "About"),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      AboutButtons(),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      LogoutButtonContainer(),
                     ],
                   ),
-                ),
+                ],
               ),
             ),
-          ));
+          ),
+        ),
+      ));
     });
   }
 }
@@ -174,7 +192,7 @@ class LogoutButtonContainer extends StatelessWidget {
                 );
           },
           style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xff000000),
+            // backgroundColor: const Color(0xff000000),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(25),
             ),
@@ -184,7 +202,7 @@ class LogoutButtonContainer extends StatelessWidget {
             style: GoogleFonts.inter(
               fontSize: 16,
               fontWeight: FontWeight.w700,
-              color: const Color(0xffffffff),
+              // color: const Color(0xffffffff),
             ),
           ),
         ),
@@ -210,7 +228,7 @@ class AboutButtons extends StatelessWidget {
             height: 10,
           ),
           ProfileCard(
-            leadingLogo: AppImages.about,
+            icon: Icons.info_outline,
             title: "About app",
             function: () {
               Navigator.pushNamed(context, '/about_app');
@@ -219,7 +237,7 @@ class AboutButtons extends StatelessWidget {
           ),
           ProfilePadding(),
           ProfileCard(
-            leadingLogo: AppImages.version,
+            icon: Icons.verified_user_outlined,
             title: "Version - 2.0.0+14",
             function: () {},
             showTrailing: false,
@@ -250,7 +268,7 @@ class HelpButtons extends StatelessWidget {
             height: 10,
           ),
           ProfileCard(
-            leadingLogo: AppImages.feedbackz,
+            icon: Icons.feedback_outlined,
             title: "Send Feedback",
             function: () {
               Navigator.pushNamed(context, '/send_feedback');
@@ -259,7 +277,7 @@ class HelpButtons extends StatelessWidget {
           ),
           ProfilePadding(),
           ProfileCard(
-            leadingLogo: AppImages.problemz,
+            icon: Icons.report_outlined,
             title: "Report problem",
             function: () {
               Navigator.pushNamed(context, '/report_problem');
@@ -268,7 +286,7 @@ class HelpButtons extends StatelessWidget {
           ),
           ProfilePadding(),
           ProfileCard(
-            leadingLogo: AppImages.contact,
+            icon: Icons.bug_report_outlined,
             title: "Bug Report",
             function: () {
               showBugSheet(context: context);
@@ -277,7 +295,7 @@ class HelpButtons extends StatelessWidget {
           ),
           ProfilePadding(),
           ProfileCard(
-            leadingLogo: AppImages.contact,
+            icon: Icons.phone_outlined,
             title: "Contact Developer",
             function: () {
               Navigator.pushNamed(context, '/contact_developer');
@@ -311,7 +329,7 @@ class CommunityButtons extends StatelessWidget {
             height: 10,
           ),
           ProfileCard(
-            leadingLogo: AppImages.resources_black,
+            icon: Icons.window_outlined,
             title: "Resources",
             function: () {
               Navigator.pushNamed(context, '/user_resources');
@@ -320,7 +338,7 @@ class CommunityButtons extends StatelessWidget {
           ),
           ProfilePadding(),
           ProfileCard(
-            leadingLogo: AppImages.community_leads,
+            icon: Icons.group_outlined,
             title: "Community leads",
             function: () {
               Navigator.pushNamed(context, '/community_leads');
@@ -334,7 +352,7 @@ class CommunityButtons extends StatelessWidget {
               listener: (context, state) {},
               builder: (context, state) {
                 return ProfileCard(
-                  leadingLogo: AppImages.admin,
+                  icon: Icons.admin_panel_settings_outlined,
                   title: "Admin",
                   function: () {
                     if (state is UserAdmin) {
@@ -384,7 +402,7 @@ class AccountButtons extends StatelessWidget {
           ),
           ProfilePadding(),
           ProfileCard(
-            leadingLogo: AppImages.person_black,
+            icon: Icons.person,
             title: "Profile",
             function: () {
               Navigator.pushNamed(context, '/personal_information');
@@ -486,8 +504,8 @@ class ProfileTitle extends StatelessWidget {
         horizontal: 10,
       ),
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 255, 255, 255),
-      ),
+          // color: const Color.fromARGB(255, 255, 255, 255),
+          ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -497,7 +515,7 @@ class ProfileTitle extends StatelessWidget {
             style: GoogleFonts.inter(
               fontWeight: FontWeight.w600,
               fontSize: 18,
-              color: const Color(0xff000000),
+              // color: const Color(0xff000000),
             ),
           ),
         ],

@@ -19,28 +19,22 @@ class ResourceWidget extends StatelessWidget {
       children: [
         Text(
           title,
-          style: GoogleFonts.inter(
+          style: Theme.of(context).textTheme.titleMedium!.copyWith(
             fontWeight: FontWeight.w600,
-            fontSize: 18,
-            color: const Color(0xff000000),
-          ),
+            fontSize: 18
+          )
         ),
         TextButton(
-          style: TextButton.styleFrom(
-            padding: EdgeInsets.zero,
-            shadowColor: Colors.white,
-            backgroundColor: Colors.white,
-          ),
+          style:Theme.of(context).textButtonTheme.style,
           onPressed: () {
             Navigator.pushNamed(context, location,arguments: arguments);
           },
           child: Text(
             "See all",
-            style: GoogleFonts.inter(
-              fontWeight: FontWeight.w500,
-              fontSize: 15,
-              color: const Color(0xff000000),
-            ),
+            style: Theme.of(context).textTheme.titleSmall!.copyWith(
+              fontWeight: FontWeight.w600,
+              fontSize: 14
+          ),
           ),
         )
       ],

@@ -28,11 +28,10 @@ class UserResources extends StatelessWidget {
               width: width,
               padding: const EdgeInsets.all(20.0),
               decoration: const BoxDecoration(
-                  color: Colors.white,
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
-                  )),
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
+              )),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -43,7 +42,6 @@ class UserResources extends StatelessWidget {
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             enableFeedback: false,
-                            backgroundColor: Colors.white,
                             foregroundColor: Colors.grey,
                             elevation: 0,
                             shape: RoundedRectangleBorder(
@@ -115,7 +113,6 @@ class UserResources extends StatelessWidget {
                             style: GoogleFonts.inter(
                               fontSize: 16,
                               fontWeight: FontWeight.w500,
-                              color: Colors.white,
                             ),
                           ),
                         ),
@@ -143,10 +140,8 @@ class UserResources extends StatelessWidget {
       ],
       child: Builder(builder: (context) {
         return Scaffold(
-          backgroundColor: Colors.white,
           appBar: AppBar(
             iconTheme: const IconThemeData(color: Color(0xff666666), size: 20),
-            backgroundColor: Colors.white,
             title: Text(
               "User Resources",
               style: GoogleFonts.inter(
@@ -179,7 +174,6 @@ class UserResources extends StatelessWidget {
                       height: 49,
                       padding: const EdgeInsets.only(left: 15, right: 1),
                       decoration: BoxDecoration(
-                          color: Colors.white,
                           borderRadius: BorderRadius.circular(25),
                           border: Border.all(
                             color: Colors.grey[500]!,

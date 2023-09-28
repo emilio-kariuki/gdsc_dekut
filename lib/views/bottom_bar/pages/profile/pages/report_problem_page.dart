@@ -25,7 +25,6 @@ class ReportProblemPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(10.0),
         child: BlocProvider(
@@ -66,8 +65,7 @@ class ReportProblemPage extends StatelessWidget {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        BlocProvider.of<ReportCubit>(context)
-                            .reportProblem(
+                        BlocProvider.of<ReportCubit>(context).reportProblem(
                           title: problemController.text,
                           description: descriptionController.text,
                           appVersion: appVersionController.text,
@@ -98,7 +96,6 @@ class ReportProblemPage extends StatelessWidget {
         ),
       ),
       appBar: AppBar(
-        backgroundColor: Colors.white,
         iconTheme: const IconThemeData(color: Color(0xff666666), size: 20),
         title: Text(
           "Report a Problem",
@@ -132,11 +129,11 @@ class ReportProblemPage extends StatelessWidget {
               ),
               InputField(
                 validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please enter your problem";
-                        }
-                        return null;
-                      },
+                  if (value!.isEmpty) {
+                    return "Please enter your problem";
+                  }
+                  return null;
+                },
                 controller: problemController,
                 hintText: "Enter your problem",
               ),
@@ -162,7 +159,6 @@ class ReportProblemPage extends StatelessWidget {
                     height: 150,
                     padding: const EdgeInsets.only(left: 12, right: 1),
                     decoration: BoxDecoration(
-                        color: Colors.white,
                         borderRadius: BorderRadius.circular(5),
                         border: Border.all(
                           color: Colors.grey[500]!,
@@ -194,11 +190,11 @@ class ReportProblemPage extends StatelessWidget {
               ),
               InputField(
                 validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please enter your app version";
-                        }
-                        return null;
-                      },
+                  if (value!.isEmpty) {
+                    return "Please enter your app version";
+                  }
+                  return null;
+                },
                 controller: appVersionController,
                 hintText: "Enter your app version",
               ),
@@ -207,11 +203,11 @@ class ReportProblemPage extends StatelessWidget {
               ),
               InputField(
                 validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please enter your contact";
-                        }
-                        return null;
-                      },
+                  if (value!.isEmpty) {
+                    return "Please enter your contact";
+                  }
+                  return null;
+                },
                 controller: contactController,
                 hintText: "Enter your contact",
               ),
@@ -270,8 +266,7 @@ class ReportProblemPage extends StatelessWidget {
                             ? const LoadingCircle()
                             : ElevatedButton(
                                 onPressed: () {
-                                  BlocProvider.of<GetImageCubit>(
-                                          context)
+                                  BlocProvider.of<GetImageCubit>(context)
                                       .getImage();
                                 },
                                 style: ElevatedButton.styleFrom(

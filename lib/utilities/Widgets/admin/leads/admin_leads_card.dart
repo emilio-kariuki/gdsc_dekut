@@ -9,7 +9,6 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../blocs/minimal_functonality/clipboard/clipboard_cubit.dart';
 import '../../../../data/services/providers/app_providers.dart';
 
-
 class AdminLeadsCard extends StatelessWidget {
   AdminLeadsCard({
     super.key,
@@ -55,7 +54,6 @@ class AdminLeadsCard extends StatelessWidget {
                   decoration:
                       BoxDecoration(borderRadius: BorderRadius.circular(10)),
                   child: Scaffold(
-                    backgroundColor: Colors.grey[900],
                     bottomNavigationBar: Container(
                         height: height * 0.11,
                         width: width,
@@ -63,7 +61,6 @@ class AdminLeadsCard extends StatelessWidget {
                           border: const Border(
                               top: BorderSide(
                                   width: 0.4, color: Color(0xff666666))),
-                          color: Colors.grey[900],
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -84,8 +81,7 @@ class AdminLeadsCard extends StatelessWidget {
                                               shape: BoxShape.circle),
                                           child: IconButton(
                                             onPressed: () {
-                                              BlocProvider.of<
-                                                          ClipboardCubit>(
+                                              BlocProvider.of<ClipboardCubit>(
                                                       context)
                                                   .copyToClipboard(text: link);
                                             },
@@ -102,7 +98,6 @@ class AdminLeadsCard extends StatelessWidget {
                                           style: GoogleFonts.inter(
                                             fontSize: 13,
                                             fontWeight: FontWeight.w500,
-                                            color: Colors.white,
                                           ),
                                         )
                                       ],
@@ -138,7 +133,6 @@ class AdminLeadsCard extends StatelessWidget {
                                     style: GoogleFonts.inter(
                                       fontSize: 13,
                                       fontWeight: FontWeight.w500,
-                                      color: Colors.white,
                                     ),
                                   )
                                 ],
@@ -171,7 +165,6 @@ class AdminLeadsCard extends StatelessWidget {
                                   style: GoogleFonts.inter(
                                     fontSize: 13,
                                     fontWeight: FontWeight.w500,
-                                    color: Colors.white,
                                   ),
                                 )
                               ],
@@ -203,7 +196,6 @@ class AdminLeadsCard extends StatelessWidget {
                                   style: GoogleFonts.inter(
                                     fontSize: 13,
                                     fontWeight: FontWeight.w500,
-                                    color: Colors.white,
                                   ),
                                 )
                               ],
@@ -213,7 +205,6 @@ class AdminLeadsCard extends StatelessWidget {
                     appBar: PreferredSize(
                       preferredSize: const Size.fromHeight(40),
                       child: AppBar(
-                        backgroundColor: Colors.grey[900],
                         elevation: 0,
                         automaticallyImplyLeading: false,
                         title: Text(
@@ -223,7 +214,6 @@ class AdminLeadsCard extends StatelessWidget {
                           style: GoogleFonts.inter(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
-                            color: Colors.white,
                           ),
                         ),
                         actions: [
@@ -234,7 +224,6 @@ class AdminLeadsCard extends StatelessWidget {
                               icon: const Icon(
                                 Icons.close,
                                 size: 20,
-                                color: Colors.white,
                               ))
                         ],
                       ),
@@ -298,7 +287,6 @@ class AdminLeadsCard extends StatelessWidget {
                         ),
                         Expanded(
                           child: Scaffold(
-                            backgroundColor: Colors.grey[900],
                             body: Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 10),
@@ -314,7 +302,6 @@ class AdminLeadsCard extends StatelessWidget {
                                     style: GoogleFonts.inter(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w600,
-                                      color: Colors.white,
                                     ),
                                   ),
                                   const SizedBox(
@@ -337,6 +324,7 @@ class AdminLeadsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
       child: ElevatedButton(
@@ -344,9 +332,8 @@ class AdminLeadsCard extends StatelessWidget {
           _showImageDialog(context, image, title, link);
         },
         style: ElevatedButton.styleFrom(
+          backgroundColor: Theme.of(context).primaryColor,
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.white,
           elevation: 0,
           shape: RoundedRectangleBorder(
             side: const BorderSide(
@@ -395,7 +382,7 @@ class AdminLeadsCard extends StatelessWidget {
                       imageBuilder: (context, imageProvider) {
                         return AnimatedContainer(
                           decoration: BoxDecoration(
-                             shape: BoxShape.circle,
+                            shape: BoxShape.circle,
                             border: Border.all(
                                 width: 0.4, color: const Color(0xff666666)),
                             image: DecorationImage(
@@ -419,20 +406,17 @@ class AdminLeadsCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(
-                    height: 5,
-                  ),
+                  
                   Text(
                     title,
                     maxLines: 2,
                     style: GoogleFonts.inter(
                       fontSize: 16,
-                      color: const Color(0xff000000),
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  const SizedBox(
-                    height: 2,
+                   SizedBox(
+                    height: height * 0.01,
                   ),
                   Text(
                     description,
@@ -444,8 +428,8 @@ class AdminLeadsCard extends StatelessWidget {
                       color: const Color(0xff666666),
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
+                   SizedBox(
+                    height: height * 0.03,
                   ),
                   SizedBox(
                     height: 36,
@@ -497,7 +481,6 @@ class AdminLeadsCard extends StatelessWidget {
                               "Delete",
                               style: GoogleFonts.inter(
                                 fontSize: 14,
-                                color: Colors.white,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),

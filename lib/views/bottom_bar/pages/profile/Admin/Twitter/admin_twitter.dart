@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../../blocs/app_functionality/twitter_space/twitter_space_cubit.dart';
-import 'post_resource_admin_page.dart';
-import 'twitter_spaces_tab.dart';
+import 'tabs/post_resource_admin_page.dart';
+import 'tabs/twitter_spaces_tab.dart';
 
 class AdminTwitter extends StatefulWidget {
   const AdminTwitter({super.key});
@@ -32,9 +32,7 @@ class _AdminTwitterState extends State<AdminTwitter>
         create: (context) => TwitterSpaceCubit(),
         child: Builder(builder: (context) {
           return Scaffold(
-            backgroundColor: Colors.white,
             appBar: AppBar(
-                backgroundColor: Colors.white,
                 iconTheme:
                     const IconThemeData(color: Color(0xff666666), size: 20),
                 title: Text(

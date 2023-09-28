@@ -55,49 +55,44 @@ class EventPage extends StatelessWidget {
       ],
       child: Builder(builder: (context) {
         return Scaffold(
-          backgroundColor: Colors.white,
-          body: AnnotatedRegion<SystemUiOverlayStyle>(
-            value: SystemUiOverlayStyle.dark.copyWith(
-              statusBarColor: Colors.white,
-            ),
-            child: SafeArea(
-              child: RefreshIndicator(
-                onRefresh: () async {
-                  context.read<UserCubit>().getUser();
-                  return Future.value();
-                },
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 20),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        UserProfileContainer(height: height, width: width),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        EventSearchContainer(),
-                        const SizedBox(height: 10),
-                        AnnouncementsContainerWidget(
-                            height: height, width: width),
-                        EventContainer(height: height, width: width),
-                        BlocBuilder<ShowSpacesCubit, ShowSpacesState>(
-                          builder: (context, state) {
-                            return state is ShowTwitterSpaces && state.value
-                                ? TwitterSpaceContainer(
-                                    height: height, width: width)
-                                : SizedBox.shrink();
-                          },
-                        ),
-                        const CategoryWidget(
-                          title: "Tech Groups",
-                          location: '/tech_groups_page',
-                        ),
-                        GroupsContainerWidget(height: height, width: width)
-                      ],
-                    ),
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          body: SafeArea(
+            child: RefreshIndicator(
+              onRefresh: () async {
+                context.read<UserCubit>().getUser();
+                return Future.value();
+              },
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      UserProfileContainer(height: height, width: width),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      EventSearchContainer(),
+                      const SizedBox(height: 10),
+                      AnnouncementsContainerWidget(
+                          height: height, width: width),
+                      EventContainer(height: height, width: width),
+                      BlocBuilder<ShowSpacesCubit, ShowSpacesState>(
+                        builder: (context, state) {
+                          return state is ShowTwitterSpaces && state.value
+                              ? TwitterSpaceContainer(
+                                  height: height, width: width)
+                              : SizedBox.shrink();
+                        },
+                      ),
+                      const CategoryWidget(
+                        title: "Tech Groups",
+                        location: '/tech_groups_page',
+                      ),
+                      GroupsContainerWidget(height: height, width: width)
+                    ],
                   ),
                 ),
               ),
@@ -126,7 +121,7 @@ class EventSearchContainer extends StatelessWidget {
           height: 49,
           padding: const EdgeInsets.only(left: 15, right: 1),
           decoration: BoxDecoration(
-              color: Colors.white,
+              color: Theme.of(context).cardColor,
               borderRadius: BorderRadius.circular(25),
               border: Border.all(
                 color: Colors.grey[500]!,
@@ -135,23 +130,20 @@ class EventSearchContainer extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Icon(
+              Icon(
                 Icons.search,
-                color: Color(0xff666666),
+                color: Theme.of(context).iconTheme.color,
                 size: 18,
               ),
               const SizedBox(
                 width: 10,
               ),
               Expanded(
-                child: AutoSizeText(
-                  "Search for event eg. flutter",
-                  style: GoogleFonts.inter(
-                    fontSize: 12,
-                    color: const Color(0xff666666),
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
+                child: AutoSizeText("Search for event eg. flutter",
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleSmall!
+                        .copyWith(fontSize: 12)),
               ),
             ],
           ),
@@ -249,23 +241,15 @@ class UserProfileContainer extends StatelessWidget {
               buildWhen: (previous, current) => current is UserSuccess,
               builder: (context, state) {
                 return AutoSizeText(
-                  "Hello ${state is UserSuccess ? state.user.name : ""} 👋",
-                  style: GoogleFonts.inter(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                    color: const Color(0xff000000),
-                  ),
-                );
+                    "Hello ${state is UserSuccess ? state.user.name : ""} 👋",
+                    style: Theme.of(context).textTheme.titleMedium);
               },
             ),
-            AutoSizeText(
-              "Welcome to GDSC",
-              style: GoogleFonts.inter(
-                fontWeight: FontWeight.w500,
-                fontSize: 13,
-                color: const Color(0xff000000),
-              ),
-            ),
+            AutoSizeText("Welcome to GDSC",
+                style: Theme.of(context)
+                    .textTheme
+                    .titleSmall!
+                    .copyWith(fontSize: 13)),
           ],
         ),
         const Spacer(),
@@ -324,12 +308,8 @@ class AnnouncementsContainerWidget extends StatelessWidget {
                       itemCount: data.length > 2 ? 2 : data.length,
                       itemBuilder: (context, index) {
                         return AnnouncementCard(
-                          id: data[index].id ?? "",
-                          height: height,
-                          width: width,
-                          title: data[index].title ?? "",
-                          name: data[index].name ?? "",
-                          position: data[index].position ?? "",
+                          announcement: data[index],
+                          isAdmin: false,
                         );
                       },
                     ),
@@ -525,32 +505,21 @@ class EventContainer extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            "Upcoming Events",
-                            style: GoogleFonts.inter(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 17,
-                              color: const Color(0xff000000),
-                            ),
-                          ),
+                          Text("Upcoming Events",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium!
+                                  .copyWith(fontSize: 17)),
                           dataz.length > 2
                               ? TextButton(
-                                  style: TextButton.styleFrom(
-                                    padding: EdgeInsets.zero,
-                                    shadowColor: Colors.white,
-                                    backgroundColor: Colors.white,
-                                  ),
+                                  style: Theme.of(context).textButtonTheme.style,
                                   onPressed: () {
                                     Navigator.pushNamed(
                                         context, '/events_page');
                                   },
                                   child: Text(
                                     "See all",
-                                    style: GoogleFonts.inter(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 15,
-                                      color: const Color(0xff000000),
-                                    ),
+                                    style: Theme.of(context).textTheme.titleSmall,
                                   ),
                                 )
                               : const Spacer()
@@ -564,29 +533,10 @@ class EventContainer extends StatelessWidget {
                       itemCount: dataz.length > 2 ? 2 : dataz.length,
                       itemBuilder: (context, index) {
                         final data = dataz[index];
-                        DateTime date = DateTime.parse(data.date!);
-
-                        int numberOfDays =
-                            date.difference(DateTime.now()).inDays.toInt();
-                        debugPrint("number of days $numberOfDays");
-                        String formattedDate = DateFormat.MMMEd().format(date);
-                        final duration = data.duration ?? 120;
-                        final time = date.add(Duration(minutes: duration));
-                        final startTime = DateFormat.jm().format(date);
-                        final endTime = DateFormat.jm().format(time);
                         return EventCard(
-                          width: width,
-                          height: height,
-                          title: data.title ?? "",
-                          organizers: data.organizers ?? "",
-                          venue: data.venue ?? "",
-                          about: data.description ?? "",
-                          date: formattedDate,
-                          time: "${startTime} - ${endTime}",
-                          numberOfDays: numberOfDays,
-                          image: data.imageUrl ?? AppImages.eventImage,
-                          link: data.link ?? "",
-                          function: () async {},
+                          event: data,
+                          isAdmin: false,
+                          isPast: false,
                         );
                       },
                     ),

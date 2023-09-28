@@ -27,10 +27,8 @@ class ForgotPassword extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
         iconTheme: const IconThemeData(color: Color(0xff000000)),
         title: AutoSizeText(
           'Forgot Password',

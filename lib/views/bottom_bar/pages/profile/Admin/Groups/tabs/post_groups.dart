@@ -6,8 +6,8 @@ import 'package:gdsc_bloc/utilities/Widgets/input_field.dart';
 import 'package:gdsc_bloc/utilities/Widgets/loading_circle.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../../../blocs/app_functionality/group/group_cubit.dart';
-import '../../../../../../blocs/minimal_functonality/get_image/get_image_cubit.dart';
+import '../../../../../../../blocs/app_functionality/group/group_cubit.dart';
+import '../../../../../../../blocs/minimal_functonality/get_image/get_image_cubit.dart';
 
 class PostGroups extends StatelessWidget {
   PostGroups({super.key, required this.tabController});
@@ -21,13 +21,12 @@ class PostGroups extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return BlocProvider(
       create: (context) => GroupCubit(),
       child: Builder(builder: (context) {
         return Scaffold(
-          backgroundColor: Colors.white,
-          bottomNavigationBar:
-              BlocConsumer<GroupCubit, GroupState>(
+          bottomNavigationBar: BlocConsumer<GroupCubit, GroupState>(
             listener: (context, state) {
               if (state is GroupCreated) {
                 Timer(
@@ -54,8 +53,7 @@ class PostGroups extends StatelessWidget {
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () {
-                            BlocProvider.of<GroupCubit>(context)
-                                .createGroup(
+                            BlocProvider.of<GroupCubit>(context).createGroup(
                               title: nameController.text,
                               description: descriptionController.text,
                               link: linkController.text,
@@ -67,18 +65,22 @@ class PostGroups extends StatelessWidget {
                             linkController.clear();
                             imageController.clear();
                           },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF000000),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                          ),
+                         style: Theme.of(context)
+                                        .elevatedButtonTheme
+                                        .style!
+                                        .copyWith(
+                                          shape: MaterialStateProperty.all(
+                                            RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(25),
+                                            ),
+                                          ),
+                                        ),
                           child: Text(
                             "Create Group",
                             style: GoogleFonts.inter(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
-                              color: const Color(0xffffffff),
                             ),
                           ),
                         ),
@@ -94,91 +96,87 @@ class PostGroups extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                            "Name",
-                            style: GoogleFonts.inter(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: const Color(0xff000000),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          InputField(
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return "Please enter the  name";
-                              }
-                              return null;
-                            },
-                            controller: nameController,
-                            hintText: "Edit name of group",
-                          ),
-                          const SizedBox(
-                            height: 6,
-                          ),
-                          Text(
-                            "Link",
-                            style: GoogleFonts.inter(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: const Color(0xff000000),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          InputField(
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return "Please enter your link";
-                              }
-                              return null;
-                            },
-                            controller: linkController,
-                            hintText: "Edit link of group",
-                          ),
-                          const SizedBox(
-                            height: 6,
-                          ),
-                          Text(
-                            "Description",
-                            style: GoogleFonts.inter(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: const Color(0xff000000),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          InputField(
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return "Please enter your description";
-                              }
-                              return null;
-                            },
-                            maxLines: 3,
-                            textInputType: TextInputType.multiline,
-                            minLines: 1,
-                            controller: descriptionController,
-                            hintText: "Edit description of group",
-                          ),
-                          const SizedBox(
-                            height: 6,
-                          ),
-                          Text(
-                            "Attach a File",
-                            style: GoogleFonts.inter(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              color: const Color(0xff000000),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 8,
-                          ),
+                    "Name",
+                    style: GoogleFonts.inter(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                   SizedBox(
+                    height: height * 0.01,
+                  ),
+                  InputField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Please enter the  name";
+                      }
+                      return null;
+                    },
+                    controller: nameController,
+                    hintText: "Edit name of group",
+                  ),
+                   SizedBox(
+                    height: height * 0.02,
+                  ),
+                  Text(
+                    "Link",
+                    style: GoogleFonts.inter(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                   SizedBox(
+                    height: height * 0.01,
+                  ),
+                  InputField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Please enter your link";
+                      }
+                      return null;
+                    },
+                    controller: linkController,
+                    hintText: "Edit link of group",
+                  ),
+                   SizedBox(
+                    height: height * 0.02,
+                  ),
+                  Text(
+                    "Description",
+                    style: GoogleFonts.inter(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                   SizedBox(
+                    height: height * 0.01,
+                  ),
+                  InputField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Please enter your description";
+                      }
+                      return null;
+                    },
+                    maxLines: 3,
+                    textInputType: TextInputType.multiline,
+                    minLines: 1,
+                    controller: descriptionController,
+                    hintText: "Edit description of group",
+                  ),
+                   SizedBox(
+                    height: height * 0.02,
+                  ),
+                  Text(
+                    "Attach a File",
+                    style: GoogleFonts.inter(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                   SizedBox(
+                    height: height * 0.01,
+                  ),
                   BlocProvider(
                     create: (context) => GetImageCubit(),
                     child: Builder(builder: (context) {
@@ -212,31 +210,30 @@ class PostGroups extends StatelessWidget {
                           }
                         },
                         builder: (context, state) {
-                         final width = MediaQuery.of(context).size.width;
-                      return SizedBox(
-                        height: 50,
-                        width: width * 0.4,
+                          final width = MediaQuery.of(context).size.width;
+                          return SizedBox(
+                            height: 50,
+                            width: width * 0.4,
                             child: state is ImageUploading
                                 ? const LoadingCircle()
                                 : ElevatedButton(
                                     onPressed: () {
-                                      BlocProvider.of<GetImageCubit>(
-                                              context)
+                                      BlocProvider.of<GetImageCubit>(context)
                                           .getImage();
                                     },
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: const Color(0xff000000),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(5),
-                                      ),
-                                    ),
+                                    style: Theme.of(context)
+                                        .elevatedButtonTheme
+                                        .style!
+                                        .copyWith(
+                                          shape: MaterialStateProperty.all(
+                                            RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(25),
+                                            ),
+                                          ),
+                                        ),
                                     child: Text(
                                       "Attach File",
-                                      style: GoogleFonts.inter(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w600,
-                                        color: const Color(0xffffffff),
-                                      ),
                                     ),
                                   ),
                           );

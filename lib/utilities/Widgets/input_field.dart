@@ -15,6 +15,8 @@ class InputField extends StatelessWidget {
     this.textInputType,
     this.minLines = 1,
     this.maxLines = 5,
+    this.fillColor = Colors.transparent,
+    this.borderRadius = 10,
     required this.hintText,
   });
   final TextEditingController controller;
@@ -27,6 +29,9 @@ class InputField extends StatelessWidget {
   final int minLines;
   final int maxLines;
   final TextInputType? textInputType;
+  final Color? fillColor;
+  final double borderRadius;
+
 
   @override
   Widget build(BuildContext context) {
@@ -39,38 +44,36 @@ class InputField extends StatelessWidget {
       textInputAction: TextInputAction.next,
       minLines: minLines,
       maxLines: maxLines,
-      style: GoogleFonts.inter(
-        fontWeight: FontWeight.w500,
-        fontSize: 14,
-        color: const Color(0xff000000),
-      ),
+      style: Theme.of(context).inputDecorationTheme.labelStyle,
       onTap: function,
+      onTapOutside: (event) {
+        FocusScope.of(context).unfocus();
+      },
       decoration: InputDecoration(
         hintText: hintText,
-        // label: Text(
-        //   title,
-        //   style: GoogleFonts.inter(
-        //     fontSize: 14,
-        //     fontWeight: FontWeight.w500,
-        //     color: const Color(0xff000000),
-        //   ),
-        // ),
+        fillColor: fillColor,
         suffixIcon: suffixIcon,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(borderRadius),
+          borderSide:  BorderSide(
+              color: Colors.grey[400]!
+              ),
+        ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(borderRadius),
           borderSide: const BorderSide(
-            color: Color(0xff000000),
-          ),
+              // color: Color(0xff000000),
+              ),
         ),
         disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(borderRadius),
           borderSide: const BorderSide(
-            color: Color(0xff666666),
-          ),
+              // color: Color(0xff666666),
+              ),
         ),
         hintStyle: GoogleFonts.inter(
           fontSize: 14,
-          color: Colors.grey[700],
+          // color: Colors.grey[700],
           fontWeight: FontWeight.w500,
         ),
       ),

@@ -22,9 +22,7 @@ class AppReports extends StatelessWidget {
       create: (context) => ReportCubit()..getAllReports(),
       child: Builder(builder: (context) {
         return Scaffold(
-          backgroundColor: Colors.white,
           appBar: AppBar(
-            backgroundColor: Colors.white,
             iconTheme: const IconThemeData(color: Color(0xff666666), size: 20),
             title: Text(
               "Admin Reports",
@@ -38,7 +36,7 @@ class AppReports extends StatelessWidget {
           body: SingleChildScrollView(
             child: RefreshIndicator(
               onRefresh: () async {
-               context.read<ReportCubit>().getAllReports();
+                context.read<ReportCubit>().getAllReports();
               },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -74,13 +72,13 @@ class AppReports extends StatelessWidget {
                             )
                           : Padding(
                               padding: const EdgeInsets.only(top: 10),
-                              child: BlocConsumer<ReportCubit,
-                                  ReportState>(
+                              child: BlocConsumer<ReportCubit, ReportState>(
                                 listener: (context, appState) {},
                                 builder: (context, appState) {
                                   return ListView.builder(
                                     scrollDirection: Axis.vertical,
-                                    physics: const NeverScrollableScrollPhysics(),
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
                                     shrinkWrap: true,
                                     itemCount: state.reports.length,
                                     itemBuilder: (context, index) {
@@ -88,7 +86,8 @@ class AppReports extends StatelessWidget {
                                         width: width,
                                         height: height,
                                         title: state.reports[index].email!,
-                                        about: state.reports[index].description!,
+                                        about:
+                                            state.reports[index].description!,
                                         image: state.reports[index].image!,
                                       );
                                     },

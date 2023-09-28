@@ -5,12 +5,12 @@ class LoadingCircle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    return  Center(
       child: SizedBox(
         height: 15,
         width: 15,
         child: CircularProgressIndicator(
-          color: Colors.black,
+          color: Theme.of(context).iconTheme.color,
           strokeWidth: 3,
         ),
       ),

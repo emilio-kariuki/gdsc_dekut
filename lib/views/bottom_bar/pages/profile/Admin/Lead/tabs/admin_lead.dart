@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Lead/app_leads.dart';
-import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Lead/post_admin_lead.dart';
+import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Lead/tabs/post_admin_lead.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../../../blocs/app_functionality/leads/leads_cubit.dart';
+import '../../../../../../../blocs/app_functionality/leads/leads_cubit.dart';
 
 class AdminLead extends StatefulWidget {
   const AdminLead({super.key});
@@ -32,9 +32,7 @@ class _AdminLeadState extends State<AdminLead>
         create: (context) => LeadsCubit(),
         child: Builder(builder: (context) {
           return Scaffold(
-            backgroundColor: Colors.white,
             appBar: AppBar(
-                backgroundColor: Colors.white,
                 iconTheme:
                     const IconThemeData(color: Color(0xff666666), size: 20),
                 title: Text(

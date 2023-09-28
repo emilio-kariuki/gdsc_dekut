@@ -111,11 +111,9 @@ class EditResourceDialog extends StatelessWidget {
                       },
                     ),
                   ),
-                  backgroundColor: Colors.white,
                   appBar: PreferredSize(
                     preferredSize: const Size.fromHeight(40),
                     child: AppBar(
-                      backgroundColor: Colors.white,
                       automaticallyImplyLeading: false,
                       title: Text(
                         "Edit Event",
@@ -124,7 +122,6 @@ class EditResourceDialog extends StatelessWidget {
                         style: GoogleFonts.inter(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
-                          color: Colors.grey[900],
                         ),
                       ),
                       actions: [
@@ -149,23 +146,23 @@ class EditResourceDialog extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-              "Name",
-              style: GoogleFonts.inter(
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-                color: const Color(0xff000000),
-              ),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
+                            "Name",
+                            style: GoogleFonts.inter(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                              color: const Color(0xff000000),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
                           InputField(
                             validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please enter your name";
-                        }
-                        return null;
-                      },
+                              if (value!.isEmpty) {
+                                return "Please enter your name";
+                              }
+                              return null;
+                            },
                             controller: nameController,
                             hintText: "Edit name of event",
                           ),
@@ -174,11 +171,11 @@ class EditResourceDialog extends StatelessWidget {
                           ),
                           InputField(
                             validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please enter your description";
-                        }
-                        return null;
-                      },
+                              if (value!.isEmpty) {
+                                return "Please enter your description";
+                              }
+                              return null;
+                            },
                             controller: descriptionController,
                             hintText: "Edit description of event",
                           ),
@@ -186,34 +183,34 @@ class EditResourceDialog extends StatelessWidget {
                             height: 6,
                           ),
                           Text(
-              "Description",
-              style: GoogleFonts.inter(
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-                color: const Color(0xff000000),
-              ),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            Text(
-              "Link",
-              style: GoogleFonts.inter(
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-                color: const Color(0xff000000),
-              ),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
+                            "Description",
+                            style: GoogleFonts.inter(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                              color: const Color(0xff000000),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            "Link",
+                            style: GoogleFonts.inter(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                              color: const Color(0xff000000),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
                           InputField(
                             validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please enter your link";
-                        }
-                        return null;
-                      },
+                              if (value!.isEmpty) {
+                                return "Please enter your link";
+                              }
+                              return null;
+                            },
                             controller: linkController,
                             hintText: "Edit link of event",
                           ),
@@ -341,8 +338,7 @@ class EditResourceDialog extends StatelessWidget {
                           BlocProvider(
                             create: (context) => GetImageCubit(),
                             child: Builder(builder: (context) {
-                              return BlocConsumer<GetImageCubit,
-                                  GetImageState>(
+                              return BlocConsumer<GetImageCubit, GetImageState>(
                                 listener: (context, state) {
                                   if (state is ImagePicked) {
                                     imageController.text = state.imageUrl;
@@ -375,16 +371,16 @@ class EditResourceDialog extends StatelessWidget {
                                   }
                                 },
                                 builder: (context, state) {
-                                 final width = MediaQuery.of(context).size.width;
-                      return SizedBox(
-                        height: 50,
-                        width: width * 0.4,
+                                  final width =
+                                      MediaQuery.of(context).size.width;
+                                  return SizedBox(
+                                    height: 50,
+                                    width: width * 0.4,
                                     child: state is ImageUploading
                                         ? const LoadingCircle()
                                         : ElevatedButton(
                                             onPressed: () {
-                                              BlocProvider.of<
-                                                          GetImageCubit>(
+                                              BlocProvider.of<GetImageCubit>(
                                                       context)
                                                   .getImage();
                                             },

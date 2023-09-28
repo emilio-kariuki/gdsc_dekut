@@ -51,4 +51,14 @@ class SharedPreferencesManager {
     final prefs = await SharedPreferences.getInstance();
     return prefs.setString(AUTH_ACCESS_TOKEN, value);
   }
+
+  Future<bool> setAppTheme({required bool value}) async{
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.setBool(APP_THEME, value);
+  }
+
+  Future<bool> getAppTheme() async{
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(APP_THEME) ?? false;
+  }
 }

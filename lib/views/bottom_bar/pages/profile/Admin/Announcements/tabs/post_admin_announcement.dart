@@ -9,8 +9,8 @@ import 'package:gdsc_bloc/utilities/Widgets/input_field.dart';
 import 'package:gdsc_bloc/utilities/Widgets/loading_circle.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../../../blocs/app_functionality/announcement/announcement_cubit.dart';
-import '../../../../../../data/services/providers/notification_providers.dart';
+import '../../../../../../../blocs/app_functionality/announcement/announcement_cubit.dart';
+import '../../../../../../../data/services/providers/notification_providers.dart';
 
 class AdminAnnouncementPostPage extends StatelessWidget {
   AdminAnnouncementPostPage({super.key, required this.tabController});
@@ -49,14 +49,11 @@ class AdminAnnouncementPostPage extends StatelessWidget {
                           "${nameController.text}-${positionController.text}",
                       topic: "test");
                   NotificationProviders().createPushNotification(
-                          image: "https://i.imgur.com/2nCt3Sbl.jpg",
-                          title: titleController.text,
-                          message:
-                              "${nameController.text}-${positionController.text}",
-                          topic:kReleaseMode? "prod" : "dev");
-
-                  
-                    
+                      image: "https://i.imgur.com/2nCt3Sbl.jpg",
+                      title: titleController.text,
+                      message:
+                          "${nameController.text}-${positionController.text}",
+                      topic: kReleaseMode ? "prod" : "dev");
 
                   tabController.animateTo(0);
                 }
@@ -89,26 +86,24 @@ class AdminAnnouncementPostPage extends StatelessWidget {
                               position: positionController.text,
                             );
                           },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xff000000),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                          ),
+                          style: Theme.of(context)
+                              .elevatedButtonTheme
+                              .style!
+                              .copyWith(
+                                shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(25),
+                                  ),
+                                ),
+                              ),
                           child: Text(
                             "Post",
-                            style: GoogleFonts.inter(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: const Color(0xffffffff),
-                            ),
                           ),
                         ),
                       );
               },
             ),
           ),
-          backgroundColor: Colors.white,
           body: SafeArea(
             child: SingleChildScrollView(
               child: Padding(
@@ -117,44 +112,74 @@ class AdminAnnouncementPostPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Text(
+                      "Title",
+                      style: GoogleFonts.inter(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
                     InputField(
-                        controller: titleController,
-                        hintText: "Enter the title of the announcement",
-                        maxLines: 3,
-                        textInputType: TextInputType.multiline,
-                        validator: (value) {
+                      controller: titleController,
+                      hintText: "Enter the title of the announcement",
+                      maxLines: 3,
+                      textInputType: TextInputType.multiline,
+                      validator: (value) {
                         if (value!.isEmpty) {
                           return "Please enter your annoucement";
                         }
                         return null;
                       },
-                        ),
+                    ),
                     const SizedBox(
                       height: 20,
                     ),
+                    Text(
+                      "Email",
+                      style: GoogleFonts.inter(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
                     InputField(
-                        controller: nameController,
-                        hintText: "Enter the name of the email",
-                        validator: (value) {
+                      controller: nameController,
+                      hintText: "Enter the name of the sender",
+                      validator: (value) {
                         if (value!.isEmpty) {
-                          return "Please enter your email";
+                          return "Please enter your sender";
                         }
                         return null;
                       },
-                        ),
+                    ),
                     const SizedBox(
                       height: 20,
                     ),
+                    Text(
+                      "Position",
+                      style: GoogleFonts.inter(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
                     InputField(
-                        controller: positionController,
-                        hintText: "Enter the Position of the sender",
-                        validator: (value) {
+                      controller: positionController,
+                      hintText: "Enter the Position of the sender",
+                      validator: (value) {
                         if (value!.isEmpty) {
                           return "Please enter your position of sender";
                         }
                         return null;
                       },
-                        ),
+                    ),
                   ],
                 ),
               ),

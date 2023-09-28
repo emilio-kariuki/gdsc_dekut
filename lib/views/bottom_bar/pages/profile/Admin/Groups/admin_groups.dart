@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Groups/post_groups.dart';
-import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Groups/tech_groups.dart';
+import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Groups/tabs/post_groups.dart';
+import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Groups/tabs/tech_groups.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../../blocs/app_functionality/group/group_cubit.dart';
-
-
 
 class AdminGroups extends StatefulWidget {
   const AdminGroups({super.key});
@@ -34,9 +32,7 @@ class _AdminGroupsState extends State<AdminGroups>
         create: (context) => GroupCubit(),
         child: Builder(builder: (context) {
           return Scaffold(
-            backgroundColor: Colors.white,
             appBar: AppBar(
-                backgroundColor: Colors.white,
                 iconTheme:
                     const IconThemeData(color: Color(0xff666666), size: 20),
                 title: Text(

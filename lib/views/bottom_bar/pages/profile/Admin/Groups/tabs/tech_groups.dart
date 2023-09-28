@@ -10,7 +10,7 @@ import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Groups/edit_group
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
-import '../../../../../../utilities/Widgets/admin/groups/admin_groups_card.dart';
+import '../../../../../../../utilities/Widgets/admin/groups/admin_groups_card.dart';
 
 class AppGroupsTab extends StatelessWidget {
   AppGroupsTab({super.key, required this.tabController});
@@ -36,7 +36,6 @@ class AppGroupsTab extends StatelessWidget {
       ],
       child: Builder(builder: (context) {
         return Scaffold(
-          backgroundColor: Colors.white,
           body: RefreshIndicator(
             onRefresh: () {
               context.read<GroupCubit>().getAllGroups();
@@ -49,87 +48,61 @@ class AppGroupsTab extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            height: 49,
-                            padding: const EdgeInsets.only(left: 15, right: 1),
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(25),
-                                border: Border.all(
-                                  color: Colors.grey[500]!,
-                                  width: 0.8,
-                                )),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                const Icon(
-                                  Icons.search,
-                                  color: Color(0xff666666),
-                                  size: 18,
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Expanded(
-                                  child: TextFormField(
-                                    controller: searchController,
-                                    style: GoogleFonts.inter(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 14,
-                                      color: const Color(0xff000000),
-                                    ),
-                                    onFieldSubmitted: (value) {
-                                      context.read<GroupCubit>().searchGroup(
-                                            query: value,
-                                          );
-                                    },
-                                    decoration: InputDecoration(
-                                      hintText: "Search for group eg. Flutter",
-                                      border: InputBorder.none,
-                                      hintStyle: GoogleFonts.inter(
-                                        fontSize: 12,
-                                        color: const Color(0xff666666),
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
+                    TextFormField(
+                      controller: searchController,
+                      style: GoogleFonts.inter(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 14,
+                        // color: const Color(0xff000000),
+                      ),
+                      onChanged: (value) {
+                        Future.delayed(const Duration(milliseconds: 500), () {
+                          context.read<GroupCubit>().searchGroup(query: value);
+                        });
+                      },
+                      onFieldSubmitted: (value) {
+                        context.read<GroupCubit>().searchGroup(query: value);
+                      },
+                      decoration: InputDecoration(
+                        prefixIcon: const Icon(
+                          Icons.search,
+                          color: Color(0xff666666),
+                          size: 18,
+                        ),
+                        suffixIcon: IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            context.read<GroupCubit>()..getAllGroups();
+                            searchController.clear();
+                          },
+                          icon: const Icon(
+                            Icons.close,
+                            color: Color(0xff666666),
+                            size: 18,
                           ),
                         ),
-                        const SizedBox(
-                          width: 8,
-                        ),
-                        SizedBox(
-                          height: 49,
-                          width: 49,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              context.read<GroupCubit>().getAllGroups();
-                              searchController.clear();
-                            },
-                            style: ElevatedButton.styleFrom(
-                              padding: EdgeInsets.zero,
-                              elevation: 0,
-                              backgroundColor: Colors.white,
-                              foregroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(100),
-                                  side: const BorderSide(
-                                      width: 0.4, color: Colors.black)),
-                            ),
-                            child: const Icon(
-                              Icons.refresh,
-                              color: Colors.black,
-                              size: 22,
-                            ),
+                        hintText: "Search for group eg. Flutter",
+                        border: Theme.of(context).inputDecorationTheme.border,
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25),
+                          borderSide: BorderSide(
+                            color: Colors.grey[500]!,
+                            width: 1,
                           ),
                         ),
-                      ],
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25),
+                          borderSide: BorderSide(
+                            color: Colors.grey[500]!,
+                            width: 1.3,
+                          ),
+                        ),
+                        hintStyle: GoogleFonts.inter(
+                          fontSize: 12,
+                          // color: const Color(0xff666666),
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
                     ),
                     BlocConsumer<GroupCubit, GroupState>(
                       listener: (context, state) {
@@ -166,7 +139,6 @@ class AppGroupsTab extends StatelessWidget {
                                     style: GoogleFonts.inter(
                                       fontWeight: FontWeight.w600,
                                       fontSize: 18,
-                                      color: const Color(0xff000000),
                                     ),
                                   ),
                                   IconButton(
@@ -183,7 +155,6 @@ class AppGroupsTab extends StatelessWidget {
                                       icon: const Icon(
                                         Icons.close,
                                         size: 18,
-                                        color: Colors.black,
                                       ))
                                 ],
                               ),
@@ -271,7 +242,13 @@ class AppGroupsTab extends StatelessWidget {
                                                     ],
                                                   )),
                                                 )
-                                              : ListView.builder(
+                                              : ListView.separated(
+                                                  separatorBuilder:
+                                                      (context, index) {
+                                                    return SizedBox(
+                                                      height: height * 0.01,
+                                                    );
+                                                  },
                                                   scrollDirection:
                                                       Axis.vertical,
                                                   physics:

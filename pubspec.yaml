@@ -58,6 +58,7 @@ dependencies:
   flutter_spinkit: ^5.2.0
   firebase_remote_config: ^4.2.6
   in_app_review: ^2.0.6
+  hydrated_bloc: ^9.1.2
 
  
 

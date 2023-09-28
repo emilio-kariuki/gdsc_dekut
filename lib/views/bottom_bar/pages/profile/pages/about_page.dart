@@ -7,10 +7,8 @@ class AboutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Color(0xff666666), size: 20),
-        backgroundColor: Colors.white,
         title: Text(
           "About",
           style: GoogleFonts.inter(
@@ -98,7 +96,7 @@ class AboutPage extends StatelessWidget {
                     fontSize: 17,
                     fontWeight: FontWeight.bold,
                   )),
-                  const SizedBox(height: 16),
+              const SizedBox(height: 16),
               Text('Team Developer Communities',
                   style: GoogleFonts.inter(
                     fontSize: 17,
@@ -110,9 +108,6 @@ class AboutPage extends StatelessWidget {
                     fontSize: 13.5,
                     fontWeight: FontWeight.w500,
                   )),
-        
-                
-              
             ],
           ),
         ),

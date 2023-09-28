@@ -32,7 +32,6 @@ class AppLeads extends StatelessWidget {
       create: (context) => LeadsCubit()..getLeads(),
       child: Builder(builder: (context) {
         return Scaffold(
-          backgroundColor: Colors.white,
           body: Padding(
             padding: const EdgeInsets.all(8.0),
             child: BlocBuilder<LeadsCubit, LeadsState>(

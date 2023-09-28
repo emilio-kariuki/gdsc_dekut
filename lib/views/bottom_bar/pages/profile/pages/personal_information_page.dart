@@ -41,15 +41,12 @@ class PersonalInformation extends StatelessWidget {
       create: (context) => GetImageCubit(),
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.white,
           iconTheme: const IconThemeData(color: Color(0xff666666), size: 20),
           title: Text(
             "Personal Information",
             style: GoogleFonts.inter(
               fontSize: 17,
               fontWeight: FontWeight.w500,
-              color: const Color(0xff666666),
             ),
           ),
           leading: Semantics(
@@ -63,7 +60,6 @@ class PersonalInformation extends StatelessWidget {
                 padding: EdgeInsets.all(10.0),
                 child: Icon(
                   Icons.arrow_back_ios,
-                  color: Colors.black,
                   size: 20,
                 ),
               ),
@@ -73,7 +69,6 @@ class PersonalInformation extends StatelessWidget {
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.all(10),
           child: BlocListener<UserCubit, UserState>(
-            bloc: context.read<UserCubit>()..getUser(),
             listener: (context, state) {
               if (state is UserSuccess) {
                 nameController.text = state.user.name!;
@@ -115,7 +110,6 @@ class PersonalInformation extends StatelessWidget {
             ),
           ),
         ),
-        backgroundColor: Colors.white,
         body: SafeArea(
           child: RefreshIndicator(
             onRefresh: () async {
@@ -339,7 +333,7 @@ class UpdateProfileContainer extends StatelessWidget {
                         );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xff000000),
+                    // backgroundColor: const Color(0xff000000),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5),
                     ),
@@ -349,7 +343,7 @@ class UpdateProfileContainer extends StatelessWidget {
                     style: GoogleFonts.inter(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
-                      color: const Color(0xffffffff),
+                      // color: const Color(0xffffffff),
                     ),
                   ),
                 ),
@@ -386,7 +380,6 @@ class FloatingImageContainer extends StatelessWidget {
             child: const Center(
               child: Icon(
                 Icons.photo_camera_outlined,
-                color: Colors.white,
                 size: 17,
               ),
             ),

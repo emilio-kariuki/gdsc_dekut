@@ -22,9 +22,9 @@ class AnnouncementPage extends StatelessWidget {
       create: (context) => AnnouncementCubit()..getAllAnnoucements(),
       child: Builder(builder: (context) {
         return Scaffold(
-          backgroundColor: Colors.white,
+          
           appBar: AppBar(
-            backgroundColor: Colors.white,
+            
             title: AutoSizeText(
               "Annoucement Page",
               style: GoogleFonts.inter(
@@ -78,14 +78,10 @@ class AnnouncementPage extends StatelessWidget {
                             physics: const NeverScrollableScrollPhysics(),
                             itemCount: state.announcements.length,
                             itemBuilder: (context, index) {
+                              final data = state.announcements[index];
                               return AnnouncementCard(
-                                id: state.announcements[index].id ?? "",
-                                height: height,
-                                width: width,
-                                title: state.announcements[index].title ?? "",
-                                name: state.announcements[index].name ?? "",
-                                position:
-                                    state.announcements[index].position ?? "",
+                                announcement: data,
+                                isAdmin: false,
                               );
                             },
                           ),

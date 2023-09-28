@@ -11,11 +11,11 @@ import 'package:gdsc_bloc/views/bottom_bar/pages/events/events_page.dart';
 import 'package:gdsc_bloc/views/bottom_bar/pages/resources/resource_post_page.dart';
 import 'package:gdsc_bloc/views/bottom_bar/pages/home/pages/tech_groups_page.dart';
 import 'package:gdsc_bloc/views/bottom_bar/pages/home/pages/twitter_page.dart';
-import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Announcements/admin_announcements.dart';
-import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Event/admin_event.dart';
+import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/announcements/admin_announcements.dart';
+import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/event/admin_event.dart';
 import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Feedback/admin_feedback.dart';
 import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Groups/admin_groups.dart';
-import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Lead/admin_lead.dart';
+import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Lead/tabs/admin_lead.dart';
 import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Reports/admin_reports.dart';
 import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Resources/admin_resources.dart';
 import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/admin_page.dart';
@@ -127,7 +127,7 @@ class RouteGenerator {
           appBar: AppBar(
             title: const Text('Error'),
             elevation: 0,
-            backgroundColor: Colors.white,
+           
             iconTheme: const IconThemeData(color: Colors.black54),
           ),
           body: SizedBox(

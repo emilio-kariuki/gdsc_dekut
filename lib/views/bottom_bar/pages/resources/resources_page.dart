@@ -31,68 +31,64 @@ class ResourcesPage extends StatelessWidget {
         builder: (context) {
           return Scaffold(
             floatingActionButton: FloatingActionButton(
-              backgroundColor: const Color(0xff000000),
+              backgroundColor: Theme.of(context).primaryColor,
               elevation: 2,
               onPressed: () {
                 Navigator.pushNamed(context, '/post_resource');
               },
-              child: const Icon(
+              child:  Icon(
                 Icons.add,
-                color: Colors.white,
+                color: Theme.of(context).iconTheme.color,
+                size: 20,
               ),
             ),
-            backgroundColor: Colors.white,
-            body: AnnotatedRegion<SystemUiOverlayStyle>(
-              value: SystemUiOverlayStyle.dark.copyWith(
-                statusBarColor: Colors.white,
-              ),
-              child: SafeArea(
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(
-                          height: 10,
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            body: SafeArea(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      AutoSizeText(
+                        "Your Resources",
+                        overflow: TextOverflow.fade,
+                        maxLines: 1,
+                        style: GoogleFonts.inter(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 18,
                         ),
-                        AutoSizeText(
-                          "Your Resources",
-                          overflow: TextOverflow.fade,
-                          maxLines: 1,
-                          style: GoogleFonts.inter(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 18,
-                            color: const Color(0xff000000),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        ResearchSearchContainer(searchController: searchController),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        BlocBuilder<ResourceCubit, ResourceState>(
-                          builder: (context, state) {
-                            if (state is ResourceSuccess) {
-                              return SearchResultView(
-                                searchController: searchController,
-                                width: width,
-                                height: height,
-                                resources: state.resources,
-                              );
-                            } else {
-                              return DefaultRecourceView(
-                                height: height,
-                                width: width,
-                              );
-                            }
-                          },
-                        )
-                      ],
-                    ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      ResearchSearchContainer(
+                          searchController: searchController),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      BlocBuilder<ResourceCubit, ResourceState>(
+                        builder: (context, state) {
+                          if (state is ResourceSuccess) {
+                            return SearchResultView(
+                              searchController: searchController,
+                              width: width,
+                              height: height,
+                              resources: state.resources,
+                            );
+                          } else {
+                            return DefaultRecourceView(
+                              height: height,
+                              width: width,
+                            );
+                          }
+                        },
+                      )
+                    ],
                   ),
                 ),
               ),
@@ -114,39 +110,49 @@ class ResearchSearchContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 49,
-      padding: const EdgeInsets.only(left: 15, right: 1),
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(25),
-          border: Border.all(
-            color: Colors.grey[500]!,
-            width: 0.8,
-          )),
-      child: TextFormField(
-        controller: searchController,
-        onFieldSubmitted: (value) {
-          context
-              .read<ResourceCubit>()
-              .searchResource(query: value);
-        },
-        style: GoogleFonts.inter(
-          fontWeight: FontWeight.w500,
-          fontSize: 14,
-          color: const Color(0xff000000),
+   return TextFormField(
+      controller: searchController,
+      style: GoogleFonts.inter(
+        fontWeight: FontWeight.w500,
+        fontSize: 14,
+        color: const Color(0xff000000),
+      ),
+      
+      onFieldSubmitted: (value) {
+        context
+            .read<ResourceCubit>()
+            .searchResource(query: value);
+      },
+      decoration: InputDecoration(
+        prefixIcon: const Icon(
+          Icons.search,
+          color: Color(0xff666666),
+          size: 18,
         ),
-        decoration: InputDecoration(
-          hintText: "Search for resource eg. Flutter",
-          border: InputBorder.none,
-          hintStyle: GoogleFonts.inter(
-            fontSize: 12,
-            color: const Color(0xff666666),
-            fontWeight: FontWeight.w500,
+        hintText: "Search for resource eg. Flutter",
+        border: Theme.of(context).inputDecorationTheme.border,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(25),
+          borderSide: BorderSide(
+            color: Colors.grey[500]!,
+            width: 1,
           ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(25),
+          borderSide: BorderSide(
+             color: Colors.grey[500]!,
+            width: 1.3,
+          ),
+        ),
+        hintStyle: GoogleFonts.inter(
+          fontSize: 12,
+          // color: const Color(0xff666666),
+          fontWeight: FontWeight.w500,
         ),
       ),
     );
+    
   }
 }
 
@@ -171,14 +177,11 @@ class SearchResultView extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            AutoSizeText(
-              "Search Results",
-              style: GoogleFonts.inter(
-                fontWeight: FontWeight.w600,
-                fontSize: 18,
-                color: const Color(0xff000000),
-              ),
-            ),
+            AutoSizeText("Search Results",
+                style: Theme.of(context)
+                    .textTheme
+                    .titleMedium!
+                    .copyWith(fontSize: 18)),
             IconButton(
                 style: IconButton.styleFrom(
                   padding: EdgeInsets.zero,
@@ -196,12 +199,11 @@ class SearchResultView extends StatelessWidget {
         ),
         resources.isEmpty
             ? Center(
-                child: AutoSizeText(
+                child: Text(
                   "No resources found",
                   style: GoogleFonts.inter(
                     fontWeight: FontWeight.w600,
                     fontSize: 15,
-                    color: const Color(0xff666666),
                   ),
                 ),
               )

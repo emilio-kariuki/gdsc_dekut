@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Announcements/admin_announcement_page.dart';
-import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Announcements/post_admin_announcement.dart';
+import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/announcements/tabs/admin_announcement_page.dart';
+import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/announcements/tabs/post_admin_announcement.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../../blocs/app_functionality/announcement/announcement_cubit.dart';
@@ -34,9 +34,7 @@ class _AdminAnnouncementsState extends State<AdminAnnouncements>
         create: (context) => AnnouncementCubit(),
         child: Builder(builder: (context) {
           return Scaffold(
-            backgroundColor: Colors.white,
             appBar: AppBar(
-                backgroundColor: Colors.white,
                 iconTheme:
                     const IconThemeData(color: Color(0xff666666), size: 20),
                 title: Text(

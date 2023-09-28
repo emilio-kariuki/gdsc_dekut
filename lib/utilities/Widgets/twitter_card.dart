@@ -7,7 +7,6 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../blocs/minimal_functonality/clipboard/clipboard_cubit.dart';
 import '../../data/services/providers/app_providers.dart';
 
-
 class TwitterCard extends StatelessWidget {
   const TwitterCard({
     super.key,
@@ -53,7 +52,6 @@ class TwitterCard extends StatelessWidget {
                         border: const Border(
                             top: BorderSide(
                                 width: 0.4, color: Color(0xff666666))),
-                        color: Colors.grey[900],
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -91,7 +89,6 @@ class TwitterCard extends StatelessWidget {
                                         style: GoogleFonts.inter(
                                           fontSize: 13,
                                           fontWeight: FontWeight.w500,
-                                          color: Colors.white,
                                         ),
                                       )
                                     ],
@@ -125,7 +122,6 @@ class TwitterCard extends StatelessWidget {
                                 style: GoogleFonts.inter(
                                   fontSize: 13,
                                   fontWeight: FontWeight.w500,
-                                  color: Colors.white,
                                 ),
                               )
                             ],
@@ -157,7 +153,6 @@ class TwitterCard extends StatelessWidget {
                                 style: GoogleFonts.inter(
                                   fontSize: 13,
                                   fontWeight: FontWeight.w500,
-                                  color: Colors.white,
                                 ),
                               )
                             ],
@@ -189,7 +184,6 @@ class TwitterCard extends StatelessWidget {
                                 style: GoogleFonts.inter(
                                   fontSize: 13,
                                   fontWeight: FontWeight.w500,
-                                  color: Colors.white,
                                 ),
                               )
                             ],
@@ -199,7 +193,6 @@ class TwitterCard extends StatelessWidget {
                   appBar: PreferredSize(
                     preferredSize: const Size.fromHeight(40),
                     child: AppBar(
-                      backgroundColor: Colors.grey[900],
                       elevation: 0,
                       automaticallyImplyLeading: false,
                       title: Text(
@@ -209,7 +202,6 @@ class TwitterCard extends StatelessWidget {
                         style: GoogleFonts.inter(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
-                          color: Colors.white,
                         ),
                       ),
                       actions: [
@@ -220,7 +212,6 @@ class TwitterCard extends StatelessWidget {
                             icon: const Icon(
                               Icons.close,
                               size: 20,
-                              color: Colors.white,
                             ))
                       ],
                     ),
@@ -343,13 +334,12 @@ class TwitterCard extends StatelessWidget {
                 overflow: TextOverflow.clip,
                 maxLines: 1,
                 style: GoogleFonts.inter(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 11,
-                    color: Colors.black,
-                    
+                  fontWeight: FontWeight.w700,
+                  fontSize: 11,
+                  color: Colors.black,
 
-                    // decoration: TextDecoration.lineThrough
-                    ),
+                  // decoration: TextDecoration.lineThrough
+                ),
               ),
               body: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -375,7 +365,6 @@ class TwitterCard extends StatelessWidget {
                   Text(
                     date,
                     overflow: TextOverflow.clip,
-                    
                     maxLines: 1,
                     style: GoogleFonts.inter(
                       fontWeight: FontWeight.w600,

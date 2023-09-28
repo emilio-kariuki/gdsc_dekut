@@ -15,9 +15,7 @@ class SendFeedbackPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
         iconTheme: const IconThemeData(color: Color(0xff666666), size: 20),
         title: Text(
           "Feedback",
@@ -34,11 +32,11 @@ class SendFeedbackPage extends StatelessWidget {
           children: [
             InputField(
               validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please enter your feedback";
-                        }
-                        return null;
-                      },
+                if (value!.isEmpty) {
+                  return "Please enter your feedback";
+                }
+                return null;
+              },
               controller: feedbackController,
               hintText: "Enter your feed",
             ),
