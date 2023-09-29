@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gdsc_bloc/utilities/Widgets/input_field.dart';
+import 'package:gdsc_bloc/utilities/Widgets/loading_circle.dart';
 import 'package:gdsc_bloc/utilities/image_urls.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -211,16 +212,7 @@ class ForgotPassword extends StatelessWidget {
                                   ));
                         }
                         return state is ResetPasswordLoading
-                            ? const Center(
-                                child: SizedBox(
-                                  height: 20,
-                                  width: 20,
-                                  child: CircularProgressIndicator(
-                                    color: Color(0xff000000),
-                                    strokeWidth: 3,
-                                  ),
-                                ),
-                              )
+                            ? const LoadingCircle()
                             : SizedBox(
                                 height: 50,
                                 width: double.infinity,

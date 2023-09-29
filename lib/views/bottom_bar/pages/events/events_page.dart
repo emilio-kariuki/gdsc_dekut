@@ -8,7 +8,6 @@ import 'package:gdsc_bloc/utilities/Widgets/loading_circle.dart';
 import 'package:gdsc_bloc/utilities/Widgets/search_container.dart';
 import 'package:gdsc_bloc/utilities/Widgets/search_not_found.dart';
 import 'package:gdsc_bloc/utilities/Widgets/search_result_button.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class EventsPage extends StatelessWidget {
   EventsPage({super.key});
@@ -26,13 +25,8 @@ class EventsPage extends StatelessWidget {
           appBar: AppBar(
             centerTitle: true,
             elevation: 0,
-            title: Text(
-              "Events Page",
-              style: GoogleFonts.inter(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
+            title: Text("Events Page",
+                style: Theme.of(context).textTheme.titleMedium),
           ),
           body: SingleChildScrollView(
             child: Padding(
@@ -69,7 +63,6 @@ class EventsPage extends StatelessWidget {
                           searchController.clear();
                           context.read<EventCubit>().getAllEvents();
                         }),
-                    
                     BlocBuilder<EventCubit, EventState>(
                       buildWhen: (previous, current) => current is EventSuccess,
                       builder: (context, state) {
@@ -83,12 +76,12 @@ class EventsPage extends StatelessWidget {
                         } else if (state is EventSuccess) {
                           return Column(
                             children: [
-                              SearchResultButton(function: () {
-                                        context
-                                            .read<EventCubit>()
-                                            .getAllEvents();
-                                        searchController.clear();
-                                      },),
+                              SearchResultButton(
+                                function: () {
+                                  context.read<EventCubit>().getAllEvents();
+                                  searchController.clear();
+                                },
+                              ),
                               state.events.isEmpty
                                   ? SearchNotFound()
                                   : ListView.builder(

@@ -73,7 +73,10 @@ class ProfilePage extends StatelessWidget {
                                 ),
                               );
                             },
-                          )
+                          ),
+                          SizedBox(
+                            width: 12,
+                          ),
                         ],
                       ),
                       SizedBox(
@@ -117,7 +120,7 @@ class ProfilePage extends StatelessWidget {
                             style: GoogleFonts.inter(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 12,
-                                color: Colors.grey[400]),
+                                color: Color(0xff666666)),
                           ),
                           trailing: Icon(
                             Icons.arrow_forward_ios,
@@ -238,7 +241,7 @@ class AboutButtons extends StatelessWidget {
           ProfilePadding(),
           ProfileCard(
             icon: Icons.verified_user_outlined,
-            title: "Version - 2.0.0+14",
+            title: "Version - 2.1.0+18",
             function: () {},
             showTrailing: false,
           ),

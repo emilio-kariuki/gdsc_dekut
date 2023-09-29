@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Resources/tabs/post_admin_resource_page.dart';
-import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Resources/tabs/app_resources.dart';
-import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Resources/tabs/approve_resource_page.dart';
+import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/resources/tabs/post_admin_resource_page.dart';
+import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/resources/tabs/app_resources.dart';
+import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/resources/tabs/approve_resource_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../../blocs/app_functionality/resource/resource_cubit.dart';
@@ -38,11 +38,7 @@ class _AdminResourcesState extends State<AdminResources>
                     const IconThemeData(color: Color(0xff666666), size: 20),
                 title: Text(
                   "Admin Resources",
-                  style: GoogleFonts.inter(
-                    fontSize: 17,
-                    fontWeight: FontWeight.w500,
-                    color: const Color(0xff666666),
-                  ),
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
                 bottom: TabBar(controller: tabController, tabs: [
                   Tab(

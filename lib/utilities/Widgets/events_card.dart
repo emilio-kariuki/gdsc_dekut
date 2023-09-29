@@ -147,7 +147,7 @@ class EventCard extends StatelessWidget {
                                 .textTheme
                                 .titleMedium!
                                 .copyWith(
-                                  fontSize: 16,
+                                  fontSize: 17,
                                   fontWeight: FontWeight.w600,
                                 ),
                           ),
@@ -226,7 +226,9 @@ class EventCard extends StatelessWidget {
                                         AutoSizeText(formattedDate,
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .titleSmall!),
+                                                .titleSmall!.copyWith(
+                                              fontSize: 13
+                                            )),
                                       ],
                                     ),
                                   ],
@@ -246,7 +248,9 @@ class EventCard extends StatelessWidget {
                                     AutoSizeText(eventTime,
                                         style: Theme.of(context)
                                             .textTheme
-                                            .titleSmall!),
+                                            .titleSmall!.copyWith(
+                                              fontSize: 13
+                                            )),
                                   ],
                                 ),
                               ],
@@ -260,7 +264,7 @@ class EventCard extends StatelessWidget {
                     ),
                   ],
                 ), //
-                Visibility(
+               !isAdmin ? SizedBox.shrink() :Visibility(
                   visible: isAdmin,
                   child: SizedBox(
                     height: 36,
@@ -402,9 +406,10 @@ void showEventSheet(
               height: height * 0.11,
               width: width,
               decoration: BoxDecoration(
-                border: const Border(
+                border:  Border(
                     top: BorderSide(
-                  width: 0.4,
+                  width: 0.2,
+                  color: Colors.grey[400]!
                 )),
               ),
               child: Row(
@@ -547,7 +552,7 @@ void showEventSheet(
             child: AppBar(
               elevation: 0,
               automaticallyImplyLeading: false,
-              //
+              centerTitle: false,
               title: AutoSizeText(event.title!,
                   overflow: TextOverflow.clip,
                   maxLines: 2,

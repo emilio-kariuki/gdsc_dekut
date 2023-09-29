@@ -90,7 +90,6 @@ class ResourceProviders {
     required String title,
     required String link,
     required String imageUrl,
-    required String description,
     required String category,
   }) async {
     final response = await ResourceRepository().updateResource(
@@ -98,7 +97,6 @@ class ResourceProviders {
       title: title,
       link: link,
       imageUrl: imageUrl,
-      description: description,
       category: category,
     );
     return response;

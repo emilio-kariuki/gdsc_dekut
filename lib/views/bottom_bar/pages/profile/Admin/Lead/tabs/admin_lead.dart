@@ -37,11 +37,7 @@ class _AdminLeadState extends State<AdminLead>
                     const IconThemeData(color: Color(0xff666666), size: 20),
                 title: Text(
                   "Admin Leads",
-                  style: GoogleFonts.inter(
-                    fontSize: 17,
-                    fontWeight: FontWeight.w500,
-                    color: const Color(0xff666666),
-                  ),
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
                 bottom: TabBar(controller: tabController, tabs: [
                   Tab(

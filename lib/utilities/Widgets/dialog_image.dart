@@ -66,17 +66,13 @@ class DialogImage extends StatelessWidget {
               decoration: const BoxDecoration(),
             ),
             appBar: AppBar(
-              backgroundColor: Colors.black,
               elevation: 0,
               automaticallyImplyLeading: false,
               title: Text(
                 title,
                 overflow: TextOverflow.clip,
                 maxLines: 2,
-                style: GoogleFonts.inter(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w500,
-                ),
+                style: Theme.of(context).textTheme.titleMedium,
               ),
               actions: [
                 PopupMenuButton(

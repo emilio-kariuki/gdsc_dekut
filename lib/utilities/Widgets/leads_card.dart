@@ -20,6 +20,7 @@ class LeadsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.sizeOf(context).height;
     return SizedBox(
       width: width * 0.34,
       child: Column(
@@ -85,12 +86,11 @@ class LeadsCard extends StatelessWidget {
                         style: GoogleFonts.inter(
                           fontWeight: FontWeight.w600,
                           fontSize: 13.5,
-                          color: Colors.black,
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 1,
+                    SizedBox(
+                      height: height * 0.01,
                     ),
                     Text(
                       role,

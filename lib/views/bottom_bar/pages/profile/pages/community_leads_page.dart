@@ -59,7 +59,6 @@ class CommunityLeads extends StatelessWidget {
                                 style: GoogleFonts.inter(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 15,
-                                  color: const Color(0xff666666),
                                 ),
                               ),
                             ],
@@ -69,7 +68,7 @@ class CommunityLeads extends StatelessWidget {
                           scrollDirection: Axis.vertical,
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 3, childAspectRatio: 0.65),
+                                  crossAxisCount: 3, childAspectRatio: 0.75),
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemCount: state.leads.length,

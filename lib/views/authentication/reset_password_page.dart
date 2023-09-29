@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gdsc_bloc/utilities/Widgets/input_field.dart';
+import 'package:gdsc_bloc/utilities/Widgets/loading_circle.dart';
 import 'package:gdsc_bloc/utilities/image_urls.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -25,10 +26,7 @@ class ResetPassword extends StatelessWidget {
         elevation: 0,
         title: Text(
           'Reset Password',
-          style: GoogleFonts.inter(
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-          ),
+          style: Theme.of(context).textTheme.titleMedium,
         ),
       ),
       body: MultiBlocProvider(
@@ -113,16 +111,7 @@ class ResetPassword extends StatelessWidget {
                                   ));
                         }
                         return state is ResetPasswordLoading
-                            ?  Center(
-                                child: SizedBox(
-                                  height: 20,
-                                  width: 20,
-                                  child: CircularProgressIndicator(
-                                    strokeWidth: 3,
-                                    color: Theme.of(context).iconTheme.color,
-                                  ),
-                                ),
-                              )
+                            ?  const LoadingCircle()
                             : SizedBox(
                                 height: 50,
                                 width: double.infinity,

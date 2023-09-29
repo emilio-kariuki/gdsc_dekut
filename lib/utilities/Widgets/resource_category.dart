@@ -7,7 +7,6 @@ import 'package:gdsc_bloc/utilities/Widgets/resources_card.dart';
 import 'package:gdsc_bloc/utilities/route_generator.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 class ResourceCategory extends StatelessWidget {
   const ResourceCategory({
     super.key,
@@ -25,7 +24,8 @@ class ResourceCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ResourceCubit()..getResourcesByCategory(category: category),
+      create: (context) =>
+          ResourceCubit()..getResourcesByCategory(category: category),
       child: Builder(builder: (context) {
         return BlocBuilder<ResourceCubit, ResourceState>(
           builder: (context, state) {
@@ -51,54 +51,50 @@ class ResourceCategory extends StatelessWidget {
                         itemBuilder: (context, index) {
                           final data = state.resources[index];
                           return Padding(
-                              padding: const EdgeInsets.only(right: 5),
-                              child: index == 3
-                                  ? Semantics(
-                                      button: true,
-                                      child: InkWell(
-                                        splashColor: Colors.white,
-                                        onTap: () {
-                                          Navigator.pushNamed(
-                                              context, '/more_resource',
-                                              arguments: ResourceArguments(
-                                                  title: data.title!,
-                                                  category: category));
-                                        },
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              bottom: 20, left: 10),
-                                          child: Row(
-                                            children: [
-                                              Text(
-                                                "Show more",
-                                                textAlign: TextAlign.center,
-                                                style: GoogleFonts.inter(
-                                                  fontSize: 13,
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                width: 5,
-                                              ),
-                                              const Icon(
-                                                Icons.arrow_forward,
-                                                size: 17,
+                            padding: const EdgeInsets.only(right: 5),
+                            child: index == 3
+                                ? Semantics(
+                                    button: true,
+                                    child: InkWell(
+                                      splashColor: Colors.white,
+                                      onTap: () {
+                                        Navigator.pushNamed(
+                                            context, '/more_resource',
+                                            arguments: ResourceArguments(
+                                                title: data.title!,
+                                                category: category));
+                                      },
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            bottom: 20, left: 10),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              "Show more",
+                                              textAlign: TextAlign.center,
+                                              style: GoogleFonts.inter(
+                                                fontSize: 13,
                                                 color: Colors.black,
-                                              )
-                                            ],
-                                          ),
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            const Icon(
+                                              Icons.arrow_forward,
+                                              size: 17,
+                                              color: Colors.black,
+                                            )
+                                          ],
                                         ),
                                       ),
-                                    )
-                                  : ResourceCard(
-                                    link: data.link!,
-                                      width: width,
-                                      height: height,
-                                      image: data.imageUrl!,
-                                      title: data.title!,
-                                      category: data.category!,
-                                    ));
+                                    ),
+                                  )
+                                : ResourceCard(
+                                    resource: data,
+                                  ),
+                          );
                         }),
               );
             } else {

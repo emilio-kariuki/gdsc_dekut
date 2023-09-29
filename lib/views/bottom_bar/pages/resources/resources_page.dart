@@ -1,16 +1,17 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gdsc_bloc/blocs/app_functionality/resource/resource_cubit.dart';
 import 'package:gdsc_bloc/utilities/Widgets/resource_category.dart';
 import 'package:gdsc_bloc/utilities/Widgets/resource_title_widget.dart';
 import 'package:gdsc_bloc/utilities/Widgets/resources_card.dart';
+import 'package:gdsc_bloc/utilities/Widgets/search_container.dart';
+import 'package:gdsc_bloc/utilities/Widgets/search_not_found.dart';
+import 'package:gdsc_bloc/utilities/Widgets/search_result_button.dart';
 import 'package:gdsc_bloc/utilities/image_urls.dart';
 import 'package:gdsc_bloc/utilities/route_generator.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../data/models/resource_model.dart';
 
 class ResourcesPage extends StatelessWidget {
   ResourcesPage({super.key});
@@ -36,7 +37,7 @@ class ResourcesPage extends StatelessWidget {
               onPressed: () {
                 Navigator.pushNamed(context, '/post_resource');
               },
-              child:  Icon(
+              child: Icon(
                 Icons.add,
                 color: Theme.of(context).iconTheme.color,
                 size: 20,
@@ -66,19 +67,61 @@ class ResourcesPage extends StatelessWidget {
                       const SizedBox(
                         height: 10,
                       ),
-                      ResearchSearchContainer(
-                          searchController: searchController),
+                      SearchContainer(
+                        searchController: searchController,
+                        onChanged: (value) {
+                          context
+                              .read<ResourceCubit>()
+                              .searchResource(query: value);
+                          return null;
+                        },
+                        onFieldSubmitted: (value) {
+                          context
+                              .read<ResourceCubit>()
+                              .searchResource(query: value);
+                          return null;
+                        },
+                        hint: "Search resource eg. flutter",
+                        close: () {
+                          context.read<ResourceCubit>().getAllResources();
+                          searchController.clear();
+                        },
+                      ),
                       const SizedBox(
                         height: 5,
                       ),
                       BlocBuilder<ResourceCubit, ResourceState>(
                         builder: (context, state) {
                           if (state is ResourceSuccess) {
-                            return SearchResultView(
-                              searchController: searchController,
-                              width: width,
-                              height: height,
-                              resources: state.resources,
+                            return Column(
+                              children: [
+                                SearchResultButton(
+                                  function: () {
+                                    context
+                                        .read<ResourceCubit>()
+                                        .getAllResources();
+                                  },
+                                ),
+                                state.resources.isEmpty
+                                    ? SearchNotFound()
+                                    : GridView.builder(
+                                        scrollDirection: Axis.vertical,
+                                        gridDelegate:
+                                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                                crossAxisCount: 3,
+                                                childAspectRatio: 0.7,
+                                                crossAxisSpacing: 8),
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
+                                        shrinkWrap: true,
+                                        itemCount: state.resources.length,
+                                        itemBuilder: (context, index) {
+                                          return ResourceCard(
+                                            resource: state.resources[index],
+                                          );
+                                        },
+                                      ),
+                              ],
                             );
                           } else {
                             return DefaultRecourceView(
@@ -96,139 +139,6 @@ class ResourcesPage extends StatelessWidget {
           );
         },
       ),
-    );
-  }
-}
-
-class ResearchSearchContainer extends StatelessWidget {
-  const ResearchSearchContainer({
-    super.key,
-    required this.searchController,
-  });
-
-  final TextEditingController searchController;
-
-  @override
-  Widget build(BuildContext context) {
-   return TextFormField(
-      controller: searchController,
-      style: GoogleFonts.inter(
-        fontWeight: FontWeight.w500,
-        fontSize: 14,
-        color: const Color(0xff000000),
-      ),
-      
-      onFieldSubmitted: (value) {
-        context
-            .read<ResourceCubit>()
-            .searchResource(query: value);
-      },
-      decoration: InputDecoration(
-        prefixIcon: const Icon(
-          Icons.search,
-          color: Color(0xff666666),
-          size: 18,
-        ),
-        hintText: "Search for resource eg. Flutter",
-        border: Theme.of(context).inputDecorationTheme.border,
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(25),
-          borderSide: BorderSide(
-            color: Colors.grey[500]!,
-            width: 1,
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(25),
-          borderSide: BorderSide(
-             color: Colors.grey[500]!,
-            width: 1.3,
-          ),
-        ),
-        hintStyle: GoogleFonts.inter(
-          fontSize: 12,
-          // color: const Color(0xff666666),
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-    );
-    
-  }
-}
-
-class SearchResultView extends StatelessWidget {
-  const SearchResultView({
-    super.key,
-    required this.searchController,
-    required this.width,
-    required this.height,
-    required this.resources,
-  });
-
-  final TextEditingController searchController;
-  final double width;
-  final double height;
-  final List<Resource> resources;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            AutoSizeText("Search Results",
-                style: Theme.of(context)
-                    .textTheme
-                    .titleMedium!
-                    .copyWith(fontSize: 18)),
-            IconButton(
-                style: IconButton.styleFrom(
-                  padding: EdgeInsets.zero,
-                ),
-                onPressed: () {
-                  context.read<ResourceCubit>().getAllResources();
-                  searchController.clear();
-                },
-                icon: const Icon(
-                  Icons.close,
-                  size: 18,
-                  color: Colors.black,
-                ))
-          ],
-        ),
-        resources.isEmpty
-            ? Center(
-                child: Text(
-                  "No resources found",
-                  style: GoogleFonts.inter(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 15,
-                  ),
-                ),
-              )
-            : GridView.builder(
-                scrollDirection: Axis.vertical,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    childAspectRatio: 0.7,
-                    crossAxisSpacing: 8),
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: resources.length,
-                itemBuilder: (context, index) {
-                  return ResourceCard(
-                    link: resources[index].link!,
-                    category: resources[index].category!,
-                    // description: resources[index].description!,
-                    width: width,
-                    height: height,
-                    image: resources[index].imageUrl!,
-                    title: resources[index].title!,
-                  );
-                },
-              ),
-      ],
     );
   }
 }

@@ -21,7 +21,7 @@ class UserRepository {
         "userID": user.userID,
         "technology": user.technology,
         "imageUrl": user.imageUrl ?? AppImages.defaultImage,
-      });
+      },SetOptions(merge: true));
       return true;
     } catch (e) {
       debugPrint(e.toString());
@@ -103,6 +103,8 @@ class UserRepository {
     try {
       final firebaseFirestore = FirebaseFirestore.instance;
 
+      debugPrint("the name is : $name");
+
       await firebaseFirestore.collection("users").doc(userId).update({
         "username": name,
         "email": email,
@@ -113,6 +115,9 @@ class UserRepository {
         "userID": userId,
         "technology": technology,
         "imageUrl": image,
+      }).then((value) {
+        print("Updated ");
+        return true;
       });
 
       return true;

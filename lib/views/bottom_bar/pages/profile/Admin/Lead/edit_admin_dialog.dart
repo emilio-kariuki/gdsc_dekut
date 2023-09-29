@@ -106,10 +106,7 @@ class EditLeadDialog extends StatelessWidget {
                         "Edit Lead",
                         overflow: TextOverflow.clip,
                         maxLines: 2,
-                        style: GoogleFonts.inter(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
+                        style: Theme.of(context).textTheme.titleMedium,
                       ),
                       actions: [
                         IconButton(

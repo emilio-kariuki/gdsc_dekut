@@ -26,6 +26,7 @@ class ImageView extends StatelessWidget {
           title,
           overflow: TextOverflow.clip,
           maxLines: 2,
+          style: Theme.of(context).textTheme.titleMedium,
           
         ),
         actions: [

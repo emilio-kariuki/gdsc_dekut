@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gdsc_bloc/blocs/minimal_functonality/image_download/image_download_cubit.dart';
+import 'package:gdsc_bloc/utilities/Widgets/loading_circle.dart';
 import 'package:gdsc_bloc/utilities/route_generator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -50,11 +51,10 @@ void _showImageDialog(
                       title,
                       overflow: TextOverflow.clip,
                       maxLines: 2,
-                      style: GoogleFonts.inter(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        color: Color.fromARGB(255, 255, 255, 255),
-                      ),
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleSmall!
+                          .copyWith(fontSize: 13),
                     ),
                     actions: [
                       IconButton(
@@ -85,7 +85,7 @@ void _showImageDialog(
                             height: height * 0.3,
                             width: width,
                             decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 243, 243, 243),
+                              color: Theme.of(context).primaryColor,
                               border: Border.all(
                                 width: 0.4,
                                 color: Color(0xff666666),
@@ -239,15 +239,7 @@ class DialogContainer extends StatelessWidget {
                           );
                         },
                         icon: state is Saving
-                            ? const Center(
-                                child: SizedBox(
-                                  height: 15,
-                                  width: 15,
-                                  child: CircularProgressIndicator(
-                                    strokeWidth: 3,
-                                  ),
-                                ),
-                              )
+                            ? const LoadingCircle()
                             : Icon(
                                 state is Saved ? Icons.check : Icons.save_alt,
                                 size: 22,

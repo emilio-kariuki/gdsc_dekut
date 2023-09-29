@@ -85,19 +85,19 @@ class SendFeedbackPage extends StatelessWidget {
                                 .sendFeedBack(
                                     feedback: feedbackController.text);
                           },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xff000000),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                          ),
+                          style: Theme.of(context)
+                              .elevatedButtonTheme
+                              .style!
+                              .copyWith(
+                                shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(25),
+                                  ),
+                                ),
+                              ),
                           child: Text(
                             "Send Feedback",
-                            style: GoogleFonts.inter(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: const Color(0xffffffff),
-                            ),
+                            
                           ),
                         ),
                       );

@@ -44,7 +44,8 @@ void main() async {
     persistenceEnabled: true,
     cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED,
   );
-  final directory = await getApplicationDocumentsDirectory(); // from path provider
+  final directory =
+      await getApplicationDocumentsDirectory(); // from path provider
 
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: directory,
@@ -116,36 +117,38 @@ class MyAppState extends State<MyApp> {
       child: BlocBuilder<ThemeBloc, ThemeState>(
         builder: (context, state) {
           return MaterialApp(
-              navigatorKey: navigatorKey,
-              theme: lightTheme,
-              darkTheme: darkTheme,
-              themeMode: state is AppTheme && state.isDark ? ThemeMode.dark :ThemeMode.light,
-              onGenerateRoute: (settings) {
-                return RouteGenerator.generateRoute(settings);
+            navigatorKey: navigatorKey,
+            theme: lightTheme,
+            darkTheme: darkTheme,
+            themeMode: state is AppTheme && state.isDark
+                ? ThemeMode.dark
+                : ThemeMode.light,
+            onGenerateRoute: (settings) {
+              return RouteGenerator.generateRoute(settings);
+            },
+            debugShowCheckedModeBanner: false,
+            home: BlocBuilder<NetworkBloc, NetworkState>(
+              builder: (context, state) {
+                if (state is NetworkFailure) {
+                  return NoInternet();
+                } else if (state is NetworkSuccess) {
+                  return BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                    builder: (context, state) {
+                      if (state is AuthenticationAuthenticated) {
+                        return const SplashPage();
+                      } else if (state is AuthenticationUnauthenticated) {
+                        return LoginPage();
+                      } else {
+                        return const SizedBox.shrink();
+                      }
+                    },
+                  );
+                } else {
+                  return const SizedBox.shrink();
+                }
               },
-              debugShowCheckedModeBanner: false,
-              home: BlocBuilder<NetworkBloc, NetworkState>(
-                builder: (context, state) {
-                  if (state is NetworkFailure) {
-                    return NoInternet();
-                  } else if (state is NetworkSuccess) {
-                    return BlocBuilder<AuthenticationBloc, AuthenticationState>(
-                      builder: (context, state) {
-                        if (state is AuthenticationAuthenticated) {
-                          return const SplashPage();
-                        } else if (state is AuthenticationUnauthenticated) {
-                          return LoginPage();
-                        } else {
-                          return const SizedBox.shrink();
-                        }
-                      },
-                    );
-                  } else {
-                    return const SizedBox.shrink();
-                  }
-                },
-              ),
-            );
+            ),
+          );
         },
       ),
     );

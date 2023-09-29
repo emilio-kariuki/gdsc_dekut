@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:gdsc_bloc/utilities/Widgets/input_field.dart';
+import 'package:gdsc_bloc/utilities/Widgets/pick_image_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../blocs/minimal_functonality/get_image/get_image_cubit.dart';
@@ -20,7 +21,7 @@ class ReportProblemPage extends StatelessWidget {
   final problemController = TextEditingController();
   final appVersionController = TextEditingController();
   final contactController = TextEditingController();
-  String image = "";
+  final imageController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -70,22 +71,19 @@ class ReportProblemPage extends StatelessWidget {
                           description: descriptionController.text,
                           appVersion: appVersionController.text,
                           contact: contactController.text,
-                          image: image,
+                          image: imageController.text,
                         );
                       },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xff000000),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                      ),
+                      style:
+                          Theme.of(context).elevatedButtonTheme.style!.copyWith(
+                                shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(25),
+                                  ),
+                                ),
+                              ),
                       child: Text(
                         "Report Problem",
-                        style: GoogleFonts.inter(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: const Color(0xffffffff),
-                        ),
                       ),
                     ),
                   );
@@ -120,12 +118,21 @@ class ReportProblemPage extends StatelessWidget {
                   style: GoogleFonts.inter(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
-                    color: Colors.black,
                   ),
                 ),
               ),
               const SizedBox(
                 height: 20,
+              ),
+              Text(
+                "Problem",
+                style: GoogleFonts.inter(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
               ),
               InputField(
                 validator: (value) {
@@ -149,44 +156,37 @@ class ReportProblemPage extends StatelessWidget {
                     style: GoogleFonts.inter(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
-                      color: const Color(0xff000000),
                     ),
                   ),
                   const SizedBox(
-                    height: 5,
+                    height: 10,
                   ),
-                  Container(
-                    height: 150,
-                    padding: const EdgeInsets.only(left: 12, right: 1),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        border: Border.all(
-                          color: Colors.grey[500]!,
-                          width: 1,
-                        )),
-                    child: TextFormField(
-                      maxLines: 3,
-                      controller: descriptionController,
-                      style: GoogleFonts.inter(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 14,
-                        color: const Color(0xff000000),
-                      ),
-                      decoration: InputDecoration(
-                        hintText: "Enter your description",
-                        border: InputBorder.none,
-                        hintStyle: GoogleFonts.inter(
-                          fontSize: 14,
-                          color: Colors.grey[400],
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                  )
+                  InputField(
+                    maxLines: 8,
+                    minLines: 3,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Please enter your description";
+                      }
+                      return null;
+                    },
+                    controller: descriptionController,
+                    hintText: "Enter your description",
+                  ),
                 ],
               ),
               const SizedBox(
                 height: 20,
+              ),
+              Text(
+                "App Version",
+                style: GoogleFonts.inter(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
               ),
               InputField(
                 validator: (value) {
@@ -200,6 +200,16 @@ class ReportProblemPage extends StatelessWidget {
               ),
               const SizedBox(
                 height: 20,
+              ),
+              Text(
+                "Contact",
+                style: GoogleFonts.inter(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
               ),
               InputField(
                 validator: (value) {
@@ -219,77 +229,12 @@ class ReportProblemPage extends StatelessWidget {
                 style: GoogleFonts.inter(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
-                  color: const Color(0xff000000),
                 ),
               ),
               const SizedBox(
-                height: 8,
+                height: 10,
               ),
-              BlocProvider(
-                create: (context) => GetImageCubit(),
-                child: Builder(builder: (context) {
-                  return BlocConsumer<GetImageCubit, GetImageState>(
-                    listener: (context, state) {
-                      if (state is ImagePicked) {
-                        image = state.imageUrl;
-                        Timer(
-                          const Duration(milliseconds: 300),
-                          () => ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              behavior: SnackBarBehavior.floating,
-                              backgroundColor: Color(0xFF0C7319),
-                              content: Text("Image uploaded"),
-                            ),
-                          ),
-                        );
-                      }
-
-                      if (state is ImageError) {
-                        Timer(
-                          const Duration(milliseconds: 100),
-                          () => ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              behavior: SnackBarBehavior.floating,
-                              backgroundColor: const Color(0xFFD5393B),
-                              content: Text(state.message),
-                            ),
-                          ),
-                        );
-                      }
-                    },
-                    builder: (context, state) {
-                      final width = MediaQuery.of(context).size.width;
-                      return SizedBox(
-                        height: 50,
-                        width: width * 0.4,
-                        child: state is ImageUploading
-                            ? const LoadingCircle()
-                            : ElevatedButton(
-                                onPressed: () {
-                                  BlocProvider.of<GetImageCubit>(context)
-                                      .getImage();
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xff000000),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                ),
-                                child: AutoSizeText(
-                                  "Attach File",
-                                  minFontSize: 10,
-                                  style: GoogleFonts.inter(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                    color: const Color(0xffffffff),
-                                  ),
-                                ),
-                              ),
-                      );
-                    },
-                  );
-                }),
-              )
+              PickImageButton(imageController: imageController)
             ],
           ),
         ),

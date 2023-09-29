@@ -11,13 +11,11 @@ class ResourceCard extends StatelessWidget {
   const ResourceCard({
     super.key,
     required this.resource,
-    required this.isAdmin,
-    required this.isApproved,
+
   });
 
   final Resource resource;
-  final bool isAdmin;
-  final bool isApproved;
+
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +29,7 @@ class ResourceCard extends StatelessWidget {
         children: [
           InkWell(
             onTap: () {
-              _showImageDialog(
-                  context, resource.imageUrl!, resource.title!, link);
+              showResourceDialog(context: context, resource: resource);
             },
             child: CachedNetworkImage(
               height: height * 0.115,
@@ -61,7 +58,7 @@ class ResourceCard extends StatelessWidget {
                   ),
                 );
               }),
-              imageUrl: image,
+              imageUrl: resource.imageUrl!,
               fit: BoxFit.cover,
               imageBuilder: (context, imageProvider) {
                 return AnimatedContainer(
@@ -92,7 +89,7 @@ class ResourceCard extends StatelessWidget {
                 children: [
                   SizedBox(
                     width: width * 0.28,
-                    child: Text(title,
+                    child: Text(resource.title!,
                         overflow: TextOverflow.clip,
                         maxLines: 2,
                         textAlign: TextAlign.center,
@@ -112,7 +109,7 @@ class ResourceCard extends StatelessWidget {
   }
 }
 
-void _showImageDialog(
+void showResourceDialog(
     {required BuildContext context, required Resource resource}) {
   final height = MediaQuery.sizeOf(context).height;
   final width = MediaQuery.sizeOf(context).width;
@@ -165,7 +162,8 @@ void _showImageDialog(
                                           onPressed: () {
                                             BlocProvider.of<ClipboardCubit>(
                                                     context)
-                                                .copyToClipboard(text: resource.link!);
+                                                .copyToClipboard(
+                                                    text: resource.link!);
                                           },
                                           icon: Icon(
                                               state is Copied
@@ -199,13 +197,13 @@ void _showImageDialog(
                                 Container(
                                   margin:
                                       const EdgeInsets.only(top: 10, bottom: 5),
-                                  // padding: const EdgeInsets.all(5),
                                   decoration: BoxDecoration(
                                       color: Colors.grey[800],
                                       shape: BoxShape.circle),
                                   child: IconButton(
                                     onPressed: () {
-                                      AppProviders().openLink(link: link);
+                                      AppProviders()
+                                          .openLink(link: resource.link!);
                                     },
                                     icon: Icon(Icons.visibility,
                                         size: 22, color: Colors.white),
@@ -230,7 +228,6 @@ void _showImageDialog(
                               Container(
                                 margin:
                                     const EdgeInsets.only(top: 10, bottom: 5),
-                                // padding: const EdgeInsets.all(5),
                                 decoration: BoxDecoration(
                                     color: Colors.grey[800],
                                     shape: BoxShape.circle),
@@ -238,7 +235,7 @@ void _showImageDialog(
                                   onPressed: () {
                                     AppProviders().tweet(
                                         message:
-                                            "Hello Devs👋 Iam happy to inform you about this cool resources and am sure it can help you guys🥳 here is the link $link");
+                                            "Hello Devs👋 Iam happy to inform you about this cool resources and am sure it can help you guys🥳 here is the link ${resource.link!}");
                                   },
                                   icon: Icon(Icons.edit,
                                       size: 22, color: Colors.white),
@@ -270,7 +267,7 @@ void _showImageDialog(
                                   onPressed: () {
                                     AppProviders().share(
                                         message:
-                                            "The link to join $title is $link");
+                                            "The link to join ${resource.title!} is ${resource.link!}");
                                   },
                                   icon: Icon(Icons.share,
                                       size: 22, color: Colors.white),
@@ -293,7 +290,7 @@ void _showImageDialog(
                     child: AppBar(
                       elevation: 0,
                       automaticallyImplyLeading: false,
-                      title: Text(title,
+                      title: Text(resource.title!,
                           overflow: TextOverflow.clip,
                           maxLines: 2,
                           style:
@@ -322,8 +319,9 @@ void _showImageDialog(
                           onTap: () {
                             Navigator.pop(context);
                             Navigator.pushNamed(context, '/image_view',
-                                arguments:
-                                    ImageArguments(title: title, image: image));
+                                arguments: ImageArguments(
+                                    title: resource.title!,
+                                    image: resource.imageUrl!));
                           },
                           child: CachedNetworkImage(
                             height: height * 0.27,
@@ -346,7 +344,7 @@ void _showImageDialog(
                                 color: Colors.red,
                               );
                             }),
-                            imageUrl: image,
+                            imageUrl: resource.imageUrl!,
                             fit: BoxFit.cover,
                             imageBuilder: (context, imageProvider) {
                               return AnimatedContainer(
@@ -379,7 +377,7 @@ void _showImageDialog(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Text(title,
+                                Text(resource.title!,
                                     overflow: TextOverflow.clip,
                                     maxLines: 2,
                                     style: Theme.of(context)
@@ -392,29 +390,18 @@ void _showImageDialog(
                                 const SizedBox(
                                   height: 4,
                                 ),
-                                Text(category,
-                                    overflow: TextOverflow.clip,
-                                    maxLines: 3,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleMedium!
-                                        .copyWith(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500,
-                                        )),
-                                // const SizedBox(
-                                //   height: 8,
-                                // ),
-                                // Text(
-                                //   description,
-                                //   overflow: TextOverflow.clip,
-                                //   maxLines: 3,
-                                //   style: GoogleFonts.inter(
-                                //     fontSize: 12,
-                                //     fontWeight: FontWeight.w500,
-                                //
-                                //   ),
-                                // ),
+                                Text(
+                                  resource.category!,
+                                  overflow: TextOverflow.clip,
+                                  maxLines: 3,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleMedium!
+                                      .copyWith(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                ),
                               ],
                             ),
                           ),

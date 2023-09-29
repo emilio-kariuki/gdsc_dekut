@@ -44,7 +44,6 @@ class ContactDeveloperPage extends StatelessWidget {
                   style: GoogleFonts.inter(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
-                    color: const Color(0xff000000),
                   ),
                 ),
               ),
@@ -58,7 +57,6 @@ class ContactDeveloperPage extends StatelessWidget {
                   style: GoogleFonts.inter(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
-                    color: Colors.black,
                   ),
                 ),
               ),
@@ -128,7 +126,6 @@ class ContactDeveloperPage extends StatelessWidget {
                                   style: GoogleFonts.inter(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w500,
-                                    color: Colors.black,
                                   ),
                                 ),
                                 subtitle: Text(

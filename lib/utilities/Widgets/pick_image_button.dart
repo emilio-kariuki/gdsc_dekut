@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gdsc_bloc/utilities/Widgets/loading_circle.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../blocs/minimal_functonality/get_image/get_image_cubit.dart';
 

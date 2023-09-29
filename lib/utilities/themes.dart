@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 final ThemeData darkTheme = ThemeData(
-  primaryColor: const Color(0xFF1E222A),
+  primaryColor: const Color(0xFF282C34),
   scaffoldBackgroundColor: const Color(0xFF181A21),
   cardColor: Color(0xFF1E222A),
   textTheme: TextTheme(
@@ -137,7 +137,7 @@ final lightTheme = ThemeData(
     ),
   ),
   appBarTheme: AppBarTheme(
-    backgroundColor: Colors.transparent,
+    backgroundColor: Colors.white,
     elevation: 0,
     systemOverlayStyle: SystemUiOverlayStyle(
       statusBarColor: Colors.white,

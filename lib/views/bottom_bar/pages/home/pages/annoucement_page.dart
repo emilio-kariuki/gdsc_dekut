@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gdsc_bloc/utilities/Widgets/announcement_card.dart';
 import 'package:gdsc_bloc/utilities/Widgets/loading_circle.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../blocs/app_functionality/announcement/announcement_cubit.dart';
 
@@ -17,21 +16,14 @@ class AnnouncementPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
     return BlocProvider(
       create: (context) => AnnouncementCubit()..getAllAnnoucements(),
       child: Builder(builder: (context) {
         return Scaffold(
-          
           appBar: AppBar(
-            
             title: AutoSizeText(
               "Annoucement Page",
-              style: GoogleFonts.inter(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                color: Colors.black,
-              ),
+              style: Theme.of(context).textTheme.titleMedium,
             ),
           ),
           body: SafeArea(

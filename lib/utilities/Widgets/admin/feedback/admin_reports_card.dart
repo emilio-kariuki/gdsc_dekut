@@ -30,6 +30,7 @@ class AdminReportCard extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
+            color: Theme.of(context).primaryColor,
             border: Border.all(
               color: const Color(0xFF282828),
               width: 0.15,
@@ -98,7 +99,6 @@ class AdminReportCard extends StatelessWidget {
                     maxLines: 2,
                     style: GoogleFonts.inter(
                       fontSize: 16,
-                      color: const Color(0xff000000),
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -110,7 +110,7 @@ class AdminReportCard extends StatelessWidget {
                     maxLines: 2,
                     style: GoogleFonts.inter(
                       fontSize: 13.5,
-                      color: const Color(0xff5B5561),
+                      color: Colors.grey[400],
                       fontWeight: FontWeight.w500,
                     ),
                   ),

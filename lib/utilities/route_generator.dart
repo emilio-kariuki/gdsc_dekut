@@ -17,14 +17,14 @@ import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Feedback/admin_fe
 import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Groups/admin_groups.dart';
 import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Lead/tabs/admin_lead.dart';
 import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Reports/admin_reports.dart';
-import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Resources/admin_resources.dart';
+import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/resources/admin_resources.dart';
 import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/admin_page.dart';
 import 'package:gdsc_bloc/views/bottom_bar/pages/resources/more_resources_page.dart';
 import 'package:gdsc_bloc/views/bottom_bar/home.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
-import '../views/bottom_bar/pages/profile/Admin/Twitter/admin_twitter.dart';
+import '../views/bottom_bar/pages/profile/Admin/twitter/admin_twitter.dart';
 import '../views/bottom_bar/pages/profile/pages/about_page.dart';
 import '../views/bottom_bar/pages/profile/pages/community_leads_page.dart';
 import '../views/bottom_bar/pages/profile/pages/contact_developer_page.dart';

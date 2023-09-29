@@ -2,9 +2,7 @@ import 'dart:async';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gdsc_bloc/blocs/app_functionality/event/event_cubit.dart';
@@ -19,8 +17,6 @@ import 'package:gdsc_bloc/utilities/Widgets/group_container.dart';
 import 'package:gdsc_bloc/utilities/Widgets/loading_circle.dart';
 import 'package:gdsc_bloc/utilities/Widgets/twitter_card.dart';
 import 'package:gdsc_bloc/utilities/image_urls.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 
 import '../../../../blocs/app_functionality/announcement/announcement_cubit.dart';
 import '../../../../blocs/app_functionality/group/group_cubit.dart';
@@ -81,10 +77,11 @@ class EventPage extends StatelessWidget {
                       EventContainer(height: height, width: width),
                       BlocBuilder<ShowSpacesCubit, ShowSpacesState>(
                         builder: (context, state) {
-                          return state is ShowTwitterSpaces && state.value
-                              ? TwitterSpaceContainer(
-                                  height: height, width: width)
-                              : SizedBox.shrink();
+                          return Visibility(
+                            visible: state is ShowTwitterSpaces && state.value,
+                            child: TwitterSpaceContainer(
+                                height: height, width: width),
+                          );
                         },
                       ),
                       const CategoryWidget(
@@ -426,39 +423,8 @@ class TwitterSpaceContainer extends StatelessWidget {
                           scrollDirection: Axis.horizontal,
                           itemCount: state.spaces.length,
                           itemBuilder: (context, index) {
-                            final Timestamp startTime =
-                                state.spaces[index].startTime;
-                            final Timestamp endTime =
-                                state.spaces[index].endTime;
-                            final DateTime startDateTime = startTime.toDate();
-                            final DateTime endDateTime = endTime.toDate();
-
-                            final String startTimeString =
-                                DateFormat.jm().format(startDateTime);
-                            final String endTimeString =
-                                DateFormat.jm().format(endDateTime);
-
-                            final Timestamp timestamp =
-                                state.spaces[index].startTime;
-
-                            final DateTime dateTime = timestamp.toDate();
-
-                            // final String dateString =
-                            //     DateFormat.yMMMMd().format(dateTime);
-
-                            final String dateString =
-                                DateFormat.MMMEd().format(dateTime);
                             return TwitterCard(
-                              time: dateTime,
-                              width: width,
-                              height: height,
-                              title: state.spaces[index].title ?? "",
-                              link: state.spaces[index].link ?? "",
-                              image: state.spaces[index].image ??
-                                  AppImages.eventImage,
-                              startTime: startTimeString,
-                              endTime: endTimeString,
-                              date: dateString,
+                              twitter: state.spaces[index],
                             );
                           },
                         ),
@@ -512,14 +478,16 @@ class EventContainer extends StatelessWidget {
                                   .copyWith(fontSize: 17)),
                           dataz.length > 2
                               ? TextButton(
-                                  style: Theme.of(context).textButtonTheme.style,
+                                  style:
+                                      Theme.of(context).textButtonTheme.style,
                                   onPressed: () {
                                     Navigator.pushNamed(
                                         context, '/events_page');
                                   },
                                   child: Text(
                                     "See all",
-                                    style: Theme.of(context).textTheme.titleSmall,
+                                    style:
+                                        Theme.of(context).textTheme.titleSmall,
                                   ),
                                 )
                               : const Spacer()

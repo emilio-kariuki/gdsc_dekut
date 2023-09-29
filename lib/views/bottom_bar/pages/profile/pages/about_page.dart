@@ -103,7 +103,7 @@ class AboutPage extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   )),
               const SizedBox(height: 16),
-              Text('Version 2.0.0+14',
+              Text('Version 2.1.0+18',
                   style: GoogleFonts.inter(
                     fontSize: 13.5,
                     fontWeight: FontWeight.w500,

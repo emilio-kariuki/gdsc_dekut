@@ -10,6 +10,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gdsc_bloc/blocs/minimal_functonality/password_visibility/password_visibility_cubit.dart';
 import 'package:gdsc_bloc/utilities/Widgets/divider_or.dart';
 import 'package:gdsc_bloc/utilities/Widgets/input_field.dart';
+import 'package:gdsc_bloc/utilities/Widgets/loading_circle.dart';
 import 'package:gdsc_bloc/utilities/image_urls.dart';
 import 'package:gdsc_bloc/views/authentication/register_page.dart';
 import 'package:gdsc_bloc/views/bottom_bar/home.dart';
@@ -202,16 +203,7 @@ class LoginPage extends StatelessWidget {
                           });
                         }
                         return state is LoginLoading
-                            ? const Center(
-                                child: SizedBox(
-                                  height: 20,
-                                  width: 20,
-                                  child: CircularProgressIndicator(
-                                    color: Color(0xff000000),
-                                    strokeWidth: 3,
-                                  ),
-                                ),
-                              )
+                            ? const LoadingCircle()
                             : SizedBox(
                                 height: 50,
                                 width: double.infinity,
@@ -306,16 +298,7 @@ class LoginPage extends StatelessWidget {
                     BlocBuilder<AuthBloc, AuthState>(
                       builder: (context, state) {
                         return state is GoogleLoginLoading
-                            ?  Center(
-                                child: SizedBox(
-                                  height: 20,
-                                  width: 20,
-                                  child: CircularProgressIndicator(
-                                    strokeWidth: 3,
-                                    color: Theme.of(context).iconTheme.color,
-                                  ),
-                                ),
-                              )
+                            ?  const LoadingCircle()
                             : SizedBox(
                                 height: 49,
                                 width: double.infinity,

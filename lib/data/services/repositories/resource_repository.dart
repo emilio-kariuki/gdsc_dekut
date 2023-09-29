@@ -54,7 +54,6 @@ class ResourceRepository {
     required String title,
     required String link,
     required String imageUrl,
-    required String description,
     required String category,
   }) async {
     try {
@@ -68,7 +67,6 @@ class ResourceRepository {
         "title": title,
         "link": link,
         "imageUrl": imageUrl,
-        "description": description,
         "category": category,
         "isApproved": true,
       });

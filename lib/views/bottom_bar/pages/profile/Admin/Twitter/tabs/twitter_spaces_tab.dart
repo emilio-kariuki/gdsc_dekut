@@ -1,14 +1,13 @@
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gdsc_bloc/blocs/app_functionality/twitter_space/twitter_space_cubit.dart';
 
 import 'package:gdsc_bloc/utilities/Widgets/loading_circle.dart';
+import 'package:gdsc_bloc/utilities/Widgets/search_not_found.dart';
 import 'package:gdsc_bloc/utilities/image_urls.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../../../../utilities/Widgets/admin/twitter/admin_twitter_card.dart';
@@ -52,7 +51,6 @@ class AppSpaces extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -74,61 +72,66 @@ class AppSpaces extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TextFormField(
-      controller: searchController,
-      style: GoogleFonts.inter(
-        fontWeight: FontWeight.w500,
-        fontSize: 14,
-        // color: const Color(0xff000000),
-      ),
-      onChanged: (value) {
-        Future.delayed(const Duration(milliseconds: 500), () {
-          context.read<TwitterSpaceCubit>().searchTwitterSpace(queyr: value);
-        });
-      },
-      onFieldSubmitted: (value) {
-        context.read<TwitterSpaceCubit>().searchTwitterSpace(queyr: value);
-      },
-      decoration: InputDecoration(
-        prefixIcon: const Icon(
-          Icons.search,
-          color: Color(0xff666666),
-          size: 18,
-        ),
-        suffixIcon: IconButton(
-          padding: EdgeInsets.zero,
-          onPressed: () {
-            context.read<TwitterSpaceCubit>()..getAllTwitterSpaces();
-            searchController.clear();
-          },
-          icon: const Icon(
-            Icons.close,
-            color: Color(0xff666666),
-            size: 18,
-          ),
-        ),
-        hintText: "Search for twitter space eg. Flutter",
-        border: Theme.of(context).inputDecorationTheme.border,
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(25),
-          borderSide: BorderSide(
-            color: Colors.grey[500]!,
-            width: 1,
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(25),
-          borderSide: BorderSide(
-            color: Colors.grey[500]!,
-            width: 1.3,
-          ),
-        ),
-        hintStyle: GoogleFonts.inter(
-          fontSize: 12,
-          // color: const Color(0xff666666),
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-    ),
+                      controller: searchController,
+                      style: GoogleFonts.inter(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 14,
+                        // color: const Color(0xff000000),
+                      ),
+                      onChanged: (value) {
+                        Future.delayed(const Duration(milliseconds: 500), () {
+                          context
+                              .read<TwitterSpaceCubit>()
+                              .searchTwitterSpace(queyr: value);
+                        });
+                      },
+                      onFieldSubmitted: (value) {
+                        context
+                            .read<TwitterSpaceCubit>()
+                            .searchTwitterSpace(queyr: value);
+                      },
+                      decoration: InputDecoration(
+                        prefixIcon: const Icon(
+                          Icons.search,
+                          color: Color(0xff666666),
+                          size: 18,
+                        ),
+                        suffixIcon: IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            context.read<TwitterSpaceCubit>()
+                              ..getAllTwitterSpaces();
+                            searchController.clear();
+                          },
+                          icon: const Icon(
+                            Icons.close,
+                            color: Color(0xff666666),
+                            size: 18,
+                          ),
+                        ),
+                        hintText: "Search for twitter space eg. Flutter",
+                        border: Theme.of(context).inputDecorationTheme.border,
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25),
+                          borderSide: BorderSide(
+                            color: Colors.grey[500]!,
+                            width: 1,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25),
+                          borderSide: BorderSide(
+                            color: Colors.grey[500]!,
+                            width: 1.3,
+                          ),
+                        ),
+                        hintStyle: GoogleFonts.inter(
+                          fontSize: 12,
+                          // color: const Color(0xff666666),
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
                     BlocListener<TwitterSpaceCubit, TwitterSpaceState>(
                       listener: (context, state) {
                         if (state is TwitterSpaceError) {
@@ -177,10 +180,11 @@ class AppSpaces extends StatelessWidget {
                                               .getAllTwitterSpaces();
                                           searchController.clear();
                                         },
-                                        icon:  Icon(
+                                        icon: Icon(
                                           Icons.close,
                                           size: 18,
-                                          color: Theme.of(context).iconTheme.color,
+                                          color:
+                                              Theme.of(context).iconTheme.color,
                                         ))
                                   ],
                                 ),
@@ -272,32 +276,7 @@ class AppSpaces extends StatelessWidget {
                                           },
                                           builder: (context, appState) {
                                             return state.spaces.isEmpty
-                                                ? SizedBox(
-                                                    height: height * 0.5,
-                                                    child: Center(
-                                                        child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Lottie.asset(
-                                                            AppImages.oops,
-                                                            height:
-                                                                height * 0.2),
-                                                        Text(
-                                                          "spaces not found",
-                                                          style:
-                                                              GoogleFonts.inter(
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                            fontSize: 15,
-                                                            color: const Color(
-                                                                0xff666666),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    )),
-                                                  )
+                                                ? SearchNotFound()
                                                 : ListView.builder(
                                                     scrollDirection:
                                                         Axis.vertical,
@@ -308,85 +287,9 @@ class AppSpaces extends StatelessWidget {
                                                         state.spaces.length,
                                                     itemBuilder:
                                                         (context, index) {
-                                                      final Timestamp
-                                                          startTime = state
-                                                              .spaces[index]
-                                                              .startTime;
-                                                      final Timestamp endTime =
-                                                          state.spaces[index]
-                                                              .endTime;
-                                                      final DateTime
-                                                          startDateTime =
-                                                          startTime.toDate();
-                                                      final DateTime
-                                                          endDateTime =
-                                                          endTime.toDate();
-
-                                                      final String
-                                                          startTimeString =
-                                                          DateFormat.jm().format(
-                                                              startDateTime);
-                                                      final String
-                                                          endTimeString =
-                                                          DateFormat.jm()
-                                                              .format(
-                                                                  endDateTime);
-
-                                                      final Timestamp
-                                                          timestamp = state
-                                                              .spaces[index]
-                                                              .startTime;
-
-                                                      final DateTime dateTime =
-                                                          timestamp.toDate();
-                                                      final String dateString =
-                                                          DateFormat.MMMEd()
-                                                              .format(dateTime);
                                                       return AdminTwitterCard(
-                                                        date: dateString,
-                                                        startTime:
-                                                            startTimeString,
-                                                        id: state.spaces[index]
-                                                                .id ??
-                                                            "",
-                                                        endTime: endTimeString,
-                                                        width: width,
-                                                        height: height,
-                                                        title: state
-                                                                .spaces[index]
-                                                                .title ??
-                                                            "",
-                                                        link: state
-                                                                .spaces[index]
-                                                                .link ??
-                                                            "",
-                                                        image: state
-                                                                .spaces[index]
-                                                                .image ??
-                                                            AppImages
-                                                                .eventImage,
-                                                        function: () async {
-                                                          BlocProvider.of<
-                                                                      TwitterSpaceCubit>(
-                                                                  context)
-                                                              .getTwitterSpaceById(
-                                                                  id: state
-                                                                          .spaces[
-                                                                              index]
-                                                                          .id ??
-                                                                      "");
-                                                        },
-                                                        completeFunction: () {
-                                                          BlocProvider.of<
-                                                                      TwitterSpaceCubit>(
-                                                                  context)
-                                                              .deleteTwitterSpace(
-                                                                  id: state
-                                                                          .spaces[
-                                                                              index]
-                                                                          .id ??
-                                                                      "");
-                                                        },
+                                                        twitter:
+                                                            state.spaces[index],
                                                       );
                                                     },
                                                   );

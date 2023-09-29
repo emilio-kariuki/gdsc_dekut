@@ -9,6 +9,7 @@ import 'package:gdsc_bloc/blocs/minimal_functonality/drop_down/drop_down_cubit.d
 
 import 'package:gdsc_bloc/utilities/Widgets/input_field.dart';
 import 'package:gdsc_bloc/utilities/Widgets/loading_circle.dart';
+import 'package:gdsc_bloc/utilities/Widgets/pick_image_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../../../blocs/app_functionality/resource/resource_cubit.dart';
@@ -18,7 +19,7 @@ class AdminResourcePostPage extends StatelessWidget {
   AdminResourcePostPage({super.key, required this.tabController});
 
   final titleController = TextEditingController();
-  final descriptionController = TextEditingController();
+  final imageController = TextEditingController();
   String image = "";
   final linkController = TextEditingController();
   String? selectedType;
@@ -37,6 +38,7 @@ class AdminResourcePostPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return MultiBlocProvider(
       providers: [
@@ -49,76 +51,6 @@ class AdminResourcePostPage extends StatelessWidget {
       ],
       child: Builder(builder: (context) {
         return Scaffold(
-          bottomNavigationBar: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: BlocListener<ResourceCubit, ResourceState>(
-              listener: (context, state) {
-                if (state is ResourceCreated) {
-                  Timer(
-                    const Duration(milliseconds: 300),
-                    () => ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        behavior: SnackBarBehavior.floating,
-                        backgroundColor: Color(0xFF0C7319),
-                        content: Text("Resource Sent Successfully"),
-                      ),
-                    ),
-                  );
-
-                  tabController.animateTo(0);
-                }
-
-                if (state is ResourceError) {
-                  Timer(
-                    const Duration(milliseconds: 300),
-                    () => ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        behavior: SnackBarBehavior.floating,
-                        backgroundColor: const Color(0xFFD5393B),
-                        content: Text(state.message),
-                      ),
-                    ),
-                  );
-                }
-              },
-              child: BlocBuilder<ResourceCubit, ResourceState>(
-                builder: (context, state) {
-                  return state is ResourceLoading
-                      ? const LoadingCircle()
-                      : SizedBox(
-                          height: 50,
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              BlocProvider.of<ResourceCubit>(context)
-                                  .createAdminResource(
-                                title: titleController.text,
-                                link: linkController.text,
-                                category: selectedType!,
-                                imageUrl: image,
-                              );
-                            },
-                           style: Theme.of(context)
-                                      .elevatedButtonTheme
-                                      .style!
-                                      .copyWith(
-                                        shape: MaterialStateProperty.all(
-                                          RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(25),
-                                          ),
-                                        ),
-                                      ),
-                            child: Text(
-                              "Post",
-                              
-                            ),
-                          ),
-                        );
-                },
-              ),
-            ),
-          ),
           body: SafeArea(
             child: SingleChildScrollView(
               child: Padding(
@@ -132,11 +64,10 @@ class AdminResourcePostPage extends StatelessWidget {
                       style: GoogleFonts.inter(
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
-                        
                       ),
                     ),
-                    const SizedBox(
-                      height: 10,
+                    SizedBox(
+                      height: height * 0.01,
                     ),
                     InputField(
                         validator: (value) {
@@ -147,42 +78,18 @@ class AdminResourcePostPage extends StatelessWidget {
                         },
                         controller: titleController,
                         hintText: "Enter the title of the resource"),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      "Description",
-                      style: GoogleFonts.inter(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500,
-                        
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    InputField(
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Please enter your description";
-                          }
-                          return null;
-                        },
-                        controller: descriptionController,
-                        hintText: "Enter the description of the resource"),
-                    const SizedBox(
-                      height: 20,
+                    SizedBox(
+                      height: height * 0.02,
                     ),
                     Text(
                       "Resource Type",
                       style: GoogleFonts.inter(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
-                        
                       ),
                     ),
-                    const SizedBox(
-                      height: 8,
+                    SizedBox(
+                      height: height * 0.01,
                     ),
                     BlocProvider(
                       create: (context) => DropDownCubit(),
@@ -269,19 +176,18 @@ class AdminResourcePostPage extends StatelessWidget {
                         );
                       }),
                     ),
-                    const SizedBox(
-                      height: 20,
+                    SizedBox(
+                      height: height * 0.02,
                     ),
                     Text(
                       "Link",
                       style: GoogleFonts.inter(
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
-                        
                       ),
                     ),
-                    const SizedBox(
-                      height: 10,
+                    SizedBox(
+                      height: height * 0.01,
                     ),
                     InputField(
                         validator: (value) {
@@ -292,28 +198,33 @@ class AdminResourcePostPage extends StatelessWidget {
                         },
                         controller: linkController,
                         hintText: "Enter the link to the resource"),
-                    const SizedBox(
-                      height: 20,
+                    SizedBox(
+                      height: height * 0.02,
                     ),
-                    BlocConsumer<GetImageCubit, GetImageState>(
+                    PickImageButton(imageController: imageController),
+                    SizedBox(
+                      height: height * 0.02,
+                    ),
+                    BlocListener<ResourceCubit, ResourceState>(
                       listener: (context, state) {
-                        if (state is ImagePicked) {
-                          image = state.imageUrl;
+                        if (state is ResourceCreated) {
                           Timer(
                             const Duration(milliseconds: 300),
                             () => ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                 behavior: SnackBarBehavior.floating,
                                 backgroundColor: Color(0xFF0C7319),
-                                content: Text("Image uploaded"),
+                                content: Text("Resource Sent Successfully"),
                               ),
                             ),
                           );
+
+                          tabController.animateTo(0);
                         }
 
-                        if (state is ImageError) {
+                        if (state is ResourceError) {
                           Timer(
-                            const Duration(milliseconds: 100),
+                            const Duration(milliseconds: 300),
                             () => ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 behavior: SnackBarBehavior.floating,
@@ -324,37 +235,42 @@ class AdminResourcePostPage extends StatelessWidget {
                           );
                         }
                       },
-                      builder: (context, state) {
-                        final width = MediaQuery.of(context).size.width;
-                        return state is ImageUploading
-                            ? const LoadingCircle()
-                            : SizedBox(
-                                height: 50,
-                                width: width * 0.4,
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    BlocProvider.of<GetImageCubit>(context)
-                                        .getImage();
-                                  },
-                                  style: Theme.of(context)
-                                      .elevatedButtonTheme
-                                      .style!
-                                      .copyWith(
-                                        shape: MaterialStateProperty.all(
-                                          RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(25),
+                      child: BlocBuilder<ResourceCubit, ResourceState>(
+                        builder: (context, state) {
+                          return state is ResourceLoading
+                              ? const LoadingCircle()
+                              : SizedBox(
+                                  height: 50,
+                                  width: double.infinity,
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      BlocProvider.of<ResourceCubit>(context)
+                                          .createAdminResource(
+                                        title: titleController.text,
+                                        link: linkController.text,
+                                        category: selectedType!,
+                                        imageUrl: imageController.text,
+                                      );
+                                    },
+                                    style: Theme.of(context)
+                                        .elevatedButtonTheme
+                                        .style!
+                                        .copyWith(
+                                          shape: MaterialStateProperty.all(
+                                            RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(25),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                  child: Text(
-                                    "Add Image",
-                                    
+                                    child: Text(
+                                      "Post",
+                                    ),
                                   ),
-                                ),
-                              );
-                      },
-                    )
+                                );
+                        },
+                      ),
+                    ),
                   ],
                 ),
               ),

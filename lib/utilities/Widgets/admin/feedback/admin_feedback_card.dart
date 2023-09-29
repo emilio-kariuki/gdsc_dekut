@@ -25,6 +25,7 @@ class AdminFeedbackCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
+          color: Theme.of(context).primaryColor,
             borderRadius: BorderRadius.circular(10),
             border: Border.all(
               color: const Color(0xFF282828),
@@ -42,7 +43,6 @@ class AdminFeedbackCard extends StatelessWidget {
               maxLines: 2,
               style: GoogleFonts.inter(
                 fontSize: 16,
-                color: const Color(0xff000000),
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -54,7 +54,7 @@ class AdminFeedbackCard extends StatelessWidget {
               maxLines: 2,
               style: GoogleFonts.inter(
                 fontSize: 13.5,
-                color: const Color(0xff5B5561),
+                color: Colors.grey[400],
                 fontWeight: FontWeight.w500,
               ),
             ),

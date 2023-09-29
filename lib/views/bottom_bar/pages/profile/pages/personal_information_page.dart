@@ -31,23 +31,27 @@ class PersonalInformation extends StatelessWidget {
 
   final technologyController = TextEditingController();
 
-  String image = AppImages.defaultImage;
+  final imageController = TextEditingController(text: AppImages.defaultImage);
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
 
-    return BlocProvider(
-      create: (context) => GetImageCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => GetImageCubit(),
+        ),
+        BlocProvider(
+          create: (context) => UserCubit()..getUser(),
+        ),
+      ],
       child: Scaffold(
         appBar: AppBar(
           iconTheme: const IconThemeData(color: Color(0xff666666), size: 20),
           title: Text(
             "Personal Information",
-            style: GoogleFonts.inter(
-              fontSize: 17,
-              fontWeight: FontWeight.w500,
-            ),
+            style: Theme.of(context).textTheme.titleMedium,
           ),
           leading: Semantics(
             button: true,
@@ -71,6 +75,7 @@ class PersonalInformation extends StatelessWidget {
           child: BlocListener<UserCubit, UserState>(
             listener: (context, state) {
               if (state is UserSuccess) {
+                debugPrint("this is the current state being listened to");
                 nameController.text = state.user.name!;
                 emailController.text = state.user.email!;
                 phoneController.text = state.user.phone!;
@@ -78,7 +83,7 @@ class PersonalInformation extends StatelessWidget {
                 twitterController.text = state.user.twitter!;
                 linkedinController.text = state.user.linkedin!;
                 technologyController.text = state.user.technology!;
-                image = state.user.imageUrl!;
+                imageController.text = state.user.imageUrl!;
               }
               if (state is UserUpdated) {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -106,7 +111,7 @@ class PersonalInformation extends StatelessWidget {
               linkedinController: linkedinController,
               twitterController: twitterController,
               technologyController: technologyController,
-              image: image,
+              image: imageController.text,
             ),
           ),
         ),
@@ -136,7 +141,7 @@ class PersonalInformation extends StatelessWidget {
                             child: BlocBuilder<GetImageCubit, GetImageState>(
                               builder: (context, state) {
                                 if (state is ImagePicked) {
-                                  image = state.imageUrl;
+                                  imageController.text = state.imageUrl;
                                   ClipRRect(
                                     borderRadius: BorderRadius.circular(100),
                                     child: Image.file(
@@ -149,7 +154,7 @@ class PersonalInformation extends StatelessWidget {
                                 } else {
                                   return Center(
                                       child: CachedNetworkImage(
-                                    imageUrl: image,
+                                    imageUrl: imageController.text,
                                     imageBuilder: (context, imageProvider) {
                                       return Container(
                                         height: height * 0.13,

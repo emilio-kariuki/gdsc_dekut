@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class ProfilePadding extends StatelessWidget {
    ProfilePadding({
     super.key,
-     this.thickness = 0.2
+     this.thickness = 0.4
   });
 
   double ?thickness;
@@ -15,6 +15,7 @@ class ProfilePadding extends StatelessWidget {
     return Divider(
       height: 5,
       thickness: thickness,
+
     );
   }
 }
