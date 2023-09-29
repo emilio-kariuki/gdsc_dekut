@@ -10,60 +10,50 @@ class ProfileCard extends StatelessWidget {
       required this.title,
       required this.function,
       required this.showTrailing,
-      required this.leadingLogo});
+      required this.icon});
   final String title;
-  final String leadingLogo;
+  final IconData icon;
   final Function() function;
   final bool showTrailing;
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        SystemChannels.textInput.invokeMethod('TextInput.hide');
-        function();
-      },
-      style: ElevatedButton.styleFrom(
-        shadowColor: Colors.white,
-        foregroundColor: Colors.white,
-        
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5),
-        ),
-        elevation: 0,
-        backgroundColor: Colors.white,
-      ),
-      child: Row(
-        children: [
-          SvgPicture.asset(
-            leadingLogo,
-            height: 15,
-            width: 15,
-          ),
-          const SizedBox(
-            width: 18,
-          ),
-          AutoSizeText(
-            title,
-            style: GoogleFonts.inter(
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              color: Colors.grey[800],
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20,horizontal: 5),
+      child: InkWell(
+        radius: 0,
+        splashColor: Theme.of(context).scaffoldBackgroundColor,
+        onTap: () {
+          SystemChannels.textInput.invokeMethod('TextInput.hide');
+          function();
+        },
+        child: Row(
+          children: [
+            Icon(icon, size: 20, color: Theme.of(context).iconTheme.color,),
+            const SizedBox(
+              width: 18,
             ),
-          ),
-          const Spacer(),
-          showTrailing
-              ? Icon(
-                  Icons.arrow_forward_ios,
-                  color: Colors.black,
-                  size: 15,
-                )
-              : const SizedBox.shrink(),
-          const SizedBox(
-            width: 5,
-          ),
-        ],
+            AutoSizeText(
+              title,
+              style: GoogleFonts.inter(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                // color: Colors.grey[800],
+              ),
+            ),
+            const Spacer(),
+            showTrailing
+                ? Icon(
+                    Icons.arrow_forward_ios,
+                    // color: Colors.black,
+                    size: 15,
+                  )
+                : const SizedBox.shrink(),
+            const SizedBox(
+              width: 5,
+            ),
+          ],
+        ),
       ),
     );
   }

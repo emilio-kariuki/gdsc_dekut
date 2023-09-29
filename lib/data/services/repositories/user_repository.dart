@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utilities/image_urls.dart';
-import '../../../utilities/shared_preference_manager.dart';
+import '../../local_storage/shared_preference_manager.dart';
 import '../../models/leads_model.dart';
 import '../../models/user_model.dart';
 

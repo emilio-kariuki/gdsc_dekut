@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gdsc_bloc/utilities/image_urls.dart';
-import 'package:gdsc_bloc/views/home.dart';
+import 'package:gdsc_bloc/views/bottom_bar/home.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
@@ -19,20 +19,20 @@ class SplashPage extends StatelessWidget {
         height: 50,
         margin: EdgeInsets.only(bottom: 30),
         width: double.infinity,
-        color: Colors.white,
-        child: const Center(
+        color: Theme.of(context).scaffoldBackgroundColor,
+        child:  Center(
             child: Center(
           child: SizedBox(
               height: 30,
               width: 30,
               child: SpinKitFadingCircle(
-                color: Colors.black,
+                color: Theme.of(context).iconTheme.color,
                 size: 30,
               )),
         )),
       ),
       body: Container(
-        color: Colors.white,
+        color: Theme.of(context).scaffoldBackgroundColor,
         child: Center(
             child: Image.asset(
           AppImages.logo_png,

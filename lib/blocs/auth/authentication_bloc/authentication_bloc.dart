@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gdsc_bloc/utilities/shared_preference_manager.dart';
+import 'package:gdsc_bloc/data/local_storage/shared_preference_manager.dart';
 part 'authentication_event.dart';
 part 'authentication_state.dart';
 

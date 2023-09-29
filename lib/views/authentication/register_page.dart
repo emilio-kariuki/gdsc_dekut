@@ -10,7 +10,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gdsc_bloc/utilities/Widgets/input_field.dart';
 import 'package:gdsc_bloc/utilities/image_urls.dart';
 import 'package:gdsc_bloc/views/authentication/login_page.dart';
-import 'package:gdsc_bloc/views/home.dart';
+import 'package:gdsc_bloc/views/bottom_bar/home.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../blocs/auth/auth_bloc/auth_bloc.dart';
@@ -32,16 +32,12 @@ class RegisterPage extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(0),
         child: AppBar(
           elevation: 0,
           automaticallyImplyLeading: false,
-          systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: Colors.white,
-            statusBarIconBrightness: Brightness.dark,
-          ),
         ),
       ),
       body: MultiBlocProvider(
@@ -77,7 +73,7 @@ class RegisterPage extends StatelessWidget {
                       style: GoogleFonts.inter(
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
-                        color: const Color(0xff000000),
+                        
                       ),
                     ),
                     SizedBox(
@@ -142,7 +138,7 @@ class RegisterPage extends StatelessWidget {
                                 state is PasswordObscured && state.isObscured
                                     ? Icons.visibility_off
                                     : Icons.visibility,
-                                color: Colors.black,
+                                color: Theme.of(context).iconTheme.color,
                                 size: 20,
                               ),
                             ));
@@ -237,19 +233,20 @@ class RegisterPage extends StatelessWidget {
                                           );
                                     }
                                   },
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color(0xff000000),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(25),
-                                    ),
-                                  ),
+                                  style: Theme.of(context)
+                                      .elevatedButtonTheme
+                                      .style!
+                                      .copyWith(
+                                        shape: MaterialStateProperty.all(
+                                          RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(25),
+                                          ),
+                                        ),
+                                      ),
                                   child: AutoSizeText(
                                     "Register",
-                                    style: GoogleFonts.inter(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w600,
-                                      color: const Color(0xffffffff),
-                                    ),
+                                   
                                   ),
                                 ),
                               );
@@ -266,7 +263,7 @@ class RegisterPage extends StatelessWidget {
                           style: GoogleFonts.inter(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
-                            color: const Color(0xff000000),
+                            
                           ),
                         ),
                         const SizedBox(
@@ -287,7 +284,7 @@ class RegisterPage extends StatelessWidget {
                             style: GoogleFonts.inter(
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
-                              color: const Color(0xff000000),
+                              
                             ),
                           ),
                         ),
@@ -303,13 +300,13 @@ class RegisterPage extends StatelessWidget {
                     BlocBuilder<AuthBloc, AuthState>(
                       builder: (context, state) {
                         return state is GoogleLoginLoading
-                            ? const Center(
+                            ?  Center(
                                 child: SizedBox(
                                   height: 20,
                                   width: 20,
                                   child: CircularProgressIndicator(
-                                    color: Color(0xff000000),
                                     strokeWidth: 3,
+                                    color: Theme.of(context).iconTheme.color,
                                   ),
                                 ),
                               )
@@ -322,12 +319,17 @@ class RegisterPage extends StatelessWidget {
                                         .read<AuthBloc>()
                                         .add(GoogleAuthentication());
                                   },
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color(0xff000000),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(25),
-                                    ),
-                                  ),
+                                  style: Theme.of(context)
+                                      .elevatedButtonTheme
+                                      .style!
+                                      .copyWith(
+                                        shape: MaterialStateProperty.all(
+                                          RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(25),
+                                          ),
+                                        ),
+                                      ),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -340,11 +342,7 @@ class RegisterPage extends StatelessWidget {
                                       ),
                                       AutoSizeText(
                                         "Sign in with Google",
-                                        style: GoogleFonts.inter(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w600,
-                                          color: const Color(0xffffffff),
-                                        ),
+                                       
                                       ),
                                     ],
                                   ),

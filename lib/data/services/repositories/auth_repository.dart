@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import '../../../utilities/shared_preference_manager.dart';
+import '../../local_storage/shared_preference_manager.dart';
 import '../../models/user_model.dart';
 import '../providers/user_providers.dart';
 

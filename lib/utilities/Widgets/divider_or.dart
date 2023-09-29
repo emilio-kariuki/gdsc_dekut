@@ -11,9 +11,8 @@ class DividerOr extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        const Expanded(
+        Expanded(
           child: Divider(
-            color: Colors.black,
             height: 20,
             thickness: 0.2,
           ),
@@ -26,15 +25,14 @@ class DividerOr extends StatelessWidget {
           style: GoogleFonts.inter(
             fontSize: 13,
             fontWeight: FontWeight.w600,
-            color: const Color(0xff000000),
+            // color: cons /t Color(0xff000000),
           ),
         ),
         const SizedBox(
           width: 10,
         ),
-        const Expanded(
+        Expanded(
           child: Divider(
-            color: Colors.black,
             height: 20,
             thickness: 0.2,
           ),

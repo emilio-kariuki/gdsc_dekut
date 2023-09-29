@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import "package:uuid/uuid.dart" as uuid;
 
-import '../../../utilities/shared_preference_manager.dart';
+import '../../local_storage/shared_preference_manager.dart';
 import '../../models/resource_model.dart';
 
 class ResourceRepository {

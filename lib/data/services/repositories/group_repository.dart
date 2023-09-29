@@ -54,7 +54,7 @@ class GroupRepository {
     try {
       final firebaseFirestore = FirebaseFirestore.instance;
 
-      final group = await firebaseFirestore.collection("announcemts").get().then(
+      final group = await firebaseFirestore.collection("announcements").get().then(
           (value) =>
               value.docs.map((e) => GroupsModel.fromJson(e.data())).toList());
 

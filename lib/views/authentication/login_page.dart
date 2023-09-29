@@ -12,7 +12,7 @@ import 'package:gdsc_bloc/utilities/Widgets/divider_or.dart';
 import 'package:gdsc_bloc/utilities/Widgets/input_field.dart';
 import 'package:gdsc_bloc/utilities/image_urls.dart';
 import 'package:gdsc_bloc/views/authentication/register_page.dart';
-import 'package:gdsc_bloc/views/home.dart';
+import 'package:gdsc_bloc/views/bottom_bar/home.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../blocs/auth/auth_bloc/auth_bloc.dart';
@@ -40,16 +40,12 @@ class LoginPage extends StatelessWidget {
       ],
       child: Builder(builder: (context) {
         return Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           appBar: PreferredSize(
             preferredSize: Size.fromHeight(0),
             child: AppBar(
               elevation: 0,
               automaticallyImplyLeading: false,
-              systemOverlayStyle: SystemUiOverlayStyle(
-                statusBarColor: Colors.white,
-                statusBarIconBrightness: Brightness.dark,
-              ),
             ),
           ),
           body: SafeArea(
@@ -72,7 +68,7 @@ class LoginPage extends StatelessWidget {
                       style: GoogleFonts.inter(
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
-                        color: const Color(0xff000000),
+                        // color: const Color(0xff000000),
                       ),
                     ),
                     SizedBox(
@@ -105,17 +101,17 @@ class LoginPage extends StatelessWidget {
                             obScureText: state is PasswordObscured
                                 ? state.isObscured
                                 : true,
-                                maxLines: 1,
+                            maxLines: 1,
                             controller: passwordController,
                             validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please enter your password";
-                        }
-                        return null;
-                      },
+                              if (value!.isEmpty) {
+                                return "Please enter your password";
+                              }
+                              return null;
+                            },
                             suffixIcon: InkWell(
                               radius: 0,
-                                  splashColor: Colors.white,
+                              splashColor: Colors.white,
                               onTap: () {
                                 context
                                     .read<PasswordVisibilityCubit>()
@@ -125,7 +121,7 @@ class LoginPage extends StatelessWidget {
                                 state is PasswordObscured && state.isObscured
                                     ? Icons.visibility_off
                                     : Icons.visibility,
-                                color: Colors.black,
+                                color: Theme.of(context).iconTheme.color,
                                 size: 20,
                               ),
                             ));
@@ -146,7 +142,7 @@ class LoginPage extends StatelessWidget {
                             style: GoogleFonts.inter(
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
-                              color: const Color(0xff000000),
+                              // color: const Color(0xff000000),
                             ),
                           ),
                         ],
@@ -242,19 +238,21 @@ class LoginPage extends StatelessWidget {
                                           );
                                     }
                                   },
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color(0xff000000),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(25),
-                                    ),
-                                  ),
-                                  child: AutoSizeText(
+                                  style: Theme.of(context)
+                                      .elevatedButtonTheme
+                                      .style!
+                                      .copyWith(
+                                        shape: MaterialStateProperty.all(
+                                          RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(25),
+                                          ),
+                                        ),
+                                      ),
+                                  child: Text(
                                     "Login",
-                                    style: GoogleFonts.inter(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w600,
-                                      color: const Color(0xffffffff),
-                                    ),
+                                    
+                                      
                                   ),
                                 ),
                               );
@@ -271,7 +269,7 @@ class LoginPage extends StatelessWidget {
                           style: GoogleFonts.inter(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
-                            color: const Color(0xff000000),
+                            // color: const Color(0xff000000),
                           ),
                         ),
                         const SizedBox(
@@ -292,7 +290,7 @@ class LoginPage extends StatelessWidget {
                             style: GoogleFonts.inter(
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
-                              color: const Color(0xff000000),
+                              // color: const Color(0xff000000),
                             ),
                           ),
                         ),
@@ -308,13 +306,13 @@ class LoginPage extends StatelessWidget {
                     BlocBuilder<AuthBloc, AuthState>(
                       builder: (context, state) {
                         return state is GoogleLoginLoading
-                            ? const Center(
+                            ?  Center(
                                 child: SizedBox(
                                   height: 20,
                                   width: 20,
                                   child: CircularProgressIndicator(
-                                    color: Color(0xff000000),
                                     strokeWidth: 3,
+                                    color: Theme.of(context).iconTheme.color,
                                   ),
                                 ),
                               )
@@ -327,12 +325,17 @@ class LoginPage extends StatelessWidget {
                                         .read<AuthBloc>()
                                         .add(GoogleAuthentication());
                                   },
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color(0xff000000),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(25),
-                                    ),
-                                  ),
+                                  style: Theme.of(context)
+                                      .elevatedButtonTheme
+                                      .style!
+                                      .copyWith(
+                                        shape: MaterialStateProperty.all(
+                                          RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(25),
+                                          ),
+                                        ),
+                                      ),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -343,13 +346,9 @@ class LoginPage extends StatelessWidget {
                                       SizedBox(
                                         width: 8,
                                       ),
-                                      AutoSizeText(
+                                      Text(
                                         "Sign in with Google",
-                                        style: GoogleFonts.inter(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w600,
-                                          color: const Color(0xffffffff),
-                                        ),
+                                        
                                       ),
                                     ],
                                   ),

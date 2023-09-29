@@ -33,7 +33,6 @@ class NoResourceCard extends StatelessWidget {
             "No resources found",
             style: GoogleFonts.inter(
               fontSize: 18,
-              color: const Color(0xff333333),
               fontWeight: FontWeight.w600,
             ),
           ),

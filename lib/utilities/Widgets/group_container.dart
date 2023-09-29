@@ -22,7 +22,6 @@ void _showImageDialog(
     context: context,
     builder: (BuildContext context) {
       return Dialog(
-        backgroundColor: Colors.grey[900],
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
           child: Container(
@@ -31,7 +30,6 @@ void _showImageDialog(
               decoration:
                   BoxDecoration(borderRadius: BorderRadius.circular(10)),
               child: Scaffold(
-                backgroundColor: Colors.grey[900],
                 bottomNavigationBar: Container(
                     height: height * 0.11,
                     width: width,
@@ -46,7 +44,6 @@ void _showImageDialog(
                 appBar: PreferredSize(
                   preferredSize: const Size.fromHeight(40),
                   child: AppBar(
-                    backgroundColor: Colors.grey[900],
                     elevation: 0,
                     automaticallyImplyLeading: false,
                     title: Text(
@@ -67,7 +64,6 @@ void _showImageDialog(
                           icon: const Icon(
                             Icons.close,
                             size: 20,
-                            color: Colors.white,
                           ))
                     ],
                   ),
@@ -158,7 +154,8 @@ class DialogContainer extends StatelessWidget {
                       // padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
                         // color: Colors.grey[800],
-                        shape: BoxShape.circle, color: Color.fromARGB(255, 78, 78, 78),
+                        shape: BoxShape.circle,
+                        color: Color.fromARGB(255, 78, 78, 78),
                       ),
                       child: IconButton(
                         onPressed: () {
@@ -168,7 +165,6 @@ class DialogContainer extends StatelessWidget {
                         icon: Icon(
                           state is Copied ? Icons.check : Icons.link,
                           size: 22,
-                          color: Colors.white,
                         ),
                       ),
                     ),
@@ -195,7 +191,8 @@ class DialogContainer extends StatelessWidget {
               margin: const EdgeInsets.only(top: 10, bottom: 5),
               // padding: const EdgeInsets.all(5),
               decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 78, 78, 78), shape: BoxShape.circle),
+                  color: Color.fromARGB(255, 78, 78, 78),
+                  shape: BoxShape.circle),
               child: IconButton(
                 onPressed: () {
                   AppProviders().openLink(link: link);
@@ -203,7 +200,6 @@ class DialogContainer extends StatelessWidget {
                 icon: const Icon(
                   Icons.join_full,
                   size: 22,
-                  color: Colors.white,
                 ),
               ),
             ),
@@ -231,7 +227,8 @@ class DialogContainer extends StatelessWidget {
                       margin: const EdgeInsets.only(top: 10, bottom: 5),
                       // padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 78, 78, 78), shape: BoxShape.circle),
+                          color: Color.fromARGB(255, 78, 78, 78),
+                          shape: BoxShape.circle),
                       child: IconButton(
                         onPressed: () async {
                           await Permission.storage.request();
@@ -247,7 +244,6 @@ class DialogContainer extends StatelessWidget {
                                   height: 15,
                                   width: 15,
                                   child: CircularProgressIndicator(
-                                    color: Colors.white,
                                     strokeWidth: 3,
                                   ),
                                 ),
@@ -255,7 +251,6 @@ class DialogContainer extends StatelessWidget {
                             : Icon(
                                 state is Saved ? Icons.check : Icons.save_alt,
                                 size: 22,
-                                color: Colors.white,
                               ),
                       ),
                     ),
@@ -282,7 +277,8 @@ class DialogContainer extends StatelessWidget {
               margin: const EdgeInsets.only(top: 10, bottom: 5),
               // padding: const EdgeInsets.all(5),
               decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 78, 78, 78), shape: BoxShape.circle),
+                  color: Color.fromARGB(255, 78, 78, 78),
+                  shape: BoxShape.circle),
               child: IconButton(
                 onPressed: () {
                   AppProviders()
@@ -291,7 +287,6 @@ class DialogContainer extends StatelessWidget {
                 icon: const Icon(
                   Icons.share,
                   size: 22,
-                  color: Colors.white,
                 ),
               ),
             ),
@@ -388,17 +383,14 @@ class GroupContainer extends StatelessWidget {
         Center(
           child: SizedBox(
             width: width * 0.27,
-            child: Text(
-              title,
-              overflow: TextOverflow.clip,
-              textAlign: TextAlign.center,
-              maxLines: 2,
-              style: GoogleFonts.inter(
-                fontWeight: FontWeight.w500,
-                fontSize: 13,
-                color: Colors.black,
-              ),
-            ),
+            child: Text(title,
+                overflow: TextOverflow.clip,
+                textAlign: TextAlign.center,
+                maxLines: 2,
+                style: Theme.of(context)
+                    .textTheme
+                    .titleSmall!
+                    .copyWith(fontSize: 13)),
           ),
         ),
       ],

@@ -11,7 +11,6 @@ void showBugSheet({required BuildContext context}) {
       }));
 }
 
-
 class ReportPage extends StatelessWidget {
   ReportPage({super.key});
 
@@ -30,11 +29,10 @@ class ReportPage extends StatelessWidget {
             width: width,
             padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
             decoration: const BoxDecoration(
-                color: Colors.white,
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(15),
-                  topRight: Radius.circular(15),
-                )),
+              topLeft: Radius.circular(15),
+              topRight: Radius.circular(15),
+            )),
             child: Column(
               children: [
                 SizedBox(

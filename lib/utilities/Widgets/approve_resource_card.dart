@@ -25,7 +25,6 @@ class AdminApprovedResourceCard extends StatelessWidget {
     required this.category,
   });
 
-
   final double height;
   final String image;
 
@@ -64,7 +63,6 @@ class AdminApprovedResourceCard extends StatelessWidget {
                   decoration:
                       BoxDecoration(borderRadius: BorderRadius.circular(10)),
                   child: Scaffold(
-                    backgroundColor: Colors.grey[900],
                     bottomNavigationBar: Container(
                         height: height * 0.11,
                         width: width,
@@ -72,7 +70,6 @@ class AdminApprovedResourceCard extends StatelessWidget {
                           border: const Border(
                               top: BorderSide(
                                   width: 0.4, color: Color(0xff666666))),
-                          color: Colors.grey[900],
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -110,7 +107,6 @@ class AdminApprovedResourceCard extends StatelessWidget {
                                           style: GoogleFonts.inter(
                                             fontSize: 13,
                                             fontWeight: FontWeight.w500,
-                                            color: Colors.white,
                                           ),
                                         )
                                       ],
@@ -146,7 +142,6 @@ class AdminApprovedResourceCard extends StatelessWidget {
                                     style: GoogleFonts.inter(
                                       fontSize: 13,
                                       fontWeight: FontWeight.w500,
-                                      color: Colors.white,
                                     ),
                                   )
                                 ],
@@ -179,7 +174,6 @@ class AdminApprovedResourceCard extends StatelessWidget {
                                   style: GoogleFonts.inter(
                                     fontSize: 13,
                                     fontWeight: FontWeight.w500,
-                                    color: Colors.white,
                                   ),
                                 )
                               ],
@@ -211,7 +205,6 @@ class AdminApprovedResourceCard extends StatelessWidget {
                                   style: GoogleFonts.inter(
                                     fontSize: 13,
                                     fontWeight: FontWeight.w500,
-                                    color: Colors.white,
                                   ),
                                 )
                               ],
@@ -221,7 +214,6 @@ class AdminApprovedResourceCard extends StatelessWidget {
                     appBar: PreferredSize(
                       preferredSize: const Size.fromHeight(40),
                       child: AppBar(
-                        backgroundColor: Colors.grey[900],
                         elevation: 0,
                         automaticallyImplyLeading: false,
                         title: Text(
@@ -231,7 +223,6 @@ class AdminApprovedResourceCard extends StatelessWidget {
                           style: GoogleFonts.inter(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
-                            color: Colors.white,
                           ),
                         ),
                         actions: [
@@ -242,7 +233,6 @@ class AdminApprovedResourceCard extends StatelessWidget {
                               icon: const Icon(
                                 Icons.close,
                                 size: 20,
-                                color: Colors.white,
                               ))
                         ],
                       ),
@@ -306,7 +296,6 @@ class AdminApprovedResourceCard extends StatelessWidget {
                         ),
                         Expanded(
                           child: Scaffold(
-                            backgroundColor: Colors.grey[900],
                             body: Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 10),
@@ -322,7 +311,6 @@ class AdminApprovedResourceCard extends StatelessWidget {
                                     style: GoogleFonts.inter(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w600,
-                                      color: Colors.white,
                                     ),
                                   ),
                                   const SizedBox(
@@ -335,7 +323,6 @@ class AdminApprovedResourceCard extends StatelessWidget {
                                     style: GoogleFonts.inter(
                                       fontSize: 14,
                                       fontWeight: FontWeight.w500,
-                                      color: Colors.white,
                                     ),
                                   ),
                                   // const SizedBox(
@@ -348,7 +335,7 @@ class AdminApprovedResourceCard extends StatelessWidget {
                                   //   style: GoogleFonts.inter(
                                   //     fontSize: 12,
                                   //     fontWeight: FontWeight.w500,
-                                  //     color: Colors.white,
+                                  //
                                   //   ),
                                   // ),
                                 ],
@@ -368,6 +355,7 @@ class AdminApprovedResourceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
       child: ElevatedButton(
@@ -375,9 +363,8 @@ class AdminApprovedResourceCard extends StatelessWidget {
           _showImageDialog(context, image, title, link);
         },
         style: ElevatedButton.styleFrom(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.white,
+          backgroundColor: Theme.of(context).primaryColor,
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 20),
           elevation: 0,
           shape: RoundedRectangleBorder(
             side: const BorderSide(
@@ -427,7 +414,7 @@ class AdminApprovedResourceCard extends StatelessWidget {
                       imageBuilder: (context, imageProvider) {
                         return AnimatedContainer(
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
+                            borderRadius: BorderRadius.circular(100),
                             border: Border.all(
                                 width: 0.4, color: const Color(0xff666666)),
                             image: DecorationImage(
@@ -459,22 +446,10 @@ class AdminApprovedResourceCard extends StatelessWidget {
                     maxLines: 2,
                     style: GoogleFonts.inter(
                       fontSize: 16,
-                      color: const Color(0xff000000),
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  // const SizedBox(
-                  //   height: 7,
-                  // ),
-                  // AutoSizeText(
-                  //   about,
-                  //   maxLines: 2,
-                  //   style: GoogleFonts.inter(
-                  //     fontSize: 13.5,
-                  //     color: const Color(0xff5B5561),
-                  //     fontWeight: FontWeight.w500,
-                  //   ),
-                  // ),
+                 SizedBox(height: height * 0.01,),
                   const SizedBox(
                     height: 10,
                   ),
@@ -530,7 +505,6 @@ class AdminApprovedResourceCard extends StatelessWidget {
                                     "Approve",
                                     style: GoogleFonts.inter(
                                       fontSize: 14,
-                                      color: Colors.white,
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),

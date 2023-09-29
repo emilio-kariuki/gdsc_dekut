@@ -17,10 +17,14 @@ import 'package:gdsc_bloc/utilities/route_generator.dart';
 
 import 'package:gdsc_bloc/firebase_options.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:gdsc_bloc/utilities/themes.dart';
 import 'package:gdsc_bloc/views/authentication/login_page.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'blocs/auth/authentication_bloc/authentication_bloc.dart';
 import 'blocs/minimal_functonality/network_observer/network_bloc.dart';
+import 'blocs/minimal_functonality/theme/theme_bloc.dart';
 import 'data/services/providers/notification_providers.dart';
 
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -28,7 +32,6 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
     message: message.notification!.body!,
     title: message.notification!.title!,
   );
-  print("Received a background message");
 }
 
 void main() async {
@@ -40,6 +43,11 @@ void main() async {
   FirebaseFirestore.instance.settings = Settings(
     persistenceEnabled: true,
     cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED,
+  );
+  final directory = await getApplicationDocumentsDirectory(); // from path provider
+
+  HydratedBloc.storage = await HydratedStorage.build(
+    storageDirectory: directory,
   );
   SystemChannels.textInput.invokeMethod('TextInput.hide');
   await NotificationProviders().initializeNotifications();
@@ -100,37 +108,45 @@ class MyAppState extends State<MyApp> {
         ),
         BlocProvider(lazy: false, create: (context) => UserCubit()..getUser()),
         BlocProvider(
+            lazy: false, create: (context) => ThemeBloc()..add(GetTheme())),
+        BlocProvider(
             lazy: false,
             create: (context) => ShowSpacesCubit()..showTwitterSpaces()),
       ],
-      child: MaterialApp(
-        navigatorKey: navigatorKey,
-        theme: ThemeData(useMaterial3: true),
-        onGenerateRoute: (settings) {
-          return RouteGenerator.generateRoute(settings);
-        },
-        debugShowCheckedModeBanner: false,
-        home: BlocBuilder<NetworkBloc, NetworkState>(
-          builder: (context, state) {
-            if (state is NetworkFailure) {
-              return NoInternet();
-            } else if (state is NetworkSuccess) {
-              return BlocBuilder<AuthenticationBloc, AuthenticationState>(
+      child: BlocBuilder<ThemeBloc, ThemeState>(
+        builder: (context, state) {
+          return MaterialApp(
+              navigatorKey: navigatorKey,
+              theme: lightTheme,
+              darkTheme: darkTheme,
+              themeMode: state is AppTheme && state.isDark ? ThemeMode.dark :ThemeMode.light,
+              onGenerateRoute: (settings) {
+                return RouteGenerator.generateRoute(settings);
+              },
+              debugShowCheckedModeBanner: false,
+              home: BlocBuilder<NetworkBloc, NetworkState>(
                 builder: (context, state) {
-                  if (state is AuthenticationAuthenticated) {
-                    return const SplashPage();
-                  } else if (state is AuthenticationUnauthenticated) {
-                    return LoginPage();
+                  if (state is NetworkFailure) {
+                    return NoInternet();
+                  } else if (state is NetworkSuccess) {
+                    return BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                      builder: (context, state) {
+                        if (state is AuthenticationAuthenticated) {
+                          return const SplashPage();
+                        } else if (state is AuthenticationUnauthenticated) {
+                          return LoginPage();
+                        } else {
+                          return const SizedBox.shrink();
+                        }
+                      },
+                    );
                   } else {
                     return const SizedBox.shrink();
                   }
                 },
-              );
-            } else {
-              return const SizedBox.shrink();
-            }
-          },
-        ),
+              ),
+            );
+        },
       ),
     );
   }

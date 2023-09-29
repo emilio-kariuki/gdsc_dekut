@@ -41,13 +41,11 @@ class NetworkImageContainer extends StatelessWidget {
             ? BoxDecoration(
                 shape: BoxShape.circle,
                 border: border,
-                color: Colors.white,
               )
             : BoxDecoration(
                 shape: BoxShape.rectangle,
                 border: border,
                 borderRadius: borderRadius,
-                color: Colors.white,
               ),
       ),
       imageBuilder: (context, imageProvider) => AnimatedContainer(
