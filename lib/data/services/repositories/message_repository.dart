@@ -2,8 +2,8 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:gdsc_bloc/data/Models/message_model.dart';
 import 'package:gdsc_bloc/data/local_storage/shared_preference_manager.dart';
+import 'package:gdsc_bloc/data/models/message_model.dart';
 
 class MessageRepository {
   Future sendMessage({
