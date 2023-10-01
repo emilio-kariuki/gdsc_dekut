@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/event/tabs/post_event_page.dart';
-import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/event/tabs/past_event.dart';
-import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/event/tabs/upcoming_events.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../../../blocs/app_functionality/event/event_cubit.dart';
+import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Event/tabs/past_event.dart';
+import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Event/tabs/post_event_page.dart';
+import 'package:gdsc_bloc/views/bottom_bar/pages/profile/Admin/Event/tabs/upcoming_events.dart';
 
+import '../../../../../../blocs/app_functionality/event/event_cubit.dart';
 
 class AdminEvent extends StatefulWidget {
   const AdminEvent({super.key});
