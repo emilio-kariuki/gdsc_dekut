@@ -103,7 +103,7 @@ In the `news` page the members are given the ability to get acess to the groups 
 </div>
 
 ### Feel Free to contribute
-You can `fork` the repo and feel free to contribute 
+You can `fork` the repo and feel free to contribute.
 
 > **Note**
 > You can reach me up on email `emilio113kariuki@gmail.com` or twitter `@EG_Kariuki`
